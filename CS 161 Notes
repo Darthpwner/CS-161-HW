@@ -1,0 +1,643 @@
+W1 M Lec	9-28-15
+darwiche@cs.ucla.edu
+https://cs.ucla/edu/~darwiche
+
+Weekly homework, half of which are programming assignments
+Programmed in Lisp
+Nice and simple language
+
+What is AI?
+A field of computer science with understanding and building intelligent agents that can:
+Perceive
+Understand
+Predict
+Manipulate
+Learn
+This is very hard, yet possible, quite useful and a lot of fun!
+Monolithic approach unnecessary for usefulness
+Hardware versus software (web) agents
+General versus task-sepcific intelligence
+Very important points that changed over time:
+Original vision of AI. The goal is to have a robot that looks like something on Star Trek
+Most of what happens today only takes one of these topics in task and isolates it.
+There is not necessarily an association between hardware versus software agents.
+More task-specific than in the past.
+Example: Self-driving car
+One task (driving from point A to point B) rather than many tasks.
+Broad goals of AI are shared with other disciplines, including philosophy, cognitive science (psychology) and neuroscience. Some key distinctions:
+Understand versus build
+Rational versus human-like
+Cognitive science is used to explain human intelligence.
+Used to be the case in AI and on human life.
+Specific goals of AI are shared with other disciplines, including linguistics (perception), statistics (learning), and mathematical logic (understanding and prediction).
+Machine learning
+Reasoning and logic
+
+The Turing Test
+Proposed by Alan Turing in 1950 as an operational test of intelligence: fool a human interrogator into believing the agent is a human. To pass the test, one needs:
+Natural language processing
+Knowledge representation
+Automated reasoning
+Machine learning
+Avoided physical interaction between interrogator and agent, excluding need for:
+Computer vision
+Robotics
+Rational versus human-like…
+
+The Intelligent Agent Architecture
+Focus on Perception
+Written language
+Speech
+Vision
+Touch
+Mouse click
+
+Knowledge Representation
+How do we represent knowledge?
+Factual knowledge (facts) - things that are true for sure 
+Emphasizes logic
+Uncertain knowledge (beliefs) - things that are uncertain
+Reasoning based on beliefs and probability
+Big transition in the history of AI
+What knowledge is relevant?
+How do we acquire knowledge?
+From experts
+By conversion from other forms of knowledge
+By learning from experience
+
+KR: How do we represent knowledge?
+Reasoning
+How can we formalize the reasoning process?
+Deduction: What is implied by a knowledge base?
+Belief revision: What beliefs to give up in case of a contradiction?
+If you have a body of knowledge and they conflict with each other.
+Causality: What is the cause of an event?
+How can we reason efficiently?
+Time
+Space
+Footprint
+
+Reasoning: Formalizing Causality
+When do we say A caused B?
+Needed for explanation
+Allow us to predict the future
+Suggest ways to control future events
+Moral responsibility
+Legal liability
+It is not simply sufficiency, nor necessity….
+
+Applications of KR&R
+Medical diagnosis
+Credit card fraud
+Theorem proving (Mathematics)
+Formal Verification
+Cognitive tasks: planning, explanation, etc.
+
+Evolution of AI
+AI has changed and has influenced the lives of people much more than they know it.
+
+Natural Language Understanding
+Understand natural language:
+List of all employees that have been working here for more than two years and have not gotten a raise since then.
+Generate natural language:
+There are actually only two such employees, do you just need their names?
+Text summarization:
+Here’s a 100 word abstract of the article?
+Machine translation:
+Convert text from one language to another.
+The Army pushed for machine translation.
+Biggest driver now is translating with pages on the Internet!
+Why is it hard? Context and ambiguity.
+Syntactic ambiguity: “They are cooking apples’
+Semantic ambiguity: “She ran to the bank”
+Pragmatic ambiguity:: “Can you open the door?”
+Two key approaches:
+Classical: Provide the system with rich knowledge of the world, perform thorough syntactic, semantic and pragmatic analysis, disambiguate using knowledge and reasoning.
+If you are translating a piece of text, and you want to do a decision based on that, any little error is problematic.
+Modern: Rely on corpus and disambiguate using machine learning.
+
+Machine learning is prosperous because we have a lot of data!
+Googling gives you votes (supervised learning)
+
+Machine Learning
+Using experiences and observations to improve future performance (actions):
+What aspect of performance to be improved?
+Irrelevant aspects of the world, how the world evolves, what are desirable/undesirable situations
+What feedback is available?
+Supervised, Unsupervised, Reinforcement learning.
+How to represent the output of a learning process?
+Logical knowledge, Probabilistic knowledge, Neural networks 
+Supervised: Give observations and actions they should lead to
+
+Supervised Learning: Character Recognition
+Finding certain patterns 
+Neural networks
+Input-output
+Unsupervised Learning: Recommender Systems
+Learned knowledge
+Reasoning
+Planning
+Finding a sequence of actions that will achieve a goal
+Input:
+Actions (preconditions, effects)
+Initial, Goal states
+
+NASA: Autonomous Sciencecraft Experiment
+Use onboard decision-making to detect, analyze, and respond to science events, and to downlink only the highest value science data.
+Radically increase science return by enabling intelligent downlink selection and autonomous retargeting.
+AI Technology Used:
+Image analysis
+Planning, scheduling and recovery
+Mission status updates:
+http://www-aig.jpl.nasa.gov/public/planning
+Co-Winner of 2005 NASA Award
+
+Robotics
+Robots: physical agents that perform tasks by manipulating the world. Equipped with:
+Effectors: legs, wheels, joints, grippers
+Sensors: cameras, ultrasound, gyroscopes, accelerometers.
+Common categories of robots:
+Manipulators (robot arms): factory assembly lines, international space station.
+Mobile robots: unmanned land/air/water vehicles, planetary rovers
+Mobile robots with manipulators: Humanoid (mimic human torso)
+
+Robotics: DARPA Grand Challenge
+2004 Challenge: 
+143 mile drive from Barstow, California to Primm, Nevada
+$1M prize
+15 robots qualified, none finished the race
+7.4 miles was furthest distance
+2005 Challenge:
+132 miles in the Mojave desert
+$2M prize
+24 robots qualified, 5 finished the race
+
+Faculty in CS doing AI-related research
+Darwiche
+Dyer
+Korf
+Pearl
+Sha
+Soatto
+Terzopoulos
+Talwalker
+Van den Breock
+Yuille
+Zhu
+
+Fortran: first programming language - something for symbolic computation
+Time sharing in Operating Systems
+Lisp:
+Functional programming language: Simple and abstract syntax
+Lisp expressions
+Numeric expressions
+Symbolic
+Boolean
+Conditional 
+Function Definition
+Expressions
+(op arg_1, …, arg_n)						atom
+op is an operator: could be an function, built-in, user specific, or special operation
+
+Example:
+//Evaluates from left to right 
+> (+ 137 349)	//(137 + 349)
+> 486
+> (- 1000 33)	//(1000 - 33)
+> 666
+> (+ (* 3 5 1) (- 10 6 ) )	// (3 * 5 * 1) and (10 - 6)
+(+ (15) (4) ) 	//(15 + 4)
+> 19
+
+//Quotes
+> (quote (+ 3 1) )
+> (+ 3 1)	//Repeats back the expression
+
+‘(+ 3 1)	 == (quote (+ 3 1) )	//These are equivalent
+
+//Setq - barred from use in program because it assigns global variables!
+> (setq x 3 )	//Assigns 3 to x
+> 3
+
+> x	// x will have the value of 3 from above
+> 3
+
+> (setq x (+ 3 1 ))	//Performing arithmetic operations using setq
+> 4
+
+> x
+> 4
+
+> y	//Error! Undefined!
+
+//Setting a list expression (similar to a string but it is NOT a string)
+> (setq x ‘(+ 3 1 ))
+> (+ 3 1)
+
+> x
+> (+ 3 1)
+
+> (setq x ‘(a b c d) )
+> ---
+> (car x) > (cdr x)
+> a	  >   (b c d)
+
+//How to get ‘c’
+> ( car ( cdr (cdr x ) ) )
+> c
+// (caddr x) == ( car ( cdr ( cdr x) ) ) 
+
+> (setq x ‘(a ( b c ) d e )
+> (caadr x) == (car ( car ( cdr x) ) )
+First gets “( b c ) d e “	//cdr
+Second gets “(b c)”	//car
+Finally gets “b”	//car
+
+> (cadadr x)	//(car (cdr (car (cdr x) ) ) ) - go inside then outside
+(b c) d e
+(b c)
+(c)
+c
+
+//nil
+(a b) (b)	NIL
+(b) ()
+___________________
+()
+
+> NIL	
+> NIL
+> ( )	//Empty list gives “nil”
+> NIL
+// () == NIL
+
+//Constructors
+//cons can take only 2 arguments
+> (cons 1 ( cons 2 NIL))
+		 ^
+(2)
+    ^^^^
+ (1 2)
+
+> (cons 1 ‘(2) )
+	^^^^
+(1 2)	
+
+> (cons 1 2)	//error
+
+> (cons NIL NIL)
+> (NIL)
+
+//Clarify this part
+> (cons - (	))
+> (cons NIL () ) == ( () )	//() == NIL
+> ( () )
+
+//Lists
+> ( list 1 2 )
+> ( 1 2 )
+
+> ( list 1 (list 1 2 ) 4 )
+> ( 1 ( 1 2) 4 )
+
+> (list a b)	//Error: ‘a’ and ‘b’ are unsassigned
+
+> (list ‘a ‘b)
+> (a b)
+
+> (setq a 7)
+> (setq b ‘x)
+
+> (list a b)
+> (7 x)
+
+// Boolean
+NIL means ‘0’ (False)
+Anything OTHER than NIL means ‘1’ (True)
+
+> (numberp _ )	//Boolean that represents if you have a number or not
+> (symbolp _)		//Boolean that represents if you have a symbol or not
+> (listp _)		//Boolean that represents if you have a list or not
+> (NULL _)		//Boolean that represents if you have NIL or not
+> (equal _ _)		//Boolean that represents if you have two values equal
+
+> (not _)		//Boolean if it is not equal
+> (or _ _ _ _ ...)	//Boolean “OR” statement, takes any # of arguments)
+> (and _ _ _ …)	//Boolean “AND” statement, takes any # of arguments)
+
+Examples:
+> (> 3 1)	//Is 3 > 1?
+> t
+> (< 3 1) 	//Is 3 < 1?
+> NIL
+
+> (NOT ( > 3 1) )	//Is NOT(3 > 1)?
+> NIL
+
+> (AND (+ 2 3) (+ 1 3) )	//Is (5) (4): Return last true statement!
+> 4
+
+> (OR t ( + 2 3) (1 + 3))	//Is t (5) (4): Return first true statement!
+> t
+
+W1 W Lec	9-30-15
+Lisp
+Numeric expressions
+Symbolic expressions
+Boolean
+Conditional
+function_def
+
+First HW posted tomorrow to warm up on Lisp
+Next week is the first subject of Lisp and then we get our programming project
+
+(numberp …)
+(symbolp …)
+(listp …)
+(null …)
+(not …)
+(and ...)
+(or …)
+
+false == nil
+Anything else is true
+
+>(> 3 1 )
+t
+
+>(< 3 1)
+NIL
+
+>(Not (> 3 1) )
+NIL
+
+> (Not 3)
+NIL
+
+> (Not NIL) 
+t
+
+> (AND (+ 2 3) (cdr ‘(A)) (+ 1 3) )
+NIL //cdr’(A) returns an empty list, which is NIL
+
+( cond (bexp exp…. exp)	//Evaluates from left to right
+	.
+	.
+	.
+	(bexp exp …. exp) )
+
+> (cond (( = x 0 ) 0 )	//Error - unbounded variable ‘x’, need to use setq
+	( (< x 0) /NEG)
+	( t  /POS) )
+
+Lisp expressions are either lists or atoms.
+Functions return Lisp expressions
+You can do interesting things with Lisp
+Have programs write programs
+
+Function Definition
+(defun <fn> (arg_1 … arg_n) 
+	___
+	___
+	___ )
+
+> (defun square (x) 
+	(* x x) )
+> --
+
+> (square 2)	//Every expression has a return value - takes an expression and evaluates it
+4
+
+> (defun abs(x) 	//Have one expression
+	(cond ( ( < x 0) (- x) )
+		( t x) ) )	//t is like an else because we put it last, acts as a catch-all case
+
+//If NONE of the cases fire, it will return NIL by default!
+
+(- 3 1)	//Returns 3 - 1 = 2
+(- 3)	//Returns -3
+
+(defun sum (x y)
+	(+ x y) )
+
+LISP
+numeric exp
+symbolic expressions, selectors
+symbolic expression: construction
+
+(defun fact(n)
+	(cond ( (= n 0) 1 ) 
+( t (* n (fact (n - 1) ) ) )
+
+B^p
+
+(defun exp (B P)
+	(cond ( (= P 0) 1 )
+	(t (* B (exp B (- P 1 ) … )
+
+B^0 = 1
+B^P = (B^P/2) ^ 2
+B^P = B * B ^ P - 1
+
+//Alternate exponentiation
+(defun exp (B P)
+	(cond ( (= P 0) 1)
+	( (evenp P)	(square (exp B ( / p 2 ) ) ) )
+	(t (* B (exp B (- p 1) …)
+
+(defun sum-list (L) 
+	(cond (null L) 0 )
+	(t (+ (car L) (sum-list (cdr L) …)
+	
+Example:
+> (sum_list ‘(1, 2, 3) )
+> 6
+
+> (sum_list ‘(2) )
+> 2
+
+(car NIL) -> NIL
+(cdr NIL) -> NIL
+
+(defun member? (x L)
+	(cond ( (null L) NIL)
+( ( equal x (first L) ) t)
+	( t (member (x (rest L) … )
+
+//Given a list, return last element of list
+//Assume list has at least 1 or more elements
+(defun last (L)
+	(cond ( (null (rest L) ) (first L) )
+		( t (last (rest L) …)	//… means close the remaining parentheses
+
+(defun nth (L n)	//Get the nth number in a list
+	(cond ( (= n 0) (car L) )
+( t (nth (rest L ) (- n 1) ) 
+
+Examples: 
+> (nth ‘(a b c) 0)
+> a
+
+//rest == cdr 
+//first == car
+Those are interchangeable!
+
+//Remove all instances of x
+(defun remove(x L)
+	(cond ( null L) NIL )
+	( (equal x (first L) (remove (x (rest L) ) )
+	(t (cons (first L) (remove x (rest L) … )
+
+//Append 2 lists together
+(defun append(L1 L2)
+	(cond ( ( null L1) L2)
+	(t (cons (car L1) (append (cdr L1) L2) … )
+
+DON’T DO THIS
+(a b) (1 2)	cons(L1 L2)
+L1	L2
+
+( (a b) 1 2)	//You get a list inside a list :(
+
+
+//Local variables
+(defun (x y) 
+	( let ( (a (+ x y) ) 
+	          (b (* x y) ) )
+	( - a b) ) )
+
+//How to create local variables
+(let ( ( a exp) 
+        ( b exp ) )
+	---- )
+
+//
+> (setq x 5)
+> 5
+
+> (+ (let ( (x 3) )
+	(+ x (* x 10) ) )	//x = 3
+	x)	//x = 5 here
+> 38
+//
+
+//
+> (setq x 2)
+> (let ((x 3)
+	(y (+ x 2) ) )
+	(* x y)		//12
+
+> (let (( x 3) 
+	(y (+ x 2) ) )
+	(* x y) )	//15
+//
+
+W1 Discussion	10-2-15
+Umut
+umut@ucla.edu
+M - 1:30 - 2:30 PM
+F - 12:30 - 1:30 PM
+BH 4663
+
+CLisp - Compiler for Lisp
+
+
+
+(defun subsequence? (L1 L2)
+	(cond (NULL L2) t)
+	( (NULL L1) NIL)
+	( (equal (first L1) (first L2) subsequence? (rest L1) (rest L2))
+	( t (subsequence ?) (rest L1) L2) ...)
+
+(defun subs (X Y L)
+	(cond ((NULL L) L)
+		(equal (first L) x) (cons Y (subs (X Y (rest L)) ))
+		(t (cons (first L) (subs X Y (rest L))))
+	)
+)
+
+//Check if X appears an even number of times
+(defun even? (X L)
+	(cond (NULL L) t)
+		(equal x (first L) (not (even? x (rest L))))
+		(t (even? x (rest L)))
+)
+
+//Local variables
+(let ((V1, B1)...(Vn, Bn))
+		(expr))
+
+//Cleaner version of "even" function
+(defun even? (X L)
+	(cond ((NULL L) t)
+	(t (let ((v (even? x (rest L))
+		(cond ((equal x (first L)) (not v))
+		(+ v) ))
+
+//Miodrag problem
+
+//1) Assuming you have a reverse list function implemented
+(reverse L)
+(defun palindrome(L)
+	(equal L (reverse L)))
+
+//2) If you don't have a reverse list function
+(SUB_LIST (L START LEN))	//Returns sublist of L starting at position "START" and ending at position "LEN"
+
+'(1 3 5 4) 1 2)
+'(3 5)'
+
+'((1 3 5 4) 1 0)'
+'()
+
+(defun palindrome(L))
+	(cond ((NULL (rest L) t)
+		((equal (first L) first((last L) (palindrome (SUB_LIST L 1 (- (Length 2) 2)))))
+		(t '())	//NIL
+	)
+
+TREES
+3
+(1 2 4)
+( (1 2 4) 6 (7 9 11))
+
+TREE
+- m: an atom
+- (L m R): 	- L is a TREE
+			- m is an atom
+			- R is a TREE
+
+? means a boolean function 
+
+	2
+   / \
+  1   4
+
+  	6
+   / \
+  2    7
+ / \  / \
+1  11 7  11
+
+In LISP, you man
+//Assuming we haev a valid tree
+(defun tree-size (TREE)
+	(cond (atom TREE) 1)
+	(t (+ 1 (tree-size(first TREE) )
+		(tree-size(third TREE)) ) )
+)
+
+//Alternate method
+(defun tree-size(TREE)
+	(cond ((atom TREE)) 1)
+	(t (let ( (v (+ 1 (tree-size (first L) )
+						(tree-size (third L) ) ) )
+		(x, v)
+		(x)
+)
+
+let vs let *:
+Everything that works with let, should work with let *
+let * is sequential and you have a result for v
+
+HW should be "easy" but test the base cases and compile it.
