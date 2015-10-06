@@ -1,22 +1,32 @@
+; Problems 1-3 are ordered, so they are already sorted.
 ; Problem 1
+
+; FIRST TEST FAILS WTF!!!!
 (defun TREE-CONTAINS(N TREE)
-	(cond ((NULL TREE) NIL);	Empty tree should return nil
-		((equal N (first TREE)) t);	If N is equal to the first element, return true
-		(t (TREE-CONTAINS(N (rest TREE))));	Recursively search the rest of the tree
+	(cond ( (NULL TREE) NIL);	Empty tree should return nil
+		( (equal N (first TREE) ) t);	If N is equal to the first element, return true
+		(t (TREE-CONTAINS N (rest TREE) ) );	Recursively search the rest of the tree
 	)
 )
 
-; Problem 2 HELP
+; GOOD!
+; Problem 2
+; The maximum will always be the last element since the tree is sorted.
 (defun TREE-MAX(TREE)
-	(cond (NULL (rest TREE) <max>);	Return max of the tree when you reach the end
-		((> first(TREE) <max>) <max> = first(TREE));	Compare the current node to the max
-		(t (last (rest TREE)) );	Move to the next node
+	(cond ( (NULL TREE) NIL);	Empty tree should return nil
+		( (NULL (rest TREE) ) (first TREE) );	Return the last item of the tree since that will be the largest
+		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree
 	)
 )
 
-; Problem 3
+ ;Problem 3
+ ;The tree is sorted so just return a single list
 (defun TREE-ORDER(TREE)
-
+	(cond ( (numberp (first TREE) ) (list TREE) );	Return a list if given a number
+		(listp (first TREE) ());	Construct the list
+			;	Add nodes to the list
+		(t (TREE-ORDER (rest TREE) ) );	Recursively search the rest of the tree
+	)
 )
 
 ; Problem 4
@@ -44,6 +54,33 @@
 
 )
 
-(defun main()
-	(TREE-CONTAINS 3 '((1 2 3) 7 8))
-) 
+;Test cases
+(TREE-CONTAINS 3 '((1 2 3) 7 8))
+(TREE-CONTAINS 4 '((1 2 3) 7 8))
+(TREE-MAX '((1 2 3) 7 8))
+;(TREE-ORDER 3)
+;(TREE-ORDER '((1 2 3) 7 8))
+;(SUB-LIST '(a b c d) 0 3)
+;(SUB-LIST '(a b c d) 3 1)
+;(SUB-LIST '(a b c d) 2 0)
+;(SPLIT-LIST '(a b c d))
+;(SPLIT-LIST '(a b c d e))
+;(SPLIT-LIST '(a b c d e f))
+;(BTREE-HEIGHT 1)
+;(BTREE-HEIGHT '(1 2))
+;(BTREE-HEIGHT '(1 (2 3)))
+;(BTREE-HEIGHT '((1 2) (3 4)))
+;(BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7))))
+;(BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8))))
+;(LIST2BTREE '(1))
+;(LIST2BTREE '(1 2))
+;(LIST2BTREE '(1 2 3))
+;(LIST2BTREE '(1 2 3 4))
+;(LIST2BTREE '(1 2 3 4 5 6 7))
+;(LIST2BTREE '(1 2 3 4 5 6 7 8))
+;(BTREE2LIST 1)
+;(BTREE2LIST '(1 2))
+;(BTREE2LIST '(1 (2 3)))
+;(BTREE2LIST '((1 2) (3 4)))
+;(BTREE2LIST '((1 (2 3)) ((4 5) (6 7))))
+;(BTREE2LIST '(((1 2) (3 4)) ((5 6) (7 8))))
