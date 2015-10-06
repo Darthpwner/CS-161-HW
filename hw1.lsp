@@ -21,17 +21,29 @@
 
  ;Problem 3
  ;The tree is sorted so just return a single list
+;(;defun TREE-ORDER(TREE)
+;	(cond ( (numberp (first TREE) ) (list TREE) );	Return a list if given a number
+;		(listp (first TREE) ());	Construct the list
+;			;	Add nodes to the list
+;		(t (TREE-ORDER (rest TREE) ) );	Recursively search the rest of the tree
+;	)
+;)
+
 (defun TREE-ORDER(TREE)
-	(cond ( (numberp (first TREE) ) (list TREE) );	Return a list if given a number
-		(listp (first TREE) ());	Construct the list
-			;	Add nodes to the list
-		(t (TREE-ORDER (rest TREE) ) );	Recursively search the rest of the tree
+	;(cond ( (numberp (first TREE) ) (list TREE) );	Return a list if given a number
+	(cond ( (NULL TREE) NIL);	Empty tree should return nil
+		( (NULL (rest TREE) ) (TREE) )
+		(t (TREE-MAX(rest TREE) ) )
 	)
 )
 
+
 ; Problem 4
 (defun SUB-LIST(L START LEN)
-
+	(cond (< START LEN) NIL);	Return NIL if LEN is greater than START
+		(equal (START LEN) list START);	Return just the START list if one element
+		(); Append to the list START
+		(t (SUB-LIST(L (+ START 1) (- LEN 1) ) ) );	Go down the list
 )
 
 ; Problem 5
@@ -58,8 +70,8 @@
 (TREE-CONTAINS 3 '((1 2 3) 7 8))
 (TREE-CONTAINS 4 '((1 2 3) 7 8))
 (TREE-MAX '((1 2 3) 7 8))
-;(TREE-ORDER 3)
-;(TREE-ORDER '((1 2 3) 7 8))
+(TREE-ORDER 3)
+(TREE-ORDER '((1 2 3) 7 8))
 ;(SUB-LIST '(a b c d) 0 3)
 ;(SUB-LIST '(a b c d) 3 1)
 ;(SUB-LIST '(a b c d) 2 0)
