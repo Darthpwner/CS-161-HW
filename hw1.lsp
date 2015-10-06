@@ -1,13 +1,16 @@
 ; Problem 1
 (defun TREE-CONTAINS(N TREE)
-	(cond ((NULL TREE) NIL)
-
+	(cond ((NULL TREE) NIL);	Empty tree should return nil
+		(equal N (first TREE) t);	If N is equal to the first element, return true
+		(t (TREE-CONTAINS(N (rest TREE))));	Recursively search the rest of the tree
 	)
 )
 
 ; Problem 2
 (defun TREE-MAX(TREE)
+	(cond ((NULL TREE) NIL);	Empty tree should return nil
 
+	)
 )
 
 ; Problem 3
@@ -39,3 +42,7 @@
 (defun BTREE2LIST(TREE)
 
 )
+
+(defun main()
+	(TREE-CONTAINS 3 '((1 2 3) 7 8))
+) 
