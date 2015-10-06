@@ -30,10 +30,10 @@
 ;)
 
 (defun TREE-ORDER(TREE)
-	;(cond ( (numberp (first TREE) ) (list TREE) );	Return a list if given a number
-	(cond ( (NULL TREE) NIL);	Empty tree should return nil
-		( (NULL (rest TREE) ) (TREE) )
-		(t (TREE-MAX(rest TREE) ) )
+	(cond ( (numberp (first TREE) ) (list TREE) );	Return a list if given a number
+		( (NULL (rest TREE) ) (TREE) );
+		( (cons (first TREE) (rest TREE) ) );	
+		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree 
 	)
 )
 
