@@ -1,15 +1,16 @@
 ; Problem 1
 (defun TREE-CONTAINS(N TREE)
 	(cond ((NULL TREE) NIL);	Empty tree should return nil
-		(equal N (first TREE) t);	If N is equal to the first element, return true
+		((equal N (first TREE)) t);	If N is equal to the first element, return true
 		(t (TREE-CONTAINS(N (rest TREE))));	Recursively search the rest of the tree
 	)
 )
 
-; Problem 2
+; Problem 2 HELP
 (defun TREE-MAX(TREE)
-	(cond ((NULL TREE) NIL);	Empty tree should return nil
-
+	(cond (NULL (rest TREE) <max>);	Return max of the tree when you reach the end
+		((> first(TREE) <max>) <max> = first(TREE));	Compare the current node to the max
+		(t (last (rest TREE)) );	Move to the next node
 	)
 )
 
