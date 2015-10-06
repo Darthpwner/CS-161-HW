@@ -30,7 +30,7 @@
 ;)
 
 (defun TREE-ORDER(TREE)
-	(cond ( (numberp (first TREE) ) (list TREE) );	Return a list if given a number
+	(cond ( (numberp (first TREE) ) (list (first TREE) ) );	Return a list if given a number
 		( (NULL (rest TREE) ) (TREE) );
 		( (cons (first TREE) (rest TREE) ) );	
 		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree 
