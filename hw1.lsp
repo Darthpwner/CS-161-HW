@@ -55,17 +55,21 @@
 
 )
 
+;GOOD
 ; Problem 6
+
 (defun BTREE-HEIGHT(TREE)
 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE) 0);	Return 0 for a number
-		( (and (atom (final TREE) ) (atom (second TREE) ) ) 1); Return 1 for any internal nodes
+		( (and (atom (first TREE) ) (atom (second TREE) ) 1) ); Return 1 for any internal nodes
 		( t;	Recursively move to next node
-			(let* (fir (BTREE-HEIGHT (first TREE) ) ) 
-				(sec (BTREE-HEIGHT (second TREE) ) )
-				(cond ( (> fir sec) (+1 fir) ) 
-					(t (+1 sec) );	else
-				)
+			(let* (
+				   	(fir (BTREE-HEIGHT (first TREE) ) ) 
+					(sec (BTREE-HEIGHT (second TREE) ) )
+				  )
+					(cond ( (> fir sec) (+ 1 fir) ) 
+						(t (+ 1 sec) );	else
+					)
 			)
 		)
 	)
