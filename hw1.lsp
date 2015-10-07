@@ -29,20 +29,23 @@
 ;	)
 ;)
 
+;Problem 3
 (defun TREE-ORDER(TREE)
-	(cond ( (numberp (first TREE) ) (list (first TREE) ) );	Return a list if given a number
-		( (NULL (rest TREE) ) (TREE) );
-		( (cons (first TREE) (rest TREE) ) );	
-		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree 
+	(cond ( (numberp TREE) (list TREE) );	Return a list if given a number
+		(t 200)
 	)
 )
+
+;		( (NULL (rest TREE) ) (TREE) );
+;		( (cons (first TREE) (rest TREE) ) );	
+;		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree 
 
 
 ; Problem 4
 (defun SUB-LIST(L START LEN)
 	(cond (< START LEN) NIL);	Return NIL if LEN is greater than START
 		(equal (START LEN) list START);	Return just the START list if one element
-		(); Append to the list START
+		(append START (first L) ); Append to the list START
 		(t (SUB-LIST(L (+ START 1) (- LEN 1) ) ) );	Go down the list
 )
 
@@ -53,7 +56,9 @@
 
 ; Problem 6
 (defun BTREE-HEIGHT(TREE)
+	(cond ( (NULL TREE) NIL);	Empty tree should return nil
 
+	)
 )
 
 ; Problem 7
