@@ -32,8 +32,7 @@
 ;Problem 3
 (defun TREE-ORDER(TREE)
 	(cond ( (numberp TREE) (list TREE) );	Return a list if given a number
-		( (listp TREE) TREE);	Return TREE if TREE is a list
-		;( listp TREE (append((first TREE) TREE) ) ); Append a list if given a list
+		( (listp (first TREE) ) (append (first TREE) TREE) )  ;	Return TREE if TREE is a list
 		(t (TREE-ORDER(rest TREE) ) ); Recursively search the rest of the tree
 	)
 )
