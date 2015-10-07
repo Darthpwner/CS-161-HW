@@ -32,7 +32,8 @@
 ;Problem 3
 (defun TREE-ORDER(TREE)
 	(cond ( (numberp TREE) (list TREE) );	Return a list if given a number
-		(t 200)
+		( (listp (first TREE) ) append ((first TREE) TREE) ); Append a list if given a list
+		;(t (TREE-ORDER(rest TREE) ) );	Traverse the tree
 	)
 )
 
