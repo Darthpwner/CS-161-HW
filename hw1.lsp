@@ -1,11 +1,26 @@
 ; Problems 1-3 are ordered, so they are already sorted.
 ; Problem 1
 
-; FIRST TEST FAILS WTF!!!!
+;GOOD!
 (defun TREE-CONTAINS(N TREE)
 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
-		( (equal N (first TREE) ) t);	If N is equal to the first element, return true
-		(t (TREE-CONTAINS N (rest TREE) ) );	Recursively search the rest of the tree
+		( (atom TREE); TREE is 1 element
+			(cond ((equal N TREE) t);	R
+				(t NIL)
+			)
+		)
+		(t;	recurisvely search TREE
+			(let* (
+					(left(TREE-CONTAINS N (first TREE) ) ) 
+					(right(TREE-CONTAINS N (third TREE) ) ) 
+				  ) 
+				
+				  (cond ((> N (second TREE) ) (TREE-CONTAINS N right) ) 
+					((< N (second TREE) ) (TREE-CONTAINS N left) )  
+					(t t)
+				  ) 
+			)
+		)
 	)
 )
 
@@ -67,9 +82,10 @@
 				   	(fir (BTREE-HEIGHT (first TREE) ) ) 
 					(sec (BTREE-HEIGHT (second TREE) ) )
 				  )
-					(cond ( (> fir sec) (+ 1 fir) ) 
+				  
+				  (cond ( (> fir sec) (+ 1 fir) ) 
 						(t (+ 1 sec) );	else
-					)
+			      )
 			)
 		)
 	)
