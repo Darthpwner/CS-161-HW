@@ -34,23 +34,15 @@
 	)
 )
 
-;(1 2 3) 7 8
+; GOOD!
 ;Problem 3
 ;The tree is sorted so just return a single list
 (defun TREE-ORDER(TREE)
 	(cond( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE) (list TREE) );	If TREE is atom, make it a list
-		;( (listp (first TREE)) (first TREE));	If TREE is a list, return the list
-		(t (append (first TREE) (rest TREE) ) )
+		(t (append (first TREE) (rest TREE) ) );	Otherwise, append to the list to the tree
 	)
 )
-
-; (defun TREE-ORDER(TREE)
-; 	(cond ( (numberp TREE) (list TREE) );	Return a list if given a number
-; 		( (listp (first TREE) ) (append (first TREE) TREE) )  ;	Return TREE if TREE is a list
-; 		(t (TREE-ORDER(rest TREE) ) ); Recursively search the rest of the tree
-; 	)
-; )
 
 ; Problem 4
 (defun SUB-LIST(L START LEN)
@@ -93,7 +85,10 @@
 
 ; Problem 8
 (defun BTREE2LIST(TREE)
-
+	(cond ( (NULL TREE) NIL);	Empty tree should return nil
+		( (NULL (rest TREE) ) (first TREE) );	Return the last item of the tree since that will be the largest
+		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree
+	)
 )
 
 ;Test cases
@@ -107,28 +102,28 @@
 ;
 (TREE-ORDER 3)
 (TREE-ORDER '((1 2 3) 7 8))
-(TREE-ORDER '(6 9 12))
+;(TREE-ORDER '(6 9 12))
 ;(SUB-LIST '(a b c d) 0 3)
 ;(SUB-LIST '(a b c d) 3 1)
 ;(SUB-LIST '(a b c d) 2 0)
 ;(SPLIT-LIST '(a b c d))
 ;(SPLIT-LIST '(a b c d e))
 ;(SPLIT-LIST '(a b c d e f))
-;(BTREE-HEIGHT 1)
-;(BTREE-HEIGHT '(1 2))
-;(BTREE-HEIGHT '(1 (2 3)))
-;(BTREE-HEIGHT '((1 2) (3 4)))
-;(BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7))))
-;(BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8))))
+(BTREE-HEIGHT 1)
+(BTREE-HEIGHT '(1 2))
+(BTREE-HEIGHT '(1 (2 3)))
+(BTREE-HEIGHT '((1 2) (3 4)))
+(BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7))))
+(BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8))))
 ;(LIST2BTREE '(1))
 ;(LIST2BTREE '(1 2))
 ;(LIST2BTREE '(1 2 3))
 ;(LIST2BTREE '(1 2 3 4))
 ;(LIST2BTREE '(1 2 3 4 5 6 7))
 ;(LIST2BTREE '(1 2 3 4 5 6 7 8))
-;(BTREE2LIST 1)
-;(BTREE2LIST '(1 2))
-;(BTREE2LIST '(1 (2 3)))
-;(BTREE2LIST '((1 2) (3 4)))
-;(BTREE2LIST '((1 (2 3)) ((4 5) (6 7))))
-;(BTREE2LIST '(((1 2) (3 4)) ((5 6) (7 8))))
+; (BTREE2LIST 1)
+; (BTREE2LIST '(1 2))
+; (BTREE2LIST '(1 (2 3)))
+; (BTREE2LIST '((1 2) (3 4)))
+; (BTREE2LIST '((1 (2 3)) ((4 5) (6 7))))
+; (BTREE2LIST '(((1 2) (3 4)) ((5 6) (7 8))))
