@@ -61,8 +61,7 @@
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
 		((evenp (length L)) (list (SUB-LIST L 0 (/ (length L) 2) ) (SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) ) ); Treats the even case
-		;(t (list (SUB-LIST L 0 (- (/ (length L) 2) 1) ) ) )
-		(t (list (SUB-LIST L 0 (/ (- (length L) 1) 2) ) (SUB-LIST L (- (/ (length L) 2) 1) (/ (+ (length L) 2) 1) ) ) )
+		(t (list (SUB-LIST L 0 (/ (- (length L) 1) 2) ) (SUB-LIST L (/ (- (length L) 1) 2) (/ (+ (length L) 2) 1) ) ) ); Treats the odd case
 	)
 )
  
