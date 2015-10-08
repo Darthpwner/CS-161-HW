@@ -58,17 +58,25 @@
 ; Problem 5
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
-		(let* 
-			(
-				(even (evenp (length L) ) )
-				;(odd (oddp (length L) ) )
-				(midpoint (/ (length L) 2) )
-			)
-
-			(cond ( (even) (+ (SUB-LIST L 0 midpoint ) (SUB-LIST L midpoint midpoint) ) )
-				(t (+ (SUB-LIST L 0 (- midpoint 1) ) (SUB-LIST L midpoint (+ midpoint 1) ) ) )
-			)
+		((= (length L) 1) L)
+		((evenp (length L) 
+			(+ (SUB-LIST L 0 (/ (length L) 2) ) 
+				(SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) 
+			) 
+		 ) 
 		)
+		(t (+ (SUB-LIST L 0 (- (/ (length L) 2) 1) ) (SUB-LIST L (/ (length L) 2) (+ (/ (length L) 2) 1) ) ) )
+		; (let* 
+		; 	(
+		; 		;(even (evenp (length L) ) )
+		; 		;(odd (oddp (length L) ) )
+		; 		;(midpoint (/ (length L) 2) )
+		; 	)
+
+		; 	(cond ( (even) (+ (SUB-LIST L 0 midpoint ) (SUB-LIST L midpoint midpoint) ) )
+		; 		(t (+ (SUB-LIST L 0 (- midpoint 1) ) (SUB-LIST L midpoint (+ midpoint 1) ) ) )
+		; 	)
+		; )
 	)
 )
 
@@ -105,6 +113,12 @@
 	)
 )
 
+(defun PRINT
+	(+ 1 2)
+)
+
+
+
 ;Test cases
 ;(TREE-CONTAINS 3 '((1 2 3) 7 8))
 (TREE-CONTAINS 4 '((1 2 3) 7 8))
@@ -134,6 +148,10 @@
 (SUB-LIST '(a b c d) 2 0)
 (SUB-LIST '(a b c d) 3 2)
 (SUB-LIST '(a b c d) 4 1)
+
+
+(PRINT)
+(SPLIT-LIST '(a))
 
 
 (SPLIT-LIST '(a b c d))
