@@ -44,11 +44,12 @@
 	)
 )
 
+; GOOD!
+; Potential concern is if LEN goes out of bound
 ; Problem 4
 (defun SUB-LIST(L START LEN) 
 	(cond ( (NULL L) NIL);	NULL L should return nil 
 		( (= LEN 0) NIL) ;	LEN = 0 should return nil
-		( (and (= START 0) (= LEN 1) (cons (first L) '() ) ) );	Construct the list
 		( (= START 0) (append (list (first L)) (SUB-LIST (rest L) START (- LEN 1) ) ) ); Start counting the SUB-LIST
 		( t (SUB-LIST(rest L) (- START 1) LEN) );  Counter has not found START yet
 	)
@@ -56,12 +57,14 @@
 
 ; Problem 5
 (defun SPLIT-LIST(L)
-
+	(cond ( (NULL L) NIL); NULL L should return nil
+		( (evenp (length L) ) SUB-LIST(L START (/ L 2) ) );	Even lengths will have L1 = L2
+		( (oddp (length L) ) SUB-LIST(L START (+ (/ L 2) 1) ) );	Odd lengths will have L2 = L1 + 1
+	)
 )
 
 ;GOOD
 ; Problem 6
-
 (defun BTREE-HEIGHT(TREE)
 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE) 0);	Return 0 for a number
@@ -106,13 +109,27 @@
 (TREE-ORDER '((1 2 3) 7 8))
 ;
 (SUB-LIST '(a) 0 1)
+(SUB-LIST '(a b c d) 0 1)
+(SUB-LIST '(a b c d) 0 2)
 (SUB-LIST '(a b c d) 0 3)
-(SUB-LIST '(a b c d) 3 1)
+(SUB-LIST '(a b c d) 0 4)
+(SUB-LIST '(a b c d) 1 1)
+(SUB-LIST '(a b c d) 1 2)
+(SUB-LIST '(a b c d) 1 3)
+(SUB-LIST '(a b c d) 1 4)
+(SUB-LIST '(a b c d) 2 1)
+(SUB-LIST '(a b c d) 2 2)
+(SUB-LIST '(a b c d) 2 3)
+(SUB-LIST '(a b c d) 2 4)
 ;
 (SUB-LIST '(a b c d) 2 0)
-;(SPLIT-LIST '(a b c d))
-;(SPLIT-LIST '(a b c d e))
-;(SPLIT-LIST '(a b c d e f))
+(SUB-LIST '(a b c d) 3 2)
+(SUB-LIST '(a b c d) 4 1)
+
+
+(SPLIT-LIST '(a b c d))
+(SPLIT-LIST '(a b c d e))
+(SPLIT-LIST '(a b c d e f))
 ; GOOD
 (BTREE-HEIGHT 1)
 (BTREE-HEIGHT '(1 2))
