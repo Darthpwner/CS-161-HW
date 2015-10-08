@@ -95,6 +95,7 @@
 	(cond ( (NULL LEAVES) NIL);	Empty List should return nil
 		((= (length LEAVES) 1) (first LEAVES));	An atom should return the root
 		((= (length LEAVES) 2) (list (first LEAVES) (second LEAVES)) );	A list of two should return a single list
+		(t (SPLIT-LIST LEAVES));	Recursively call SPLIT-LIST on any other conditions
 	)
 )
 
