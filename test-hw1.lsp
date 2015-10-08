@@ -11,9 +11,9 @@
 (unit-test (TREE-ORDER 3) '(3))
 (unit-test (TREE-ORDER '((1 2 3) 7 8)) '(1 2 3 7 8))
 ;; Problem 4
-;(unit-test (SUB-LIST '(a b c d) 0 3) '(a b c))
-;(unit-test (SUB-LIST '(a b c d) 3 1) '(d))
-;(unit-test (SUB-LIST '(a b c d) 2 0) NIL)
+(unit-test (SUB-LIST '(a b c d) 0 3) '(a b c))
+(unit-test (SUB-LIST '(a b c d) 3 1) '(d))
+(unit-test (SUB-LIST '(a b c d) 2 0) NIL)
 ;; Problem 5
 ;(unit-test (SPLIT-LIST '(a b c d))     '((a b) (c d)))
 ;(unit-test (SPLIT-LIST '(a b c d e))   '((a b) (c d e)))
