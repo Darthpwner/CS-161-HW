@@ -58,7 +58,8 @@
 ; Problem 5
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
-		((length L))
+		((evenp (length L)) t)
+		(t NIL)
 	)
 )
 
