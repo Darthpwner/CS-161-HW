@@ -95,15 +95,34 @@
 	(cond ( (NULL LEAVES) NIL);	Empty List should return nil
 		((= (length LEAVES) 1) (first LEAVES));	An atom should return the root
 		((= (length LEAVES) 2) (list (first LEAVES) (second LEAVES)) );	A list of two should return a single list
-		(t (LIST2BTREE (SPLIT-LIST LEAVES) ) )
+		(t ;	Recursively search the rest of the tree
+			(let* (
+					((splitter (SPLIT-LIST LEAVES) ); Split the list
+						(fir (LIST2BTREE(first splitter) ) )
+						(sec (LIST2BTREE(second splitter) ) )
+					)
+					(list fir sec) 
+				)
+			)
+		)
 	)
+)
+
+(t
+			(let* ((tempList (SPLIT-LIST LEAVES))	;;; Split the list
+        			(L1 (LIST2BTREE (first tempList)))		;;;	convert half
+					(L2 (LIST2BTREE (second tempList))))	;;;	convert half
+				(list L1 L2)
+        	)
+        )
+	) 
 )
 
 ; Problem 8
 (defun BTREE2LIST(TREE)
 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
 		( (NULL (rest TREE) ) (first TREE) );	Return the last item of the tree since that will be the largest
-		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree
+
 	)
 )
 
