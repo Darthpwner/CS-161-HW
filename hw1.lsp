@@ -49,7 +49,8 @@
 	(cond ( (NULL L) NIL);	NULL L should return nil 
 		( (= LEN 0) NIL) ;	LEN = 0 should return nil
 		( (and (= START 0) (= LEN 1) (cons (first L) '() ) ) );	Construct the list
-		( (= START 0) (SUB-LIST L START (- LEN 1) ) ); Start counting the SUB-LIST
+		( (= START 0) (append L (SUB-LIST (rest L) START (- LEN 1) ) ) )
+		;( (= START 0) (append ((first L) (SUB-LIST L START (- LEN 1) ) ) ) ); Start counting the SUB-LIST
 		( t (SUB-LIST(rest L) (- START 1) LEN) );  Counter has not found START yet
 	)
 )
