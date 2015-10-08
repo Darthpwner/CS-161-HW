@@ -61,7 +61,7 @@
 		(let* 
 			(
 				(even (evenp (length L) ) )
-				(odd (oddp (length L) ) )
+				;(odd (oddp (length L) ) )
 				(midpoint (/ (length L) 2) )
 			)
 
