@@ -93,6 +93,7 @@
 ; NEED TO RECURSIVELY BREAK DOWN THE LIST!
 (defun LIST2BTREE(LEAVES)
 	(cond ( (NULL LEAVES) NIL);	Empty List should return nil
+		((= (length LEAVES) 1) (first LEAVES));	An atom should return the root
 		(t (SPLIT-LIST LEAVES))
 	)
 )
@@ -106,7 +107,7 @@
 )
 
 (defun PRINTME()
-	(- (/ 5 2) 1)
+	;(- (/ 5 2) 1)
 	;((fuck))
 )
 
@@ -142,11 +143,7 @@
 (SUB-LIST '(a b c d) 3 2)
 (SUB-LIST '(a b c d) 4 1)
 
-
-(PRINTME)
 (SPLIT-LIST '(a))
-
-
 (SPLIT-LIST '(a b c d))
 (SPLIT-LIST '(a b c d e))
 (SPLIT-LIST '(a b c d e f))
@@ -155,7 +152,6 @@
 (SPLIT-LIST '(a b c d e f g 1 ))
 (SPLIT-LIST '(a b c d e f g 0 9))
 (SPLIT-LIST '(a b c d e f g 0 9 69))
-(PRINTME)
 ; GOOD
 (BTREE-HEIGHT 1)
 (BTREE-HEIGHT '(1 2))
@@ -163,12 +159,16 @@
 (BTREE-HEIGHT '((1 2) (3 4)))
 (BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7))))
 (BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8))))
+
+(PRINTME)
 (LIST2BTREE '(1))
 (LIST2BTREE '(1 2))
 (LIST2BTREE '(1 2 3))
 (LIST2BTREE '(1 2 3 4))
 (LIST2BTREE '(1 2 3 4 5 6 7))
 (LIST2BTREE '(1 2 3 4 5 6 7 8))
+(PRINTME)
+
 ; (BTREE2LIST 1)
 ; (BTREE2LIST '(1 2))
 ; (BTREE2LIST '(1 (2 3)))
