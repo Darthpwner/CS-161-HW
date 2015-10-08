@@ -45,11 +45,10 @@
 )
 
 ; Problem 4
-(defun SUB-LIST(L START LEN)
-	(cond (< START LEN) NIL);	Return NIL if LEN is greater than START
-		(equal (START LEN) list START);	Return just the START list if one element
-		(append START (first L) ); Append to the list START
-		(t (SUB-LIST(L (+ START 1) (- LEN 1) ) ) );	Go down the list
+(defun SUB-LIST(L START LEN) 
+	(cond ( (= LEN 0) NIL) );	LEN = 0 should return nil
+		
+
 )
 
 ; Problem 5
