@@ -68,19 +68,6 @@
 		(t (list (SUB-LIST L 0 (/ (- (length L) 1) 2) ) (SUB-LIST L (/ (- (length L) 1) 2) (/ (+ (length L) 2) 1) ) ) ); Treats the odd case
 	)
 )
- 
-
- 
-			; (
-			; 	(even (evenp (length L) ) )
-			; 	;(odd (oddp (length L) ) )
-			; 	(midpoint (/ (length L) 2) )
-			; )
-
-			; (cond ( (even) (+ (SUB-LIST L 0 midpoint ) (SUB-LIST L midpoint midpoint) ) )
-			; 	(t (+ (SUB-LIST L 0 (- midpoint 1) ) (SUB-LIST L midpoint (+ midpoint 1) ) ) )
-			; )
-	
 
 ;GOOD
 ; Problem 6
@@ -90,8 +77,8 @@
 		( (and (atom (first TREE) ) (atom (second TREE) ) 1) ); Return 1 for any internal nodes
 		( t;	Recursively move to next node
 			(let* (
-				   	(fir (BTREE-HEIGHT (first TREE) ) ) 
-					(sec (BTREE-HEIGHT (second TREE) ) )
+				   	(fir (BTREE-HEIGHT (first TREE) ) ); fir is the left sub-tree 
+					(sec (BTREE-HEIGHT (second TREE) ) ); sec is the right sub-tree
 				  )
 				  
 				  (cond ( (> fir sec) (+ 1 fir) ) 
@@ -103,8 +90,11 @@
 )
 
 ; Problem 7
+; NEED TO RECURSIVELY BREAK DOWN THE LIST!
 (defun LIST2BTREE(LEAVES)
-
+	(cond ( (NULL LEAVES) NIL);	Empty List should return nil
+		(t (SPLIT-LIST LEAVES))
+	)
 )
 
 ; Problem 8
@@ -173,12 +163,12 @@
 (BTREE-HEIGHT '((1 2) (3 4)))
 (BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7))))
 (BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8))))
-;(LIST2BTREE '(1))
-;(LIST2BTREE '(1 2))
-;(LIST2BTREE '(1 2 3))
-;(LIST2BTREE '(1 2 3 4))
-;(LIST2BTREE '(1 2 3 4 5 6 7))
-;(LIST2BTREE '(1 2 3 4 5 6 7 8))
+(LIST2BTREE '(1))
+(LIST2BTREE '(1 2))
+(LIST2BTREE '(1 2 3))
+(LIST2BTREE '(1 2 3 4))
+(LIST2BTREE '(1 2 3 4 5 6 7))
+(LIST2BTREE '(1 2 3 4 5 6 7 8))
 ; (BTREE2LIST 1)
 ; (BTREE2LIST '(1 2))
 ; (BTREE2LIST '(1 (2 3)))
