@@ -47,8 +47,8 @@
 ; Problem 4
 (defun SUB-LIST(L START LEN) 
 	(cond ( (= LEN 0) NIL) ;	LEN = 0 should return nil
-		( (= START 0) cons (first L) '() );	Construct a list for the first atom
-		( t (SUB-LIST (rest L) (- START 1) LEN) )
+		((and (= START 0) (= LEN 1) (cons (first L) '() ) ) );
+		;((and (= START 0) (= LEN 1)) cons (first L) '() );	Start counting the SUB-LIST
 	)
 )
 
@@ -103,6 +103,7 @@
 (TREE-ORDER 3)
 (TREE-ORDER '((1 2 3) 7 8))
 ;
+(SUB-LIST '(a) 0 1)
 (SUB-LIST '(a b c d) 0 3)
 (SUB-LIST '(a b c d) 3 1)
 (SUB-LIST '(a b c d) 2 0)
