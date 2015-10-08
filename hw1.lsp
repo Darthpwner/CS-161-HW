@@ -40,6 +40,7 @@
 (defun TREE-ORDER(TREE)
 	(cond( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE) (list TREE) );	If TREE is atom, make it a list
+		( (listp TREE) TREE)
 		(t (append (TREE-ORDER(rest TREE) ) TREE) )
 	)
 )
