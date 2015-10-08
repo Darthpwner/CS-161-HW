@@ -108,10 +108,11 @@
 (SUB-LIST '(a) 0 1)
 (SUB-LIST '(a b c d) 0 3)
 (SUB-LIST '(a b c d) 3 1)
+;
 (SUB-LIST '(a b c d) 2 0)
-(SPLIT-LIST '(a b c d))
-(SPLIT-LIST '(a b c d e))
-(SPLIT-LIST '(a b c d e f))
+;(SPLIT-LIST '(a b c d))
+;(SPLIT-LIST '(a b c d e))
+;(SPLIT-LIST '(a b c d e f))
 ; GOOD
 (BTREE-HEIGHT 1)
 (BTREE-HEIGHT '(1 2))
