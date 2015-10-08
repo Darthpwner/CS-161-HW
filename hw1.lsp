@@ -40,8 +40,8 @@
 (defun TREE-ORDER(TREE)
 	(cond( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE) (list TREE) );	If TREE is atom, make it a list
-		( (listp TREE) TREE)
-		(t (append (TREE-ORDER(rest TREE) ) TREE) )
+		;( (listp (first TREE)) (first TREE));	If TREE is a list, return the list
+		(t (append (first TREE) (rest TREE) ) )
 	)
 )
 
@@ -99,7 +99,12 @@
 ;Test cases
 ;(TREE-CONTAINS 3 '((1 2 3) 7 8))
 (TREE-CONTAINS 4 '((1 2 3) 7 8))
+;GOOD
 (TREE-MAX '((1 2 3) 7 8))
+(TREE-MAX '((1 2 3) 7 900))
+(TREE-MAX '((1 2 3) 7 81))
+(TREE-MAX '((1 2 3) 7 9))
+;
 (TREE-ORDER 3)
 (TREE-ORDER '((1 2 3) 7 8))
 (TREE-ORDER '(6 9 12))
