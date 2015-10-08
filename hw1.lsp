@@ -47,7 +47,8 @@
 ; Problem 4
 (defun SUB-LIST(L START LEN) 
 	(cond ( (= LEN 0) NIL) );	LEN = 0 should return nil
-		
+		( (= START 0) cons (first L) '() );	Construct a list for the first atom
+		( (> START 0) SUB-LIST (rest L) (- START 1) LEN)
 
 )
 
@@ -98,16 +99,17 @@
 (TREE-MAX '((1 2 3) 7 900))
 (TREE-MAX '((1 2 3) 7 81))
 (TREE-MAX '((1 2 3) 7 9))
-;
+;GOOD
 (TREE-ORDER 3)
 (TREE-ORDER '((1 2 3) 7 8))
-;(TREE-ORDER '(6 9 12))
-;(SUB-LIST '(a b c d) 0 3)
-;(SUB-LIST '(a b c d) 3 1)
-;(SUB-LIST '(a b c d) 2 0)
-;(SPLIT-LIST '(a b c d))
-;(SPLIT-LIST '(a b c d e))
-;(SPLIT-LIST '(a b c d e f))
+;
+(SUB-LIST '(a b c d) 0 3)
+(SUB-LIST '(a b c d) 3 1)
+(SUB-LIST '(a b c d) 2 0)
+(SPLIT-LIST '(a b c d))
+(SPLIT-LIST '(a b c d e))
+(SPLIT-LIST '(a b c d e f))
+; GOOD
 (BTREE-HEIGHT 1)
 (BTREE-HEIGHT '(1 2))
 (BTREE-HEIGHT '(1 (2 3)))
