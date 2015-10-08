@@ -39,7 +39,7 @@
 (defun TREE-ORDER(TREE)
 	(cond( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE) (list TREE) );	If TREE is atom, make it a list
-		( (append TREE '() ) );	if TREE is a list, append it to the previous ones
+		( (append (first TREE) '() ) );	if TREE is a list, append it to the previous ones
 		(t (TREE-ORDER rest TREE) ) ;	Call TREE-ORDER on the rest of TREE
 	)
 )
