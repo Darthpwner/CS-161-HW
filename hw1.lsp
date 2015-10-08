@@ -36,6 +36,7 @@
 
 ; GOOD!
 ;Problem 3
+;
 ;The tree is sorted so just return a single list
 (defun TREE-ORDER(TREE)
 	(cond( (NULL TREE) NIL);	Empty tree should return nil
@@ -45,7 +46,8 @@
 )
 
 ; GOOD!
-; Potential concern is if LEN goes out of bound
+; Returns a SUB-LIST from START to LEN. 
+;Potential concern is my function will still return a list if the length goes out of bounds
 ; Problem 4
 (defun SUB-LIST(L START LEN) 
 	(cond ( (NULL L) NIL);	NULL L should return nil 
@@ -58,10 +60,13 @@
 ; Problem 5
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
-		((evenp (length L)) (list (SUB-LIST L 0 (/ (length L) 2) ) (SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) ) )
-		(t NIL)
+		((evenp (length L)) (list (SUB-LIST L 0 (/ (length L) 2) ) (SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) ) ); Treats the even case
+		;(t (list (SUB-LIST L 0 (- (/ (length L) 2) 1) ) ) )
+		(t (list (SUB-LIST L 0 (/ (- (length L) 1) 2) ) (SUB-LIST L (- (/ (length L) 2) 1) (/ (+ (length L) 2) 1) ) ) )
 	)
 )
+ 
+
  
 			; (
 			; 	(even (evenp (length L) ) )
@@ -107,8 +112,9 @@
 	)
 )
 
-(defun PRINT
-	(+ 1 2)
+(defun PRINTME()
+	(- (/ 5 2) 1)
+	;((fuck))
 )
 
 
@@ -144,7 +150,7 @@
 (SUB-LIST '(a b c d) 4 1)
 
 
-(PRINT)
+(PRINTME)
 (SPLIT-LIST '(a))
 
 
@@ -152,7 +158,7 @@
 (SPLIT-LIST '(a b c d e))
 (SPLIT-LIST '(a b c d e f))
 (SPLIT-LIST '(a b c d e f g))
-(PRINT)
+(PRINTME)
 ; GOOD
 (BTREE-HEIGHT 1)
 (BTREE-HEIGHT '(1 2))
