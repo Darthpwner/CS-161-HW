@@ -34,28 +34,22 @@
 	)
 )
 
- ;Problem 3
- ;The tree is sorted so just return a single list
-;(;defun TREE-ORDER(TREE)
-;	(cond ( (numberp (first TREE) ) (list TREE) );	Return a list if given a number
-;		(listp (first TREE) ());	Construct the list
-;			;	Add nodes to the list
-;		(t (TREE-ORDER (rest TREE) ) );	Recursively search the rest of the tree
-;	)
-;)
-
 ;Problem 3
+;The tree is sorted so just return a single list
 (defun TREE-ORDER(TREE)
-	(cond ( (numberp TREE) (list TREE) );	Return a list if given a number
-		( (listp (first TREE) ) (append (first TREE) TREE) )  ;	Return TREE if TREE is a list
-		(t (TREE-ORDER(rest TREE) ) ); Recursively search the rest of the tree
+	(cond( (NULL TREE) NIL);	Empty tree should return nil
+		( (atom TREE) (list TREE) );	If TREE is atom, make it a list
+		( (append TREE '() ) );	if TREE is a list, append it to the previous ones
+		(t (TREE-ORDER rest TREE) ) ;	Call TREE-ORDER on the rest of TREE
 	)
 )
 
-;		( (NULL (rest TREE) ) (TREE) );
-;		( (cons (first TREE) (rest TREE) ) );	
-;		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree 
-
+; (defun TREE-ORDER(TREE)
+; 	(cond ( (numberp TREE) (list TREE) );	Return a list if given a number
+; 		( (listp (first TREE) ) (append (first TREE) TREE) )  ;	Return TREE if TREE is a list
+; 		(t (TREE-ORDER(rest TREE) ) ); Recursively search the rest of the tree
+; 	)
+; )
 
 ; Problem 4
 (defun SUB-LIST(L START LEN)
@@ -102,7 +96,7 @@
 )
 
 ;Test cases
-(TREE-CONTAINS 3 '((1 2 3) 7 8))
+;(TREE-CONTAINS 3 '((1 2 3) 7 8))
 (TREE-CONTAINS 4 '((1 2 3) 7 8))
 (TREE-MAX '((1 2 3) 7 8))
 (TREE-ORDER 3)
@@ -113,12 +107,12 @@
 ;(SPLIT-LIST '(a b c d))
 ;(SPLIT-LIST '(a b c d e))
 ;(SPLIT-LIST '(a b c d e f))
-(BTREE-HEIGHT 1)
-(BTREE-HEIGHT '(1 2))
-(BTREE-HEIGHT '(1 (2 3)))
-(BTREE-HEIGHT '((1 2) (3 4)))
-(BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7))))
-(BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8))))
+;(BTREE-HEIGHT 1)
+;(BTREE-HEIGHT '(1 2))
+;(BTREE-HEIGHT '(1 (2 3)))
+;(BTREE-HEIGHT '((1 2) (3 4)))
+;(BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7))))
+;(BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8))))
 ;(LIST2BTREE '(1))
 ;(LIST2BTREE '(1 2))
 ;(LIST2BTREE '(1 2 3))
