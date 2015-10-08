@@ -1,7 +1,7 @@
 ; Problems 1-3 are ordered, so they are already sorted.
 ; Problem 1
 
-;GOOD!
+;FIXME!
 (defun TREE-CONTAINS(N TREE)
 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE); TREE is 1 element
@@ -46,9 +46,11 @@
 
 ; Problem 4
 (defun SUB-LIST(L START LEN) 
-	(cond ( (= LEN 0) NIL) ;	LEN = 0 should return nil
-		((and (= START 0) (= LEN 1) (cons (first L) '() ) ) );
-		;((and (= START 0) (= LEN 1)) cons (first L) '() );	Start counting the SUB-LIST
+	(cond ( (NULL L) NIL);	NULL L should return nil 
+		( (= LEN 0) NIL) ;	LEN = 0 should return nil
+		( (and (= START 0) (= LEN 1) (cons (first L) '() ) ) );	Construct the list
+		( (= START 0) (SUB-LIST(rest L) START (- LEN 1) ) ); Start counting the SUB-LIST
+		( t (SUB-LIST(rest L) (- START 1) LEN) );  Counter has not found START yet
 	)
 )
 
