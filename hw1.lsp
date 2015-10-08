@@ -60,6 +60,7 @@
 ; Problem 5
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
+		((= (length L) 1) L);	Handles base case where you only have 1 element in the list
 		((evenp (length L)) (list (SUB-LIST L 0 (/ (length L) 2) ) (SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) ) ); Treats the even case
 		(t (list (SUB-LIST L 0 (/ (- (length L) 1) 2) ) (SUB-LIST L (/ (- (length L) 1) 2) (/ (+ (length L) 2) 1) ) ) ); Treats the odd case
 	)
@@ -157,6 +158,10 @@
 (SPLIT-LIST '(a b c d e))
 (SPLIT-LIST '(a b c d e f))
 (SPLIT-LIST '(a b c d e f g))
+(SPLIT-LIST '(a b c d e f g h))
+(SPLIT-LIST '(a b c d e f g 1 ))
+(SPLIT-LIST '(a b c d e f g 0 9))
+(SPLIT-LIST '(a b c d e f g 0 9 69))
 (PRINTME)
 ; GOOD
 (BTREE-HEIGHT 1)
