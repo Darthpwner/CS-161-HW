@@ -57,7 +57,10 @@
 	)
 )
 
+; GOOD!
 ; Problem 5
+; Splits the list in half into two sub-lists
+; For odd length lists, L2 = L1 + 1
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
 		((= (length L) 1) L);	Handles base case where you only have 1 element in the list

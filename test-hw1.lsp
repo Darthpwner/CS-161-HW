@@ -14,9 +14,9 @@
 (unit-test (SUB-LIST '(a b c d) 0 3) '(a b c))
 (unit-test (SUB-LIST '(a b c d) 3 1) '(d))
 (unit-test (SUB-LIST '(a b c d) 2 0) NIL)
-;; Problem 5
+;; Problem 5 GOOD
 (unit-test (SPLIT-LIST '(a b c d))     '((a b) (c d)))
-;(unit-test (SPLIT-LIST '(a b c d e))   '((a b) (c d e)))
+(unit-test (SPLIT-LIST '(a b c d e))   '((a b) (c d e)))
 (unit-test (SPLIT-LIST '(a b c d e f)) '((a b c) (d e f)))
 ;; Problem 6 GOOD
 (unit-test (BTREE-HEIGHT 1)  0)
