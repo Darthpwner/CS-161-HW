@@ -58,25 +58,7 @@
 ; Problem 5
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
-		((= (length L) 1) L)
-		((evenp (length L) 
-			(+ (SUB-LIST L 0 (/ (length L) 2) ) 
-				(SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) 
-			) 
-		 ) 
-		)
-		(t (+ (SUB-LIST L 0 (- (/ (length L) 2) 1) ) (SUB-LIST L (/ (length L) 2) (+ (/ (length L) 2) 1) ) ) )
-		; (let* 
-		; 	(
-		; 		;(even (evenp (length L) ) )
-		; 		;(odd (oddp (length L) ) )
-		; 		;(midpoint (/ (length L) 2) )
-		; 	)
-
-		; 	(cond ( (even) (+ (SUB-LIST L 0 midpoint ) (SUB-LIST L midpoint midpoint) ) )
-		; 		(t (+ (SUB-LIST L 0 (- midpoint 1) ) (SUB-LIST L midpoint (+ midpoint 1) ) ) )
-		; 	)
-		; )
+		((length L))
 	)
 )
 
@@ -158,6 +140,7 @@
 (SPLIT-LIST '(a b c d e))
 (SPLIT-LIST '(a b c d e f))
 (SPLIT-LIST '(a b c d e f g))
+(PRINT)
 ; GOOD
 (BTREE-HEIGHT 1)
 (BTREE-HEIGHT '(1 2))
