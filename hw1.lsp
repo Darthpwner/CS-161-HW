@@ -58,8 +58,8 @@
 ; Problem 5
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
-		( (evenp (length L) ) SUB-LIST(L START (/ L 2) ) );	Even lengths will have L1 = L2
-		( (oddp (length L) ) SUB-LIST(L START (+ (/ L 2) 1) ) );	Odd lengths will have L2 = L1 + 1
+		( (evenp (length L) ) (SUB-LIST L 0 (/ (length L) 2) ) );	Even lengths will have L1 = L2
+		( (oddp (length L) ) (SUB-LIST L 0 (- (/ (length L) 2) 1) ) );	Odd lengths will have L2 = L1 + 1
 	)
 )
 
