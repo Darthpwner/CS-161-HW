@@ -101,6 +101,7 @@
 (TREE-MAX '((1 2 3) 7 8))
 (TREE-ORDER 3)
 (TREE-ORDER '((1 2 3) 7 8))
+(TREE-ORDER '(6 9 12))
 ;(SUB-LIST '(a b c d) 0 3)
 ;(SUB-LIST '(a b c d) 3 1)
 ;(SUB-LIST '(a b c d) 2 0)
