@@ -97,25 +97,14 @@
 		((= (length LEAVES) 2) (list (first LEAVES) (second LEAVES)) );	A list of two should return a single list
 		(t ;	Recursively search the rest of the tree
 			(let* (
-					((splitter (SPLIT-LIST LEAVES) ); Split the list
+					(splitter (SPLIT-LIST LEAVES) ); Split the list
 						(fir (LIST2BTREE(first splitter) ) )
 						(sec (LIST2BTREE(second splitter) ) )
-					)
-					(list fir sec) 
-				)
+				  )
+				  (list fir sec) 
 			)
 		)
 	)
-)
-
-(t
-			(let* ((tempList (SPLIT-LIST LEAVES))	;;; Split the list
-        			(L1 (LIST2BTREE (first tempList)))		;;;	convert half
-					(L2 (LIST2BTREE (second tempList))))	;;;	convert half
-				(list L1 L2)
-        	)
-        )
-	) 
 )
 
 ; Problem 8
