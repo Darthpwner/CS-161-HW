@@ -77,12 +77,12 @@
 		( (and (atom (first TREE) ) (atom (second TREE) ) 1) ); Return 1 for any internal nodes
 		( t;	Recursively move to next node
 			(let* (
-				   	(fir (BTREE-HEIGHT (first TREE) ) ); fir is the left sub-tree 
-					(sec (BTREE-HEIGHT (second TREE) ) ); sec is the right sub-tree
+				   	(left (BTREE-HEIGHT (first TREE) ) ); left sub-tree 
+					(right (BTREE-HEIGHT (second TREE) ) ); right sub-tree
 				  )
 				  
-				  (cond ( (> fir sec) (+ 1 fir) ) 
-						(t (+ 1 sec) );	else
+				  (cond ( (> left right) (+ 1 left) ) 
+						(t (+ 1 right) );	else
 			      )
 			)
 		)
@@ -98,10 +98,10 @@
 		(t ;	Recursively search the rest of the tree
 			(let* (
 					(splitter (SPLIT-LIST LEAVES) ); Split the list
-						(fir (LIST2BTREE(first splitter) ) )
-						(sec (LIST2BTREE(second splitter) ) )
+						(left (LIST2BTREE(first splitter) ) ); left subtree
+						(right (LIST2BTREE(second splitter) ) ); right subtree
 				  )
-				  (list fir sec) 
+				  (list left right) 
 			)
 		)
 	)
