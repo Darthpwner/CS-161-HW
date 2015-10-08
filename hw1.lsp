@@ -110,8 +110,9 @@
 ; Problem 8
 (defun BTREE2LIST(TREE)
 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
-		( (NULL (rest TREE) ) (first TREE) );	Return the last item of the tree since that will be the largest
-
+		((atom TREE) TREE);	Return the atom if TREE is just a number
+		((= (length TREE) 2) (list (first TREE) (second TREE) ) ); Return just the list if TREE is a list of 2 nodes
+		(t (BTREE2LIST(rest TREE) ) );	Recursively call BTREE2LIST
 	)
 )
 
@@ -169,18 +170,18 @@
 (BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7))))
 (BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8))))
 
-(PRINTME)
 (LIST2BTREE '(1))
 (LIST2BTREE '(1 2))
 (LIST2BTREE '(1 2 3))
 (LIST2BTREE '(1 2 3 4))
 (LIST2BTREE '(1 2 3 4 5 6 7))
 (LIST2BTREE '(1 2 3 4 5 6 7 8))
-(PRINTME)
 
-; (BTREE2LIST 1)
-; (BTREE2LIST '(1 2))
-; (BTREE2LIST '(1 (2 3)))
-; (BTREE2LIST '((1 2) (3 4)))
-; (BTREE2LIST '((1 (2 3)) ((4 5) (6 7))))
-; (BTREE2LIST '(((1 2) (3 4)) ((5 6) (7 8))))
+(PRINTME)
+(BTREE2LIST 1)
+(BTREE2LIST '(1 2))
+(BTREE2LIST '(1 (2 3)))
+(BTREE2LIST '((1 2) (3 4)))
+(BTREE2LIST '((1 (2 3)) ((4 5) (6 7))))
+(BTREE2LIST '(((1 2) (3 4)) ((5 6) (7 8))))
+(PRINTME)
