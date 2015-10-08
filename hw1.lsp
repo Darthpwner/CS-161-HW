@@ -46,10 +46,10 @@
 
 ; Problem 4
 (defun SUB-LIST(L START LEN) 
-	(cond ( (= LEN 0) NIL) );	LEN = 0 should return nil
+	(cond ( (= LEN 0) NIL) ;	LEN = 0 should return nil
 		( (= START 0) cons (first L) '() );	Construct a list for the first atom
-		( (> START 0) SUB-LIST (rest L) (- START 1) LEN)
-
+		( t (SUB-LIST (rest L) (- START 1) LEN) )
+	)
 )
 
 ; Problem 5
