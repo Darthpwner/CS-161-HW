@@ -2,25 +2,32 @@
 ; Problem 1
 
 ;FIXME!
-(defun TREE-CONTAINS(N TREE)
-	(cond ( (NULL TREE) NIL);	Empty tree should return nil
-		( (atom TREE); TREE is 1 element
-			(cond ((equal N TREE) t);	R
-				(t NIL)
-			)
-		)
-		(t;	recurisvely search TREE
-			(let* (
-					(left(TREE-CONTAINS N (first TREE) ) ) 
-					(right(TREE-CONTAINS N (third TREE) ) ) 
-				  ) 
+; (defun TREE-CONTAINS(N TREE)
+; 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
+; 		( (atom TREE); TREE is 1 element
+; 			(cond ((equal N TREE) t);	R
+; 				(t NIL)
+; 			)
+; 		)
+; 		(t;	recurisvely search TREE
+; 			(let* (
+; 					(left(TREE-CONTAINS N (first TREE) ) ) 
+; 					(right(TREE-CONTAINS N (third TREE) ) ) 
+; 				  ) 
 				
-				  (cond ((> N (second TREE) ) (TREE-CONTAINS N right) ) 
-					((< N (second TREE) ) (TREE-CONTAINS N left) )  
-					(t t)
-				  ) 
-			)
-		)
+; 				  (cond ((> N (second TREE) ) (TREE-CONTAINS N right) ) 
+; 					((< N (second TREE) ) (TREE-CONTAINS N left) )  
+; 					(t t)
+; 				  ) 
+; 			)
+; 		)
+; 	)
+; )
+
+; Problem 1
+(defun TREE-CONTAINS(N TREE)
+	(cond ((NULL TREE) NIL)
+
 	)
 )
 
@@ -36,7 +43,6 @@
 
 ; GOOD!
 ;Problem 3
-;
 ;The tree is sorted so just return a single list
 (defun TREE-ORDER(TREE)
 	(cond( (NULL TREE) NIL);	Empty tree should return nil
@@ -108,11 +114,11 @@
 )
 
 ; Problem 8
+; 
 (defun BTREE2LIST(TREE)
 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
-		((atom TREE) TREE);	Return the atom if TREE is just a number
-		((= (length TREE) 2) (list (first TREE) (second TREE) ) ); Return just the list if TREE is a list of 2 nodes
-		(t (BTREE2LIST(rest TREE) ) );	Recursively call BTREE2LIST
+		((atom TREE) (list TREE) );	Return the atom as a list if TREE is just a number
+		(t (append(BTREE2LIST(first TREE) ) (BTREE2LIST(rest TREE) ) ) );	Recursively call BTREE2LIST and append it to a main list
 	)
 )
 
