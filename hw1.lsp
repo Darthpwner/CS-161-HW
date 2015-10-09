@@ -21,8 +21,8 @@
 ; The maximum will always be the last element since the tree is sorted.
 (defun TREE-MAX(TREE)
 	(cond ( (NULL TREE) NIL);	Empty tree should return nil
-		( (NULL (rest TREE) ) (first TREE) );	Return the last item of the tree since that will be the largest
-		(t (TREE-MAX(rest TREE) ) );	Recursively search the rest of the tree
+		((atom TREE) TREE);	Return the TREE if only one item
+		(t (TREE-MAX (third TREE) ) );	Recursively go to the last node in the tree
 	)
 )
 

@@ -10,7 +10,7 @@
 
 ;; Problem 2
 (unit-test (TREE-MAX '((1 2 3) 7 8)) 8)
-;(unit-test (TREE-MAX '((1 2 6) 7 (8 9 14))) 14)
+(unit-test (TREE-MAX '((1 2 6) 7 (8 9 14))) 14)
 
 ;; Problem 3
 (unit-test (TREE-ORDER '()) NIL)
@@ -63,7 +63,7 @@
 (unit-test (TREE-MAX '((1 2 3) 7 900)) 900)
 (unit-test (TREE-MAX '((1 2 3) 7 81)) 81)
 (unit-test (TREE-MAX '((1 2 3) 7 9)) 9)
-;(unit-test (TREE-MAX '((1 2 3) 7 (10 11 12))) 12)
+(unit-test (TREE-MAX '((1 2 3) 7 (10 11 12))) 12)
 
 (unit-test (TREE-ORDER 3) '(3))
 (unit-test (TREE-ORDER NIL) NIL)
