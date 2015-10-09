@@ -2,8 +2,9 @@
 ; Input: L is a list representation of the tree
 ; Return Value: list of terminal nodes in the order they were visited
 (defun DFS(L)
-	(cond (atom L) L);
-	(t (append (DFS(first L) ) (DFS(rest L) ) ) )
+	(cond ((atom L) (list L) ) ;
+		(t (append (DFS(first L) ) (DFS(rest L) ) ) )
+	)
 )
 
 ; Problem 2
@@ -78,4 +79,4 @@
 
 )
 
-(dfs '((A (B)) C (D)))
+(DFS '((A (B)) C (D)))
