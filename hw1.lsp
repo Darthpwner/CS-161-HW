@@ -58,8 +58,12 @@
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
 		((= (length L) 1) L);	Handles base case where you only have 1 element in the list
-		((evenp (length L)) (list (SUB-LIST L 0 (/ (length L) 2) ) (SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) ) ); Treats the even case
-		(t (list (SUB-LIST L 0 (/ (- (length L) 1) 2) ) (SUB-LIST L (/ (- (length L) 1) 2) (/ (+ (length L) 2) 1) ) ) ); Treats the odd case
+		((evenp (length L)); Treats the even case 
+			(list (SUB-LIST L 0 (/ (length L) 2) ) (SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) ) 
+		)
+		(t; Treats the odd case 
+			(list (SUB-LIST L 0 (/ (- (length L) 1) 2) ) (SUB-LIST L (/ (- (length L) 1) 2) (/ (+ (length L) 2) 1) ) ) 
+		)
 	)
 )
 
@@ -118,4 +122,3 @@
 		(t (append(BTREE2LIST(first TREE) ) (BTREE2LIST(rest TREE) ) ) );	Recursively call BTREE2LIST and append it to a main list
 	)
 )
-
