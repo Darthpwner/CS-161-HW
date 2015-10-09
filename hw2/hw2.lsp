@@ -2,7 +2,8 @@
 ; Input: L is a list representation of the tree
 ; Return Value: list of terminal nodes in the order they were visited
 (defun DFS(L)
-	(cond ((atom L) (list L) ) ;
+	(cond ((NULL L) NIL); 
+		((atom L) (list L) ) ;
 		(t (append (DFS(first L) ) (DFS(rest L) ) ) )
 	)
 )
