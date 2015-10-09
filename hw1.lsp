@@ -57,7 +57,7 @@
 ; For odd length lists, L2 = L1 + 1
 (defun SPLIT-LIST(L)
 	(cond ( (NULL L) NIL); NULL L should return nil
-		((= (length L) 1) L);	Handles base case where you only have 1 element in the list
+		((= (length L) 1) (list NIL L) );	Handles base case where you only have 1 element in the list
 		((evenp (length L)); Treats the even case 
 			(list (SUB-LIST L 0 (/ (length L) 2) ) (SUB-LIST L (/ (length L) 2) (/ (length L) 2) ) ) 
 		)
