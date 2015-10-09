@@ -44,7 +44,6 @@
 	)
 )
 
-
 ; Problem 4
 ; Input: L is a List, START is the index the SUB-LIST begins
 ; Return value: A SUB-LIST from START to LEN. 
