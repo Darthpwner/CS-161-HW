@@ -33,7 +33,14 @@
 (defun TREE-ORDER(TREE)
 	(cond( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE) (list TREE) );	If TREE is atom, make it a list
-		(t (append (first TREE) (rest TREE) ) );	Otherwise, append to the list to the tree
+		(t
+			(let* 	(
+					(left (TREE-ORDER(first TREE))); Set left sub-tree 
+					(right (TREE-ORDER(cons (second TREE) (third TREE) ) ) ); Set right sub-tree
+			  	)
+				(append left right)
+			)
+		)
 	)
 )
 
