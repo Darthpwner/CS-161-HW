@@ -34,9 +34,9 @@
 	(cond( (NULL TREE) NIL);	Empty tree should return nil
 		( (atom TREE) (list TREE) );	If TREE is atom, make it a list
 		(t
-			(let* 	(
-					(left (TREE-ORDER(first TREE))); Set left sub-tree 
-					(right (TREE-ORDER(cons (second TREE) (third TREE) ) ) ); Set right sub-tree
+			(let* (
+					(left (TREE-ORDER(first TREE) ) ); Set left sub-tree 
+					(right (append (TREE-ORDER(second TREE) ) (TREE-ORDER(third TREE) ) ) ); Set right sub-tree
 			  	)
 				(append left right)
 			)
