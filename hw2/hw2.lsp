@@ -21,7 +21,6 @@
 ; FINAL-STATE takes a single argument (S), the current state, and returns T if
 ; it is the goal state (3 3 NIL) and NIL otherwise.
 (defun final-state (s)
-	;((cond (equal (s '(3 3 NIL) ) ) t)
 	(cond ((equal s '(3 3 NIL) ) t)
 		(t NIL)
 	)
@@ -87,3 +86,4 @@
 ;(DFS '((3 4 5) 6 ((9) 10))
 
 (final-state '(3 3 NIL))
+(final-state '(3 3 t))
