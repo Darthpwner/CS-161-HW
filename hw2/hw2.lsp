@@ -39,7 +39,10 @@
 ; NOTE that next-state returns a list containing the successor state (which is
 ; itself a list); the return should look something like ((1 1 T)).
 (defun next-state (s m c)
-
+	;(cond (or (< m 0) (< c 0)) NIL);	Cannot move negative # of missionaries
+	(cond (= m 0) nil
+		(t)
+	)
 )
 
 ; SUCC-FN returns all of the possible legal successor states to the current
@@ -87,3 +90,5 @@
 
 (final-state '(3 3 NIL))
 (final-state '(3 3 t))
+
+(next-state '(3 3 NIL) 1 1)
