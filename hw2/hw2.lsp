@@ -41,9 +41,14 @@
 (defun next-state (s m c)
 	(cond ((or (< m 0) (< c 0) ) nil);	Cannot move negative # of missionaries or cannibals
 		( (or (> m (first s) ) (> c (second s) ) ) nil);	Cannot move more missionaries or cannibals than you have on your side
+		;((> (- (second s) c) ) (- (first s) m) nil); Cannot have less missionaries than cannibals on the side you just moved 
 		(t t)
 	)
 )
+; (second s - c) > (first s - m); More cannibals on your current side
+; ()
+; (first s) - m > 0
+  (second s) - s > 0
 
 ; SUCC-FN returns all of the possible legal successor states to the current
 ; state. It takes a single argument (S), which encodes the current state, and
@@ -100,4 +105,5 @@
 (next-state '(1 3 NIL) 1 5); nil
 (next-state '(1 3 NIL) 1 3); t
 
-
+("FUCK")
+(next-state '(3 2 NIL) 1 1); nil
