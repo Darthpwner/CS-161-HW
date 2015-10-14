@@ -40,6 +40,8 @@
 ; itself a list); the return should look something like ((1 1 T)).
 (defun next-state (s m c)
 	(cond ((or (< m 0) (< c 0) ) nil);	Cannot move negative # of missionaries or cannibals
+		( (> m (first s) ) nil);	Cannot move more missionaries than you have on your side
+		( (> c (second s) ) nil);	Cannot move more cannibals than you have on your side
 		(t t)
 	)
 )
@@ -93,3 +95,8 @@
 (next-state '(3 3 NIL) 1 1)
 (next-state '(3 3 NIL) -1 1)
 (next-state '(3 3 NIL) 1 -1)
+("BITCH")
+(next-state '(1 3 NIL) 2 1)
+(next-state '(1 3 NIL) 1 1)
+
+
