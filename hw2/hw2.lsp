@@ -91,5 +91,7 @@
 
 (final-state '(3 3 NIL))
 (final-state '(3 3 t))
-
+("YOLO")
 (next-state '(3 3 NIL) 1 1)
+(next-state '(3 3 NIL) -1 1)
+(next-state '(3 3 NIL) 1 -1)
