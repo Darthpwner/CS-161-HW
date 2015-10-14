@@ -40,7 +40,8 @@
 ; itself a list); the return should look something like ((1 1 T)).
 (defun next-state (s m c)
 	;(cond (or (< m 0) (< c 0)) NIL);	Cannot move negative # of missionaries
-	(cond (= m 0) nil
+	(cond ((< m 0) nil)
+		((< c 0) nil)
 		(t)
 	)
 )
