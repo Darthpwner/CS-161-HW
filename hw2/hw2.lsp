@@ -76,7 +76,7 @@
 		((and (> (- (first s) m) 0) (> (- (second s) c) (- (first s) m) ) ) nil); Cannot have less missionaries than cannibals on the side you just moved UNLESS you have 0 missionaries after moving 		
 		;(); Cannot have less missionaries than cannibals on your new side
 		;(t t)
-		(t (list(+ m (first s) ) (+ c (second s) ) (not (third s) ) ) ); Return next state ???
+		(t (list(+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) (not (third s) ) ) ); Return next state ???
 	)
 )
 ;Chseck if moving more than 2 people
