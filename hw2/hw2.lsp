@@ -74,7 +74,7 @@
 		( (or (> m (first s) ) (> c (second s) ) ) nil);	Cannot move more missionaries or cannibals than you have on your side
 		;((> (- (second s) c) (- (first s) m) ) nil); Cannot have less missionaries than cannibals on the side you just moved 
 		((and (> (- (first s) m) 0) (> (- (second s) c) (- (first s) m) ) ) nil); Cannot have less missionaries than cannibals on the side you just moved UNLESS you have 0 missionaries after moving 		
-		;(); Cannot have less missionaries than cannibals on your new side
+		((> (+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) ) nil); Cannot have less missionaries than cannibals on your new side
 		;(t t)
 		(t (list(+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) (not (third s) ) ) ); Return next state :)
 	)
