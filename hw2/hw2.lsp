@@ -72,7 +72,8 @@
 	(cond ((or (< m 0) (< c 0) ) nil);	Cannot move negative # of missionaries or cannibals
 		((or (< (+ m c) 1) (> (+ m c) 2) ) nil); Have to move 1 or 2 people
 		( (or (> m (first s) ) (> c (second s) ) ) nil);	Cannot move more missionaries or cannibals than you have on your side
-		((> (- (second s) c) (- (first s) m) ) nil); Cannot have less missionaries than cannibals on the side you just moved 
+		;((> (- (second s) c) (- (first s) m) ) nil); Cannot have less missionaries than cannibals on the side you just moved 
+		((and (> (- (first s) m) 0) (> (- (second s) c) (- (first s) m) ) ) nil); Cannot have less missionaries than cannibals on the side you just moved 		
 		;(); Cannot have less missionaries than cannibals on your new side
 		(t t)
 	)
@@ -146,6 +147,8 @@
 (next-state '(3 2 NIL) 2 0); nil
 (next-state '(2 3 NIL) 1 0); nil
 (next-state '(3 3 NIL) 0 0); nil
-(next-state '(2 3 NIL) 2 0); nil: THIS CONDITION NEEDS FIXING
+(next-state '(2 3 NIL) 2 0); t 
 (next-state '(3 3 NIL) 0 3); nil
+
+(next-state '(1 3 NIL) 1 0); t 
 
