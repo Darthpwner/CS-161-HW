@@ -22,7 +22,7 @@
 ; it is the goal state (3 3 NIL) and NIL otherwise.
 (defun final-state (s)
 	;((cond (equal (s '(3 3 NIL) ) ) t)
-	(cond ((= s 1) t)
+	(cond ((equal s '(3 3 NIL) ) t)
 		(t NIL)
 	)
 )
