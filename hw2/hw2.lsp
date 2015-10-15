@@ -82,23 +82,6 @@
 ; state. It takes a single argument (S), which encodes the current state, and
 ; returns a list of states that can be reached by applying legal operators to
 ; the current state.
-; (defun succ-fn (s)
-; 	(let* (
-; 			(originalList (list (next-state s 0 1) (next-state s 0 2) (next-state s 1 0) (next-state s 1 1) (next-state s 2 0) ) );	Grab all five possible moves including NIL moves
-; 			(returnedList (list () ) ); Grab only valid moves
-; 		)
-
-; 		; Parse through and remove NIL moves
-; 		(cond ((not (equal (first originalList) NIL) ) (append (first originalList) returnedList) ) )
-; 		(cond ((not (equal (second originalList) NIL) ) (append (second originalList) returnedList) ) )
-; 		(cond ((not (equal (third originalList) NIL) ) (append (third originalList) returnedList) ) )
-; 		(cond ((not (equal (fourth originalList) NIL) ) (append (fourth originalList) returnedList) ) )
-; 		(cond ((not (equal (fifth originalList) NIL) ) (append (fifth originalList) returnedList) ) )
-		
-; 		returnedList
-; 	)
-; )
-
 (defun succ-fn (s)
 	; Check each of the 5 possible moves and append it if it does NOT return nill
 	(append
@@ -109,38 +92,6 @@
 		(cond ((not (equal (next-state s 0 2) NIL) ) (list (next-state s 0 2) ) ) )
 	)
 )
-
-; (defun succ-fn (s)
-;   append(  '()
-;   			(cond ((next-state s 0 0) list((next-state s 1 0)) ) 
-;   				(t NIL)
-;   			)
-
-;   			(cond ((next-state s 0 0) list((next-state s 0 1)) ) 
-;   				(t NIL)
-;   				)
-
-;   			(cond ((next-state s 0 0) list((next-state s 2 0)) ) 
-;   				(t NIL)
-;   				)
-
-;   			(cond ((next-state s 0 0) list((next-state s 0 2)) ) 
-;   				(t NIL)
-;   				)
-
-;   			(cond ((next-state s 0 0) list((next-state s 1 1)) ) 
-;   				(t NIL)
-;   				)
-
-
-
-
-;   	)
-
-
-;   )
-
-
 
 ; ON-PATH checks whether the current state is on the stack of states visited by
 ; this depth-first search. It takes two arguments: the current state (S) and the
