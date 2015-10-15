@@ -135,8 +135,7 @@
 ; ensuring that the depth-first search does not revisit a node already on the
 ; search path.
 (defun mc-dfs (s path)
-	(cond ((and (final-state s) (not (NULL path))) (append path (list s))) ; If S is the final state, append S to our path
-		  ((final-state s) (list s)) ; if s is final state, just return s
+	(cond ((final-state s) (append path (list s) ) ) ; If S is the final state, append S to our path
 		  ((not (on-path s path)) (mult-dfs (succ-fn s) (append path (list s)))) ; if s is not locatd on the current path, call mult-dfs on s and append it to path
 		  (t NIL) ; if current state has been visited, then we want to return NIL, since we know there are no solutions
 	)
