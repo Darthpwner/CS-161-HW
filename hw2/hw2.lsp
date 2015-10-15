@@ -88,17 +88,15 @@
 			(returnedList (list () ) ); Grab only valid moves
 		)
 
-		;(cond ((not (equal (first originalList) NIL) ) (append (first originalList) returnedList) ) )
+		; Parse through and remove NIL moves
+		(cond ((not (equal (first originalList) NIL) ) (append (first originalList) returnedList) ) )
 		(cond ((not (equal (second originalList) NIL) ) (append (second originalList) returnedList) ) )
-		;(cond ((not (equal (third originalList) NIL) ) (append (third originalList) returnedList) ) )
-		;(cond ((not (equal (fourth originalList) NIL) ) (append (fourth originalList) returnedList) ) )
-		;(cond ((not (equal (fifth originalList) NIL) ) (append (fifth originalList) returnedList) ) )
+		(cond ((not (equal (third originalList) NIL) ) (append (third originalList) returnedList) ) )
+		(cond ((not (equal (fourth originalList) NIL) ) (append (fourth originalList) returnedList) ) )
+		(cond ((not (equal (fifth originalList) NIL) ) (append (fifth originalList) returnedList) ) )
 		
 		returnedList
-		;originalList
 	)
-
-	;(t (originalList)) ; Parse through and remove NIL moves
 )
 
 
