@@ -93,11 +93,11 @@
 		;(third originalList)
 		;(fourth originalList)
 		;(fifth originalList)
-		;(not (= (first originalList) NIL) (append (first originalList) returnedList) )
-		 (not (= (second originalList) NIL) (append (second originalList) returnedList) )
-		; (not (= (third originalList) NIL) (append (third originalList) returnedList) )
-		; (not (= (fourth originalList) NIL) (append (fourth originalList) returnedList) )
-		; (not (= (fifth originalList) NIL) (append (fifth originalList) returnedList) )
+		(not (equal (first originalList) NIL) (append (first originalList) returnedList) )
+		(not (equal (second originalList) NIL) (append (second originalList) returnedList) )
+		(not (equal (third originalList) NIL) (append (third originalList) returnedList) )
+		(not (equal (fourth originalList) NIL) (append (fourth originalList) returnedList) )
+		(not (equal (fifth originalList) NIL) (append (fifth originalList) returnedList) )
 
 		returnedList
 		;originalList
