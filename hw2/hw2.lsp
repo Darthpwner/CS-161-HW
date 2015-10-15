@@ -115,18 +115,18 @@
 ; MULT-DFS does a depth-first search on each element of STATES in turn. If any
 ; of those searches reaches the final state, MULT-DFS returns the complete path
 ; from the initial state to the goal state. Otherwise, it returns NIL.
-(defun mult-dfs (states path)
-	(append (cond ((equal (final-state (first path) ) t) (first path) ); If initial state equals final state, just return initial state 
-				(path)
-				(succ-fn (first states) )
-			)
-	)
-		;(succ-fn (states))
-)
 
-;NOTES BITCH
-; keep track of path
-; states call SUCC-FUN
+(defun mult-dfs (states path)
+	;; check all the states, see if any of the states is the end goal
+	;; if it is, append the child to the path
+	;; otherwise, return NIL
+	(cond ((= (length states) 0) NIL)
+	      ((mc-dfs (first states) path) (mc-dfs (first states) path))
+	      (t
+	      	(mult-dfs (rest states) path)
+	      )
+	)
+)
 
 ; MC-DFS does a depth first search from a given state to the goal state. It
 ; takes two arguments: a state (S) and the path from the initial state to S
@@ -137,7 +137,13 @@
 ; ensuring that the depth-first search does not revisit a node already on the
 ; search path.
 (defun mc-dfs (s path)
-
+	(cond ((AND (final-state s) (not (NULL path))) (append path (list s))) ; if s is the final state, we want to append s to path
+		  ((final-state s) (list s)) ; if s is final state, just return s
+		  ((not (on-path s path)) (mult-dfs (succ-fn s) (append path (list s)))) ; if s is not locatd on the current path, call mult-dfs on s and append it to path
+		  (t
+		  	NIL ; if current state has been visited, then we want to return NIL, since we know there are no solutions
+		  )
+	)
 )
 
 ; Function execution examples
@@ -214,12 +220,14 @@
 (on-path 1 NIL); nil
 (on-path NIL 1); nil
 (on-path '(3 2 NIL) '((3 2 NIL)) ); t
-(on-path '(3 2 NIL) '(NIL (3 1 NIL) NIL ) ); nil
+(on-path '(3 c2 NIL) '(NIL (3 1 NIL) NIL ) ); nil
 (on-path '(4 2 NIL) '(NIL (4 2 NIL) NIL ) ); nil
 
 ("TEST SUCC_FN")
 ("WEST SIDE")
 (succ-fn '(0 1 T) )
+(succ-fn '(0 2 T) )
+
 (succ-fn '(1 0 t) )
 (succ-fn '(1 1 T) )
 (succ-fn '(2 0 T) )
@@ -242,5 +250,5 @@
 (mult-dfs (succ-fn '(3 3 NIL) ) '((3 3 NIL) (2 2 T) ) ); BUG
 (mult-dfs (succ-fn '(3 3 NIL) ) '((3 2 NIL) (2 2 T) ) ); NIL
 (mult-dfs (succ-fn '(3 3 NIL) ) '((3 2 NIL) (2 2 T) (3 3 NIL)) ); NIL
-
-
+("FRANK")
+(mult-dfs (succ-fn '(0 2 t) ) NIL) '((3 2 NIL) (1 1 T) ) 
