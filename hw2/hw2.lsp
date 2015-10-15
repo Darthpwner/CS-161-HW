@@ -121,8 +121,8 @@
 	;; if it is, append the child to the path
 	;; otherwise, return NIL
 	(cond ((NULL states) NIL);	Return nil if states has no other other possible moves
-	      ((mc-dfs (first states) path) (mc-dfs (first states) path) )
-	      (t (mult-dfs (rest states) path) )
+	      ((mc-dfs (first states) path) (mc-dfs (first states) path) ); 
+	      (t (mult-dfs (rest states) path) ); Else, run MULT-DFS on the rest of the states
 	)
 )
 
@@ -138,51 +138,9 @@
 	(cond ((and (final-state s) (not (NULL path))) (append path (list s))) ; If S is the final state, append S to our path
 		  ((final-state s) (list s)) ; if s is final state, just return s
 		  ((not (on-path s path)) (mult-dfs (succ-fn s) (append path (list s)))) ; if s is not locatd on the current path, call mult-dfs on s and append it to path
-		  (t
-		  	NIL ; if current state has been visited, then we want to return NIL, since we know there are no solutions
-		  )
+		  (t NIL) ; if current state has been visited, then we want to return NIL, since we know there are no solutions
 	)
 )
-
-;;;;
-; MULT-DFS is a helper function for MC-DFS. It takes two arguments: a stack of
-; states from the initial state to the current state (path), and the legal
-; successor states to the last state on that stack (states). path is a
-; first-in first-out list of states; that is, the first element is the initial
-; state for the current search and the last element is the most recent state
-; explored. MULT-DFS does a depth-first search on each element of states in
-; turn. If any of those searches reaches the final state, MULT-DFS returns the
-; complete path from the initial state to the goal state. Otherwise, it returns
-; NIL.
-(defun mult-dfs (states path)
-	(cond
-		((NULL states) NIL)
-		((final-state (first states)) (append path (list (first states))))
-		((and (not (on-path (first states) path)) (not (NULL (mult-dfs (succ-fn (first states))
-				(append path (list (first states))))))) (mult-dfs (succ-fn (first states))
-				(append path (list (first states)))))
-		(t (mult-dfs (rest states) path))
-	)
-)
-
-; MC-DFS does a depth first search from a given state to the goal state. It
-; takes two arguments: a state (S) and the path from the initial state to S
-; (PATH). If S is the initial state in our search, PATH should be NIL. MC-DFS
-; performs a depth-first search starting at the given state. It returns the path
-; from the initial state to the goal state, if any, or NIL otherwise. MC-DFS is
-; responsible for checking if S is already the goal state, as well as for
-; ensuring that the depth-first search does not revisit a node already on the
-; search path.
-(defun mc-dfs (s path)
-	(cond
-		((and (final-state s) (not (NULL path))) (append path (list s)))
-		((final-state s) (list s))
-		(t (mult-dfs (succ-fn s) (append path (list s))))
-	)
-)
-
-;(mc-dfs '(3 3 T) NIL)
-
 
 ; Function execution examples
 
