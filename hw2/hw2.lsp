@@ -84,12 +84,26 @@
 ; the current state.
 (defun succ-fn (s)
 	(let* (
-			(returnedList (list (next-state s 0 1) (next-state s 0 2) (next-state s 1 0) (next-state s 1 1) (next-state s 2 0) ) );	Grab all five possible moves including NIL moves
+			(originalList (list (next-state s 0 1) (next-state s 0 2) (next-state s 1 0) (next-state s 1 1) (next-state s 2 0) ) );	Grab all five possible moves including NIL moves
+			(returnedList (list () ) ); Grab only valid moves
 		)
+
+		;(first originalList)
+		;(second originalList)
+		;(third originalList)
+		;(fourth originalList)
+		;(fifth originalList)
+		;(not (= (first originalList) NIL) (append (first originalList) returnedList) )
+		 (not (= (second originalList) NIL) (append (second originalList) returnedList) )
+		; (not (= (third originalList) NIL) (append (third originalList) returnedList) )
+		; (not (= (fourth originalList) NIL) (append (fourth originalList) returnedList) )
+		; (not (= (fifth originalList) NIL) (append (fifth originalList) returnedList) )
+
 		returnedList
+		;originalList
 	)
 
-	;(t (returnedList)) ; Parse through and remove NIL moves
+	;(t (originalList)) ; Parse through and remove NIL moves
 )
 
 
@@ -177,6 +191,9 @@
 (next-state '(1 3 NIL) 1 0); t 
 
 (next-state '(3 3 NIL) 0 2); nil
+
+("VIR")
+(next-state '(3 2 t) 1 1)
 ("TEST ON-PATH")
 (on-path 1 NIL); nil
 (on-path NIL 1); nil
