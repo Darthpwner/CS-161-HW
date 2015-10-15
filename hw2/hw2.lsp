@@ -88,17 +88,12 @@
 			(returnedList (list () ) ); Grab only valid moves
 		)
 
-		;(first originalList)
-		;(second originalList)
-		;(third originalList)
-		;(fourth originalList)
-		;(fifth originalList)
-		(not (equal (first originalList) NIL) (append (first originalList) returnedList) )
-		(not (equal (second originalList) NIL) (append (second originalList) returnedList) )
-		(not (equal (third originalList) NIL) (append (third originalList) returnedList) )
-		(not (equal (fourth originalList) NIL) (append (fourth originalList) returnedList) )
-		(not (equal (fifth originalList) NIL) (append (fifth originalList) returnedList) )
-
+		(cond ((not (equal (first originalList) NIL) ) (append (first originalList) returnedList) ) )
+		(cond ((not (equal (second originalList) NIL) ) (append (second originalList) returnedList) ) )
+		(cond ((not (equal (third originalList) NIL) ) (append (third originalList) returnedList) ) )
+		(cond ((not (equal (fourth originalList) NIL) ) (append (fourth originalList) returnedList) ) )
+		(cond ((not (equal (fifth originalList) NIL) ) (append (fifth originalList) returnedList) ) )
+		
 		returnedList
 		;originalList
 	)
