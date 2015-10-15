@@ -46,7 +46,6 @@
 
 ; Examples of calls to some of the helper functions can be found after the code.
 
-
 ;Helper Functions
 ; FINAL-STATE takes a single argument (S), the current state, and returns T if
 ; it is the goal state (3 3 NIL) and NIL otherwise.
@@ -68,6 +67,7 @@
 ;
 ; NOTE that next-state returns a list containing the successor state (which is
 ; itself a list); the return should look something like ((1 1 T)).
+; GOOD
 (defun next-state (s m c)
 	(cond ((or (< m 0) (< c 0) ) nil);	Cannot move negative # of missionaries or cannibals
 		((or (< (+ m c) 1) (> (+ m c) 2) ) nil); Have to move 1 or 2 people
@@ -90,8 +90,12 @@
 ; this depth-first search. It takes two arguments: the current state (S) and the
 ; stack of states visited by MC-DFS (STATES). It returns T if S is a member of
 ; STATES and NIL otherwise.
+; GOOD
 (defun on-path (s states)
-
+	(cond(or ((NULL s) (NULL states) ) NIL);	Return nil if either s or states is NIL
+		(equal s (first states) t);	Return T if S is a member of STATES
+		(t (on-path s (rest states) ) );
+	)
 )
 
 ; MULT-DFS is a helper function for MC-DFS. It takes two arguments: the path
@@ -117,6 +121,22 @@
 (defun mc-dfs (s path)
 
 )
+
+; Function execution examples
+
+; Applying this operator would result in an invalid state, with more cannibals
+; than missionaries on the east side of the river.
+; (next-state '(3 3 t) 1 0) -> NIL
+
+; Applying this operator would result in one cannibal and zero missionaries on
+; the west side of the river, which is a legal operator. (note that NEXT-STATE
+; returns a LIST of successor states, even when there is only one successor)
+; (next-state '(3 3 t) 0 1) -> ((0 1 NIL))
+
+; SUCC-FN returns all of the legal states that can result from applying
+; operators to the current state.
+; (succ-fn '(3 3 t)) -> ((0 1 NIL) (1 1 NIL) (0 2 NIL))
+; (succ-fn '(1 1 t)) -> ((3 2 NIL) (3 3 NIL))
 
 (DFS '((A (B)) C (D)))
 ;(DFS '((3 4 5) 6 ((9) 10))
@@ -147,3 +167,5 @@
 (next-state '(1 3 NIL) 1 0); t 
 
 (next-state '(3 3 NIL) 0 2); nil
+("TEST ON-PATH")
+(on-path '(3 2 NIL) '('(3 2 NIL)))
