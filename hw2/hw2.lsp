@@ -116,8 +116,16 @@
 ; of those searches reaches the final state, MULT-DFS returns the complete path
 ; from the initial state to the goal state. Otherwise, it returns NIL.
 (defun mult-dfs (states path)
- 
+	(append (cond ((equal (final-state (first path) ) t) (first path) ); If initial state equals final state, just return initial state 
+		
+			)
+	)
+		;(succ-fn (states))
 )
+
+;NOTES BITCH
+; keep track of path
+; states call SUCC-FUN
 
 ; MC-DFS does a depth first search from a given state to the goal state. It
 ; takes two arguments: a state (S) and the path from the initial state to S
@@ -147,7 +155,23 @@
 ; (succ-fn '(3 3 t)) -> ((0 1 NIL) (1 1 NIL) (0 2 NIL))
 ; (succ-fn '(1 1 t)) -> ((3 2 NIL) (3 3 NIL))
 
+
+; DAVIDS SHIT
+; (defun testDFS()
+; 	(AND 
+; 		(equal (DFS '((w x) (y z))) '(W X Y Z))
+; 		(equal (DFS '((A (B)) C (D))) '(A B C D))
+; 		(equal (DFS '((A B) C (D E))) '(A B C D E))
+; 		(equal (DFS '(((A B C)) (D E F) G H)) '(A B C D E F G H))
+; 		(equal (DFS '(((A B C) D) (E F) G H)) '(A B C D E F G H))
+; 	)
+; )
+
 (DFS '((A (B)) C (D)))
+(DFS '((w x) (y z))) '(W X Y Z))
+(DFS '((A (B)) C (D))) '(A B C D))
+(DFS '((A B) C (D E))) '(A B C D E))
+
 ;(DFS '((3 4 5) 6 ((9) 10))
 
 ("#3")
@@ -211,4 +235,7 @@
 (succ-fn '(2 2 nil) )
 (succ-fn '(3 2 nil) )
 (succ-fn '(3 3 nil) )
+
+("TEST MULT-DFS")
+(mult-dfs (succ-fn '(3 3 NIL) ) '(3 3 NIL))
 
