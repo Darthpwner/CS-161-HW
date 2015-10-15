@@ -253,5 +253,5 @@
 ("FRANK")
 (mult-dfs (succ-fn '(0 2 t) ) NIL) '((3 2 NIL) (1 1 T) ) 
 ("FRANK BADASS MOTHERFUCKER!")
-(mc-dfs '(0 2 t) NIL) ;'((0 2 T) (3 2 NIL) (1 1 T) (3 3 NIL) )
+;(mc-dfs '(0 2 t) NIL) ;'((0 2 T) (3 2 NIL) (1 1 T) (3 3 NIL) )
 (mc-dfs '(3 3 t) NIL) ;'((3 3 T) (1 1 NIL) (3 2 T) (0 3 NIL) (3 1 T) (2 2 NIL) (2 2 T) (3 1 NIL) (0 3 T) (3 2 NIL) (1 1 T) (3 3 NIL)))
