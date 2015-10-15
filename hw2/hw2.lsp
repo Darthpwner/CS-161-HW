@@ -241,5 +241,6 @@
 (mult-dfs (succ-fn '(3 3 NIL) ) '((3 3 NIL))); Test initial == final
 (mult-dfs (succ-fn '(3 3 NIL) ) '((3 3 NIL) (2 2 T) ) ); BUG
 (mult-dfs (succ-fn '(3 3 NIL) ) '((3 2 NIL) (2 2 T) ) ); NIL
+(mult-dfs (succ-fn '(3 3 NIL) ) '((3 2 NIL) (2 2 T) (3 3 NIL)) ); NIL
 
 
