@@ -88,11 +88,11 @@
 			(returnedList (list () ) ); Grab only valid moves
 		)
 
-		(cond ((not (equal (first originalList) NIL) ) (append (first originalList) returnedList) ) )
+		;(cond ((not (equal (first originalList) NIL) ) (append (first originalList) returnedList) ) )
 		(cond ((not (equal (second originalList) NIL) ) (append (second originalList) returnedList) ) )
-		(cond ((not (equal (third originalList) NIL) ) (append (third originalList) returnedList) ) )
-		(cond ((not (equal (fourth originalList) NIL) ) (append (fourth originalList) returnedList) ) )
-		(cond ((not (equal (fifth originalList) NIL) ) (append (fifth originalList) returnedList) ) )
+		;(cond ((not (equal (third originalList) NIL) ) (append (third originalList) returnedList) ) )
+		;(cond ((not (equal (fourth originalList) NIL) ) (append (fourth originalList) returnedList) ) )
+		;(cond ((not (equal (fifth originalList) NIL) ) (append (fifth originalList) returnedList) ) )
 		
 		returnedList
 		;originalList
@@ -162,25 +162,25 @@
 
 (final-state '(3 3 NIL))
 (final-state '(3 3 t))
-("YOLO")
+("NEGATIVE")
 (next-state '(3 3 NIL) 1 1); t
 (next-state '(3 3 NIL) -1 1); nil
 (next-state '(3 3 NIL) 1 -1); nil
-("BITCH")
+("MORE PEOPE")
 (next-state '(1 3 NIL) 2 1); nil
 (next-state '(3 1 NIL) 1 1); t
 (next-state '(1 3 NIL) 1 5); nil
 (next-state '(3 1 NIL) 1 5); nil
 
 
-("FUCK")
+("CANNIBAL HUNGRY MY SIDE")
 (next-state '(3 2 NIL) 1 1); t
 (next-state '(3 2 NIL) 2 0); nil
 (next-state '(2 3 NIL) 1 0); nil
 (next-state '(3 3 NIL) 0 0); nil
 (next-state '(2 3 NIL) 2 0); t 
 (next-state '(3 3 NIL) 0 3); nil
-("ROFL")
+("CANNIBAL HUNGRY OTHER SIDE")
 (next-state '(2 3 NIL) 0 2); nil
 
 (next-state '(1 3 NIL) 1 0); t 
