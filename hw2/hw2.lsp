@@ -73,17 +73,10 @@
 		((or (< (+ m c) 1) (> (+ m c) 2) ) nil); Have to move 1 or 2 people
 		( (or (> m (first s) ) (> c (second s) ) ) nil);	Cannot move more missionaries or cannibals than you have on your side
 		((and (> (- (first s) m) 0) (> (- (second s) c) (- (first s) m) ) ) nil); Cannot have less missionaries than cannibals on the side you just moved UNLESS you have 0 missionaries after moving 		
-		((< (+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) ) nil); Cannot have less missionaries than cannibals on your new side UNLESS you have 0 missionaries after moving TOOO
+		((and (> (+ m (- 3 (first s) ) ) ) (< (+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) ) ) nil); Cannot have less missionaries than cannibals on your new side UNLESS you have 0 missionaries after moving
 		(t (list(+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) (not (third s) ) ) ); Return next state 
 	)
 )
-;Chseck if moving more than 2 people
-; Check the other side
-
-; (second s - c) > (first s - m); More cannibals on your current side
-; ()
-; (first s) - m > 0
-  ;(second s) - s > 0
 
 ; SUCC-FN returns all of the possible legal successor states to the current
 ; state. It takes a single argument (S), which encodes the current state, and
@@ -151,6 +144,6 @@
 ("ROFL")
 (next-state '(2 3 NIL) 0 2); nil
 
-
 (next-state '(1 3 NIL) 1 0); t 
 
+(next-state '(3 3 NIL) 0 2); nil
