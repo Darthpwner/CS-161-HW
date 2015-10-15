@@ -117,7 +117,7 @@
 ; from the initial state to the goal state. Otherwise, it returns NIL.
 (defun mult-dfs (states path)
 	(append (cond ((equal (final-state (first path) ) t) (first path) ); If initial state equals final state, just return initial state 
-		
+				;(t (first path))
 			)
 	)
 		;(succ-fn (states))
@@ -237,5 +237,8 @@
 (succ-fn '(3 3 nil) )
 
 ("TEST MULT-DFS")
-(mult-dfs (succ-fn '(3 3 NIL) ) '(3 3 NIL))
+(mult-dfs (succ-fn '(3 3 NIL) ) '((3 3 NIL))); Test initial == final
+(mult-dfs (succ-fn '(3 3 NIL) ) '((3 3 NIL) (2 2 T) ) ); BUG
+(mult-dfs (succ-fn '(3 3 NIL) ) '((3 2 NIL) (2 2 T) ) ); NIL
+
 
