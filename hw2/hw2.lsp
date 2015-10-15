@@ -92,10 +92,9 @@
 ; STATES and NIL otherwise.
 ; GOOD
 (defun on-path (s states)
-	;(cond(or ( (NULL s) (NULL states) ) NIL);	Return nil if either s or states is NIL
-	(cond((NULL s) nil)
-		((NULL states) nil)
-		(equal s (first states) t);	Return T if S is a member of STATES
+	(cond((NULL s) nil);	Return nil if s is NULL
+		((NULL states) nil);	Return nil if states is NULL
+		(equal (s (first states)) t);	Return T if S is a member of STATES
 		(t (on-path s (rest states) ) );
 	)
 )
@@ -170,6 +169,7 @@
 
 (next-state '(3 3 NIL) 0 2); nil
 ("TEST ON-PATH")
-(on-path 1 NIL)
-(on-path '(3 2 NIL) '((3 2 NIL) (3 2 NIL)) )
-;(on-path '(3 2 NIL) '('(3 2 NIL) '(1 0 T) ) )
+(on-path 1 NIL); nil
+(on-path NIL 1); nil
+(on-path '(3 2 NIL) '(3 2 NIL))
+;(on-path '(3 2 NIL) '((3 2 NIL) (3 2 NIL)) )
