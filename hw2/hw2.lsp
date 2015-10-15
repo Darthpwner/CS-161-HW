@@ -82,23 +82,62 @@
 ; state. It takes a single argument (S), which encodes the current state, and
 ; returns a list of states that can be reached by applying legal operators to
 ; the current state.
-(defun succ-fn (s)
-	(let* (
-			(originalList (list (next-state s 0 1) (next-state s 0 2) (next-state s 1 0) (next-state s 1 1) (next-state s 2 0) ) );	Grab all five possible moves including NIL moves
-			(returnedList (list () ) ); Grab only valid moves
-		)
+; (defun succ-fn (s)
+; 	(let* (
+; 			(originalList (list (next-state s 0 1) (next-state s 0 2) (next-state s 1 0) (next-state s 1 1) (next-state s 2 0) ) );	Grab all five possible moves including NIL moves
+; 			(returnedList (list () ) ); Grab only valid moves
+; 		)
 
-		; Parse through and remove NIL moves
-		(cond ((not (equal (first originalList) NIL) ) (append (first originalList) returnedList) ) )
-		(cond ((not (equal (second originalList) NIL) ) (append (second originalList) returnedList) ) )
-		(cond ((not (equal (third originalList) NIL) ) (append (third originalList) returnedList) ) )
-		(cond ((not (equal (fourth originalList) NIL) ) (append (fourth originalList) returnedList) ) )
-		(cond ((not (equal (fifth originalList) NIL) ) (append (fifth originalList) returnedList) ) )
+; 		; Parse through and remove NIL moves
+; 		(cond ((not (equal (first originalList) NIL) ) (append (first originalList) returnedList) ) )
+; 		(cond ((not (equal (second originalList) NIL) ) (append (second originalList) returnedList) ) )
+; 		(cond ((not (equal (third originalList) NIL) ) (append (third originalList) returnedList) ) )
+; 		(cond ((not (equal (fourth originalList) NIL) ) (append (fourth originalList) returnedList) ) )
+; 		(cond ((not (equal (fifth originalList) NIL) ) (append (fifth originalList) returnedList) ) )
 		
-		returnedList
+; 		returnedList
+; 	)
+; )
+
+(defun succ-fn (s)
+	(append '()
+		(cond ((not (equal (next-state s 1 0) NIL) ) (list (next-state s 1 0) ) ) )
+		(cond ((not (equal (next-state s 2 0) NIL) ) (list (next-state s 2 0) ) ) )
+		(cond ((not (equal (next-state s 1 1) NIL) ) (list (next-state s 1 1) ) ) )
+		(cond ((not (equal (next-state s 0 1) NIL) ) (list (next-state s 0 1) ) ) )
+		(cond ((not (equal (next-state s 0 2) NIL) ) (list (next-state s 0 2) ) ) )
 	)
 )
 
+; (defun succ-fn (s)
+;   append(  '()
+;   			(cond ((next-state s 0 0) list((next-state s 1 0)) ) 
+;   				(t NIL)
+;   			)
+
+;   			(cond ((next-state s 0 0) list((next-state s 0 1)) ) 
+;   				(t NIL)
+;   				)
+
+;   			(cond ((next-state s 0 0) list((next-state s 2 0)) ) 
+;   				(t NIL)
+;   				)
+
+;   			(cond ((next-state s 0 0) list((next-state s 0 2)) ) 
+;   				(t NIL)
+;   				)
+
+;   			(cond ((next-state s 0 0) list((next-state s 1 1)) ) 
+;   				(t NIL)
+;   				)
+
+
+
+
+;   	)
+
+
+;   )
 
 
 
@@ -164,7 +203,7 @@
 (next-state '(3 3 NIL) 1 1); t
 (next-state '(3 3 NIL) -1 1); nil
 (next-state '(3 3 NIL) 1 -1); nil
-("MORE PEOPE")
+("MORE PEOPLE")
 (next-state '(1 3 NIL) 2 1); nil
 (next-state '(3 1 NIL) 1 1); t
 (next-state '(1 3 NIL) 1 5); nil
