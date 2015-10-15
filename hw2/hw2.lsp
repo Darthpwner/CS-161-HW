@@ -82,6 +82,7 @@
 ; state. It takes a single argument (S), which encodes the current state, and
 ; returns a list of states that can be reached by applying legal operators to
 ; the current state.
+; GOOD
 (defun succ-fn (s)
 	; Check each of the 5 possible moves and append it if it does NOT return nill
 	(append
@@ -149,8 +150,14 @@
 (DFS '((A (B)) C (D)))
 ;(DFS '((3 4 5) 6 ((9) 10))
 
+("#3")
 (final-state '(3 3 NIL))
 (final-state '(3 3 t))
+
+("TEST CASES FOR NEXT-STATE")
+(next-state '(3 3 t) 1 0)
+(next-state '(3 3 t) 0 1)
+
 ("NEGATIVE")
 (next-state '(3 3 NIL) 1 1); t
 (next-state '(3 3 NIL) -1 1); nil
@@ -186,5 +193,22 @@
 (on-path '(4 2 NIL) '(NIL (4 2 NIL) NIL ) ); nil
 
 ("TEST SUCC_FN")
+("WEST SIDE")
+(succ-fn '(0 1 T) )
+(succ-fn '(1 0 t) )
+(succ-fn '(1 1 T) )
+(succ-fn '(2 0 T) )
+(succ-fn '(2 1 T) )
+(succ-fn '(2 2 T) )
+(succ-fn '(3 2 T) )
 (succ-fn '(3 3 T) )
-(succ-fn '(1 1 t) )
+("EAST SIDE")
+(succ-fn '(0 1 nil) )
+(succ-fn '(1 0 nil) )
+(succ-fn '(1 1 nil) )
+(succ-fn '(2 0 nil) )
+(succ-fn '(2 1 nil) )
+(succ-fn '(2 2 nil) )
+(succ-fn '(3 2 nil) )
+(succ-fn '(3 3 nil) )
+
