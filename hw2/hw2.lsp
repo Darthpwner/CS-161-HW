@@ -95,7 +95,7 @@
 	(cond((NULL s) nil);	Return nil if s is NULL
 		((NULL states) nil);	Return nil if states is NULL
 		((equal s (first states) ) t);	Return T if S is a member of STATES
-		(t (on-path s (rest states) )  )
+		(t (on-path s (rest states) )  ); Check the other states on the stack
 	)
 )
 
@@ -171,5 +171,5 @@
 ("TEST ON-PATH")
 (on-path 1 NIL); nil
 (on-path NIL 1); nil
-(on-path '(3 2 NIL) '(3 2 NIL))
+(on-path '(3 2 NIL) '((3 2 NIL)) )
 ;(on-path '(3 2 NIL) '((3 2 NIL) (3 2 NIL)) )
