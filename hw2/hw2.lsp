@@ -83,8 +83,10 @@
 ; returns a list of states that can be reached by applying legal operators to
 ; the current state.
 (defun succ-fn (s)
-
+	(list (next-state s 0 1) (next-state s 0 2) (next-state s 1 0) (next-state s 1 1) (next-state s 2 0) );	Grab all five possible moves including NIL moves
+	; Parse through and remove NIL moves
 )
+;(next-state '(3 3 NIL) 1 1)
 
 ; ON-PATH checks whether the current state is on the stack of states visited by
 ; this depth-first search. It takes two arguments: the current state (S) and the
@@ -174,3 +176,6 @@
 (on-path '(3 2 NIL) '((3 2 NIL)) ); t
 (on-path '(3 2 NIL) '(NIL (3 1 NIL) NIL ) ); nil
 (on-path '(4 2 NIL) '(NIL (4 2 NIL) NIL ) ); nil
+
+("TEST SUCC_FN")
+(succ-fn '(3 3 T) )
