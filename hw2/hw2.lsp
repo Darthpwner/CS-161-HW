@@ -179,3 +179,4 @@
 
 ("TEST SUCC_FN")
 (succ-fn '(3 3 T) )
+(succ-fn '(1 1 t) )
