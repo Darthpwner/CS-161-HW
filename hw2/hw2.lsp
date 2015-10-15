@@ -117,7 +117,7 @@
 ; from the initial state to the goal state. Otherwise, it returns NIL.
 (defun mult-dfs (states path)
 	(append (cond ((equal (final-state (first path) ) t) (first path) ); If initial state equals final state, just return initial state 
-				(t (succ-fn states) )
+				(t (succ-fn (first states) ) )
 			)
 	)
 		;(succ-fn (states))
