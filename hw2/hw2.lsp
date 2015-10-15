@@ -122,7 +122,7 @@
 	;; otherwise, return NIL
 	(cond ((NULL states) NIL);	Return nil if states has no other other possible moves
 	      ((mc-dfs (first states) path) (mc-dfs (first states) path) ); 
-	      (t (mult-dfs (rest states) path) ); Else, run MULT-DFS on the rest of the states
+	      (t (mult-dfs (rest states) path) ); else, run MULT-DFS on the rest of the states
 	)
 )
 
@@ -136,8 +136,8 @@
 ; search path.
 (defun mc-dfs (s path)
 	(cond ((final-state s) (append path (list s) ) ) ; If S is the final state, append S to our path
-		  ((not (on-path s path)) (mult-dfs (succ-fn s) (append path (list s)))) ; if s is not locatd on the current path, call mult-dfs on s and append it to path
-		  (t NIL) ; if current state has been visited, then we want to return NIL, since we know there are no solutions
+		  ((not (on-path s path)) (mult-dfs (succ-fn s) (append path (list s)))) ; If S is not part of the current path, call mult-dfs on S and append it to path
+		  (t NIL); else, return NIL because this means that the current state has been visited and there is no solution
 	)
 )
 
