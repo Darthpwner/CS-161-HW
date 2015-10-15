@@ -171,5 +171,6 @@
 ("TEST ON-PATH")
 (on-path 1 NIL); nil
 (on-path NIL 1); nil
-(on-path '(3 2 NIL) '((3 2 NIL)) )
-;(on-path '(3 2 NIL) '((3 2 NIL) (3 2 NIL)) )
+(on-path '(3 2 NIL) '((3 2 NIL)) ); t
+(on-path '(3 2 NIL) '(NIL (3 1 NIL) NIL ) ); nil
+(on-path '(4 2 NIL) '(NIL (4 2 NIL) NIL ) ); nil
