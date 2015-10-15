@@ -100,7 +100,8 @@
 ; )
 
 (defun succ-fn (s)
-	(append '()
+	; Check each of the 5 possible moves and append it if it does NOT return nill
+	(append
 		(cond ((not (equal (next-state s 1 0) NIL) ) (list (next-state s 1 0) ) ) )
 		(cond ((not (equal (next-state s 2 0) NIL) ) (list (next-state s 2 0) ) ) )
 		(cond ((not (equal (next-state s 1 1) NIL) ) (list (next-state s 1 1) ) ) )
