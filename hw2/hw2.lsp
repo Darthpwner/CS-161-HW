@@ -17,6 +17,9 @@
 	)
 )
 
+; Helper function for DFID
+; Input:
+; Return Value: 
 (defun LDFS (L DEPTH)
 	(cond ((or (NULL L) (< DEPTH 0) ) nil);	If L is NULL or DEPTH is negative, return nil
 		((atom L) (list L) );	If L is a single atom, return L as a list
