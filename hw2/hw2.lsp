@@ -18,9 +18,9 @@
 ; 	)
 ; )
 
-; ; ; Helper function for DFID
-; ; ; Input:
-; ; ; Return Value: 
+; ; Helper function for DFID
+; ; Input:
+; ; Return Value: 
 ; (defun LDFS (L DEPTH)
 ; 	(cond ((or (NULL L) (< DEPTH 0) ) nil);	If L is NULL or DEPTH is negative, return nil
 ; 		((atom L) (list L) );	If L is a single atom, return L as a list
@@ -28,9 +28,9 @@
 ; 	)
 ; )
 
-(defun DFID (TREE M)
-	(cond ((or (NULL TREE) (< M 0) ) nil) ; ;if there is no TREE, return NIL
-		(t (append (DFID TREE (- M 1) ) (LDFS TREE M) ) )
+(defun DFID (L MAX_DEPTH)
+	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil) ; ;if there is no TREE, return NIL
+		(t (append (DFID L (- MAX_DEPTH 1) ) (LDFS L MAX_DEPTH) ) )
 	)
 ) ;otherwise, use limited DFS to append last and current traversals
 	
