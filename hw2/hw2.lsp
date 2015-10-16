@@ -14,7 +14,8 @@
 
 (defun DFID(L MAX_DEPTH)
 	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil) ; If L is NULL or MAX_DEPTH is negative, return nil
-		(t (append (LDFS(first L) (- MAX_DEPTH 1) ) ) )
+;		(t (append (LDFS L (- MAX_DEPTH 1) (LDFS L MAX_DEPTH) ) ) )
+		(t (append (LDFS L(- MAX_DEPTH 1) ) (LDFS L MAX_DEPTH) ) )
 	)
 )
 
