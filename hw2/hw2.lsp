@@ -17,13 +17,18 @@
 	)
 )
 
+; Have a function that recursively appends a call to LDFS, and appends that to a call to that helper function, which will call the
+; next DFS
+; LDFS of depth, recursive function will call with depth - 1 in 2nd call to helper function
+; ONE LINE THING, check that whatever count you are using is > 0
+
 ; Helper function for DFID
 ; Input:
 ; Return Value: 
 (defun LDFS (L DEPTH)
 	(cond ((or (NULL L) (< DEPTH 0) ) nil);	If L is NULL or DEPTH is negative, return nil
 		((atom L) (list L) );	If L is a single atom, return L as a list
-		(t (append (LDFS(first L) (- DEPTH 1) ) (LDFS (rest L) (- DEPTH 1) ) ) )
+		(t (append (LDFS(first L) (- DEPTH 1) ) (LDFS (rest L) DEPTH ) ) )
 	)
 )
 
@@ -133,7 +138,7 @@
 	;; if it is, append the child to the path
 	;; otherwise, return NIL
 	(cond ((NULL states) NIL);	Return nil if states has no other other possible moves
-	      ((mc-dfs (first states) path) );
+	      ((mc-dfs (first states) path) ); Calls MC-DFS and returns the value obtained here
 	      (t (mult-dfs (rest states) path) ); else, run MULT-DFS on the rest of the states
 	)
 )
@@ -180,12 +185,12 @@
 	)
 )
 
-("#1")
+;("#1")
 (DFS '((A (B)) C (D))); A B C D
 (testDFS); T
 
-("#2")
-("ROFL")
+;("#2")
+;("ROFL")
 (LDFS '((A (B)) C (D)) 0);	()
 (LDFS '((A (B)) C (D)) 1);	(C)
 (LDFS '((A (B)) C (D)) 2);	(A C D)
@@ -193,7 +198,7 @@
 (LDFS '((A (B)) C (D)) 4); 	(A B C D) SHOULD REPEAT AFTER THIS
 
 
-("LOL")
+;("LOL")
 (DFID nil '(A))
 (DFID '(A) nil)
 
@@ -298,3 +303,13 @@
 ; (mc-dfs '(3 2 nil) nil)
 ; (mc-dfs '(1 1 T) '((3 3 t) ) )
 ; (mc-dfs '(1 1 T) nil )
+
+
+; ("FRANK TEST")
+;; Problem 3 sub-problem testing
+
+; (next-state '(3 3 t) 1 0); nil
+; (next-state '(3 3 t) 0 1); '((0 1 NIL))
+; (next-state '(2 2 t) 0 2); NIL
+; (next-state '(3 3 NIL) 1 1); '((1 1 t))
+; (next-state '(1 1 NIL) 1 0); '((3 2 t))
