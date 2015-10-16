@@ -14,7 +14,7 @@
 
 (defun DFID(L MAX_DEPTH)
 	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil) ; If L is NULL or MAX_DEPTH is negative, return nil
-		(append LDFS(first L) (- MAX_DEPTH 1) ) ;
+		(t (append (LDFS(first L) (- MAX_DEPTH 1) ) ) )
 	)
 )
 
@@ -198,13 +198,14 @@
 (LDFS '((A (B)) C (D)) 3);	(A B C D)
 (LDFS '((A (B)) C (D)) 4); 	(A B C D) SHOULD REPEAT AFTER THIS
 
-(DFID '())
+("BITCH")
+(DFID '() 3)
 
 ;("LOL")
 ;(DFID nil '(A))
 ;(DFID '(A) nil)
 
-(DFID '(((A (B)) C (D)) 3))
+(DFID '(((A (B)) C (D))) 3)
 
 ; ("#3")
 ; (final-state '(3 3 NIL))
