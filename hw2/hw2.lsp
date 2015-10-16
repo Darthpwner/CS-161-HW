@@ -79,14 +79,13 @@
 ;
 ; NOTE that next-state returns a list containing the successor state (which is
 ; itself a list); the return should look something like ((1 1 T)).
-; GOOD
 (defun next-state (s m c)
 	(cond ((or (< m 0) (< c 0) ) nil);	Cannot move negative # of missionaries or cannibals
 		((or (< (+ m c) 1) (> (+ m c) 2) ) nil); Have to move 1 or 2 people
 		( (or (> m (first s) ) (> c (second s) ) ) nil);	Cannot move more missionaries or cannibals than you have on your side
 		((and (> (- (first s) m) 0) (> (- (second s) c) (- (first s) m) ) ) nil); Cannot have less missionaries than cannibals on the side you just moved UNLESS you have 0 missionaries after moving 		
 		((and (> (+ m (- 3 (first s) ) ) 0) (< (+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) ) ) nil); Cannot have less missionaries than cannibals on your new side UNLESS you have 0 missionaries after moving
-		(t (list(+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) (not (third s) ) ) ); Return next state 
+		(t (list (list(+ m (- 3 (first s) ) ) (+ c (- 3 (second s) ) ) (not (third s) ) ) ) ); Return next state inside a bigger list
 	)
 )
 
@@ -94,15 +93,14 @@
 ; state. It takes a single argument (S), which encodes the current state, and
 ; returns a list of states that can be reached by applying legal operators to
 ; the current state.
-; GOOD
 (defun succ-fn (s)
 	; Check each of the 5 possible moves and append it if it does NOT return nill
 	(append
-		(cond ((not (equal (next-state s 1 0) NIL) ) (list (next-state s 1 0) ) ) )
-		(cond ((not (equal (next-state s 2 0) NIL) ) (list (next-state s 2 0) ) ) )
-		(cond ((not (equal (next-state s 1 1) NIL) ) (list (next-state s 1 1) ) ) )
-		(cond ((not (equal (next-state s 0 1) NIL) ) (list (next-state s 0 1) ) ) )
-		(cond ((not (equal (next-state s 0 2) NIL) ) (list (next-state s 0 2) ) ) )
+		(cond ((not (equal (next-state s 1 0) NIL) ) (next-state s 1 0) ) ) 
+		(cond ((not (equal (next-state s 2 0) NIL) ) (next-state s 2 0) ) ) 
+		(cond ((not (equal (next-state s 1 1) NIL) ) (next-state s 1 1) ) ) 
+		(cond ((not (equal (next-state s 0 1) NIL) ) (next-state s 0 1) ) ) 
+		(cond ((not (equal (next-state s 0 2) NIL) ) (next-state s 0 2) ) ) 
 	)
 )
 
@@ -110,7 +108,6 @@
 ; this depth-first search. It takes two arguments: the current state (S) and the
 ; stack of states visited by MC-DFS (STATES). It returns T if S is a member of
 ; STATES and NIL otherwise.
-; GOOD
 (defun on-path (s states)
 	(cond((NULL s) nil);	Return nil if s is NULL
 		((NULL states) nil);	Return nil if states is NULL
@@ -127,7 +124,6 @@
 ; MULT-DFS does a depth-first search on each element of STATES in turn. If any
 ; of those searches reaches the final state, MULT-DFS returns the complete path
 ; from the initial state to the goal state. Otherwise, it returns NIL.
-
 (defun mult-dfs (states path)
 	;; check all the states, see if any of the states is the end goal
 	;; if it is, append the child to the path
@@ -170,23 +166,23 @@
 ; (succ-fn '(1 1 t)) -> ((3 2 NIL) (3 3 NIL))
 
 ;("#1")
-(DFS '((A (B)) C (D))); A B C D
-(DFS '((w x) (y z))) ;'(W X Y Z))
-(DFS '((A (B)) C (D))) ;'(A B C D))
-(DFS '((A B) C (D E))) ;'(A B C D E))
-(DFS '(((A B C)) (D E F) G H)) ;'(A B C D E F G H))
-(DFS '(((A B C) D) (E F) G H)) ;'(A B C D E F G H))
+; (DFS '((A (B)) C (D))); A B C D
+; (DFS '((w x) (y z))) ;'(W X Y Z))
+; (DFS '((A (B)) C (D))) ;'(A B C D))
+; (DFS '((A B) C (D E))) ;'(A B C D E))
+; (DFS '(((A B C)) (D E F) G H)) ;'(A B C D E F G H))
+; (DFS '(((A B C) D) (E F) G H)) ;'(A B C D E F G H))
 
-;("#2")
-(LDFS '((A (B)) C (D)) 0);	()
-(LDFS '((A (B)) C (D)) 1);	(C)
-(LDFS '((A (B)) C (D)) 2);	(A C D)
-(LDFS '((A (B)) C (D)) 3);	(A B C D)
-(LDFS '((A (B)) C (D)) 4); 	(A B C D) SHOULD REPEAT AFTER THIS
+; ;("#2")
+; (LDFS '((A (B)) C (D)) 0);	()
+; (LDFS '((A (B)) C (D)) 1);	(C)
+; (LDFS '((A (B)) C (D)) 2);	(A C D)
+; (LDFS '((A (B)) C (D)) 3);	(A B C D)
+; (LDFS '((A (B)) C (D)) 4); 	(A B C D) SHOULD REPEAT AFTER THIS
 
-(dfid '((A (B)) C (D)) 3); '(C A C D A B C D))
-(dfid 'A 0) ;'(A))
-(dfid '(A B) 1) ;'(A B))
-(dfid '(A B C) 1) ;'(A B C)
-(dfid '((A B) C (D E)) 2) ;'(C A B C D E))
-(dfid '(((A B C)) (D E F) G H) 3) ;'(G H D E F G H A B C D E F G H))
+; (dfid '((A (B)) C (D)) 3); '(C A C D A B C D))
+; (dfid 'A 0) ;'(A))
+; (dfid '(A B) 1) ;'(A B))
+; (dfid '(A B C) 1) ;'(A B C)
+; (dfid '((A B) C (D E)) 2) ;'(C A B C D E))
+; (dfid '(((A B C)) (D E F) G H) 3) ;'(G H D E F G H A B C D E F G H))
