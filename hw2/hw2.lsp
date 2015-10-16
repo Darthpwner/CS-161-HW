@@ -12,24 +12,32 @@
 ; Input:
 ; Return Value:
 
-(defun DFID(L MAX_DEPTH)
-	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil) ; If L is NULL or MAX_DEPTH is negative, return nil
-		(t (append (LDFS L (- MAX_DEPTH 1) ) (LDFS L MAX_DEPTH) ) )
+; (defun DFID(L MAX_DEPTH)
+; 	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil) ; If L is NULL or MAX_DEPTH is negative, return nil
+; 		(t (append (LDFS L (- MAX_DEPTH 1) ) (LDFS L MAX_DEPTH) ) )
+; 	)
+; )
+
+; ; ; Helper function for DFID
+; ; ; Input:
+; ; ; Return Value: 
+; (defun LDFS (L DEPTH)
+; 	(cond ((or (NULL L) (< DEPTH 0) ) nil);	If L is NULL or DEPTH is negative, return nil
+; 		((atom L) (list L) );	If L is a single atom, return L as a list
+; 		(t (append (LDFS(first L) (- DEPTH 1) ) (LDFS (rest L) DEPTH ) ) )
+; 	)
+; )
+
+(defun DFID (TREE M)
+	(cond ((or (NULL TREE) (< M 0) ) nil) ; ;if there is no TREE, return NIL
+		(t (append (DFID TREE (- M 1) ) (LDFS TREE M) ) )
 	)
-)
-
-; Have a function that recursively appends a call to LDFS, and appends that to a call to that helper function, which will call the
-; next DFS
-; LDFS of depth, recursive function will call with depth - 1 in 2nd call to helper function
-; ONE LINE THING, check that whatever count you are using is > 0
-
-; Helper function for DFID
-; Input:
-; Return Value: 
-(defun LDFS (L DEPTH)
-	(cond ((or (NULL L) (< DEPTH 0) ) nil);	If L is NULL or DEPTH is negative, return nil
-		((atom L) (list L) );	If L is a single atom, return L as a list
-		(t (append (LDFS(first L) (- DEPTH 1) ) (LDFS (rest L) DEPTH ) ) )
+) ;otherwise, use limited DFS to append last and current traversals
+	
+(defun LDFS (TREE L)
+	(cond ((or (NULL TREE) (< L 0) ) nil) ;if there is no TREE left, return NIL
+		((atom TREE) (list TREE) ) ;if there is an atom left, return it as a list
+		(t (append (LDFS (first TREE) (- L 1)) (LDFS (rest TREE) L) ) )
 	)
 )
 
