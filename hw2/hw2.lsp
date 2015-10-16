@@ -206,7 +206,9 @@
 ;(DFID nil '(A))
 ;(DFID '(A) nil)
 
-(DFID '(((A (B)) C (D))) 3)
+(dfid '((A (B)) C (D)) 3)
+(dfid '((A (B)) C (D)) 3); '(C A C D A B C D))
+
 
 ; ("#3")
 ; (final-state '(3 3 NIL))
