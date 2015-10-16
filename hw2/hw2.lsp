@@ -11,9 +11,10 @@
 ; Problem 2
 ; Input:
 ; Return Value:
+
 (defun DFID(L MAX_DEPTH)
-	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil); If L is NULL or MAX_DEPTH is negative, return nil
-		
+	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil) ; If L is NULL or MAX_DEPTH is negative, return nil
+		(append LDFS(first L) (- MAX_DEPTH 1) ) ;
 	)
 )
 
@@ -197,10 +198,11 @@
 (LDFS '((A (B)) C (D)) 3);	(A B C D)
 (LDFS '((A (B)) C (D)) 4); 	(A B C D) SHOULD REPEAT AFTER THIS
 
+(DFID '())
 
 ;("LOL")
-(DFID nil '(A))
-(DFID '(A) nil)
+;(DFID nil '(A))
+;(DFID '(A) nil)
 
 (DFID '(((A (B)) C (D)) 3))
 
