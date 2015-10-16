@@ -34,10 +34,10 @@
 	)
 ) ;otherwise, use limited DFS to append last and current traversals
 	
-(defun LDFS (TREE L)
-	(cond ((or (NULL TREE) (< L 0) ) nil) ;if there is no TREE left, return NIL
-		((atom TREE) (list TREE) ) ;if there is an atom left, return it as a list
-		(t (append (LDFS (first TREE) (- L 1)) (LDFS (rest TREE) L) ) )
+(defun LDFS (L DEPTH)
+	(cond ((or (NULL L) (< DEPTH 0) ) nil) ;if there is no TREE left, return NIL
+		((atom L) (list L) ) ;if there is an atom left, return it as a list
+		(t (append (LDFS (first L) (- DEPTH 1)) (LDFS (rest L) DEPTH) ) )
 	)
 )
 
