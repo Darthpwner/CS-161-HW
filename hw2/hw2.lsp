@@ -14,8 +14,7 @@
 
 (defun DFID(L MAX_DEPTH)
 	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil) ; If L is NULL or MAX_DEPTH is negative, return nil
-;		(t (append (LDFS L (- MAX_DEPTH 1) (LDFS L MAX_DEPTH) ) ) )
-		(t (append (LDFS L(- MAX_DEPTH 1) ) (LDFS L MAX_DEPTH) ) )
+		(t (append (LDFS L (- MAX_DEPTH 1) ) (LDFS L MAX_DEPTH) ) )
 	)
 )
 
@@ -30,7 +29,6 @@
 (defun LDFS (L DEPTH)
 	(cond ((or (NULL L) (< DEPTH 0) ) nil);	If L is NULL or DEPTH is negative, return nil
 		((atom L) (list L) );	If L is a single atom, return L as a list
-		;((= (length TREE) 1) (LDFS (first L) (- L 1)))
 		(t (append (LDFS(first L) (- DEPTH 1) ) (LDFS (rest L) DEPTH ) ) )
 	)
 )
@@ -217,7 +215,7 @@
 ;(testDFID)
 (dfid 'A 0) ;'(A))
 		(dfid '(A B) 1) ;'(A B))
-		(dfid '(A B C) 1) ;'(A B C))
+		(dfid '(A B C) 1) ;'(A B C)
 		(dfid '((A B) C (D E)) 2) ;'(C A B C D E))
 		(dfid '(((A B C)) (D E F) G H) 3) ;'(G H D E F G H A B C D E F G H))
 
