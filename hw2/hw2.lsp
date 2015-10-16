@@ -169,156 +169,24 @@
 ; (succ-fn '(3 3 t)) -> ((0 1 NIL) (1 1 NIL) (0 2 NIL))
 ; (succ-fn '(1 1 t)) -> ((3 2 NIL) (3 3 NIL))
 
-; DAVIDS SHIT REMOVE LATER
-(defun testDFS()
-	(AND 
-		(equal (DFS '((w x) (y z))) '(W X Y Z))
-		(equal (DFS '((A (B)) C (D))) '(A B C D))
-		(equal (DFS '((A B) C (D E))) '(A B C D E))
-		(equal (DFS '(((A B C)) (D E F) G H)) '(A B C D E F G H))
-		(equal (DFS '(((A B C) D) (E F) G H)) '(A B C D E F G H))
-	)
-)
-
-(defun testDFID () 
-	(AND
-		(equal (dfid 'A 0) '(A))
-		(equal (dfid '(A B) 1) '(A B))
-		(equal (dfid '(A B C) 1) '(A B C))
-		(equal (dfid '((A B) C (D E)) 2) '(C A B C D E))
-		(equal (dfid '(((A B C)) (D E F) G H) 3) '(G H D E F G H A B C D E F G H))
-	)
-)
-
 ;("#1")
 (DFS '((A (B)) C (D))); A B C D
-(testDFS); T
+(DFS '((w x) (y z))) ;'(W X Y Z))
+(DFS '((A (B)) C (D))) ;'(A B C D))
+(DFS '((A B) C (D E))) ;'(A B C D E))
+(DFS '(((A B C)) (D E F) G H)) ;'(A B C D E F G H))
+(DFS '(((A B C) D) (E F) G H)) ;'(A B C D E F G H))
 
-("#2")
+;("#2")
 (LDFS '((A (B)) C (D)) 0);	()
 (LDFS '((A (B)) C (D)) 1);	(C)
 (LDFS '((A (B)) C (D)) 2);	(A C D)
 (LDFS '((A (B)) C (D)) 3);	(A B C D)
 (LDFS '((A (B)) C (D)) 4); 	(A B C D) SHOULD REPEAT AFTER THIS
 
-
-
-(dfid '((A (B)) C (D)) 3)
 (dfid '((A (B)) C (D)) 3); '(C A C D A B C D))
-("BULLShit")
-;(testDFID)
 (dfid 'A 0) ;'(A))
-		(dfid '(A B) 1) ;'(A B))
-		(dfid '(A B C) 1) ;'(A B C)
-		(dfid '((A B) C (D E)) 2) ;'(C A B C D E))
-		(dfid '(((A B C)) (D E F) G H) 3) ;'(G H D E F G H A B C D E F G H))
-
-; ("#3")
-; (final-state '(3 3 NIL))
-; (final-state '(3 3 t))
-
-; ("TEST CASES FOR NEXT-STATE")
-; (next-state '(3 3 t) 1 0)
-; (next-state '(3 3 t) 0 1)
-
-; ("NEGATIVE")
-; (next-state '(3 3 NIL) 1 1); t
-; (next-state '(3 3 NIL) -1 1); nil
-; (next-state '(3 3 NIL) 1 -1); nil
-; ("MORE PEOPLE")
-; (next-state '(1 3 NIL) 2 1); nil
-; (next-state '(3 1 NIL) 1 1); t
-; (next-state '(1 3 NIL) 1 5); nil
-; (next-state '(3 1 NIL) 1 5); nil
-
-
-; ("CANNIBAL HUNGRY MY SIDE")
-; (next-state '(3 2 NIL) 1 1); t
-; (next-state '(3 2 NIL) 2 0); nil
-; (next-state '(2 3 NIL) 1 0); nil
-; (next-state '(3 3 NIL) 0 0); nil
-; (next-state '(2 3 NIL) 2 0); t 
-; (next-state '(3 3 NIL) 0 3); nil
-; ("CANNIBAL HUNGRY OTHER SIDE")
-; (next-state '(2 3 NIL) 0 2); nil
-
-; (next-state '(1 3 NIL) 1 0); t 
-
-; (next-state '(3 3 NIL) 0 2); nil
-
-; ("VIR")
-; (next-state '(3 2 t) 1 1)
-; ("TEST ON-PATH")
-; (on-path 1 NIL); nil
-; (on-path NIL 1); nil
-; (on-path '(3 2 NIL) '((3 2 NIL)) ); t
-; (on-path '(3 c2 NIL) '(NIL (3 1 NIL) NIL ) ); nil
-; (on-path '(4 2 NIL) '(NIL (4 2 NIL) NIL ) ); nil
-
-; ("TEST SUCC_FN")
-; ("WEST SIDE")
-; (succ-fn '(0 1 T) )
-; (succ-fn '(0 2 T) )
-
-; (succ-fn '(1 0 t) )
-; (succ-fn '(1 1 T) )
-; (succ-fn '(2 0 T) )
-; (succ-fn '(2 1 T) )
-; (succ-fn '(2 2 T) )
-; (succ-fn '(3 2 T) )
-; (succ-fn '(3 3 T) )
-; ("EAST SIDE")
-; (succ-fn '(0 1 nil) )
-; (succ-fn '(1 0 nil) )
-; (succ-fn '(1 1 nil) )
-; (succ-fn '(2 0 nil) )
-; (succ-fn '(2 1 nil) )
-; (succ-fn '(2 2 nil) )
-; (succ-fn '(3 2 nil) )
-; (succ-fn '(3 3 nil) )
-
-; ("TEST MULT-DFS")
-; (mult-dfs (succ-fn '(3 3 NIL) ) '((3 3 NIL))); Test initial == final
-; (mult-dfs (succ-fn '(3 3 NIL) ) '((3 3 NIL) (2 2 T) ) ); BUG
-; (mult-dfs (succ-fn '(3 3 NIL) ) '((3 2 NIL) (2 2 T) ) ); NIL
-; (mult-dfs (succ-fn '(3 3 NIL) ) '((3 2 NIL) (2 2 T) (3 3 NIL)) ); NIL
-; ("FRANK")
-; (mult-dfs (succ-fn '(0 2 t) ) NIL) '((3 2 NIL) (1 1 T) ) 
-; ("FRANK BADASS MOTHERFUCKER!")
-; (mc-dfs '(0 2 t) NIL) ;'((0 2 T) (3 2 NIL) (1 1 T) (3 3 NIL) )
-; (mc-dfs '(3 3 t) NIL) ;'((3 3 T) (1 1 NIL) (3 2 T) (0 3 NIL) (3 1 T) (2 2 NIL) (2 2 T) (3 1 NIL) (0 3 T) (3 2 NIL) (1 1 T) (3 3 NIL)))
-; ("ALTERNATES")
-; ("WEST SIDE")
-; (mc-dfs '(0 1 T) nil)
-; (mc-dfs '(0 2 T) nil)
-
-; (mc-dfs '(1 0 t) nil)
-; (mc-dfs '(1 1 T) '((3 3 t) ) )
-; (mc-dfs '(2 0 T) nil)
-; (mc-dfs '(2 1 T) nil)
-; (mc-dfs '(2 2 T) '((3 3 t) (1 1 nil) (3 2 t) (0 3 nil) (3 1 t) (2 2 nil) ) )
-; (mc-dfs '(3 2 T) '((3 3 t) (1 1 nil) ) )
-; (mc-dfs '(3 3 T) NIL)
-; ("EAST SIDE")
-; (mc-dfs '(0 1 nil) nil)
-; (mc-dfs '(1 0 nil) nil)
-; (mc-dfs '(1 1 nil) nil)
-; (mc-dfs '(2 0 nil) nil)
-; (mc-dfs '(2 1 nil) nil)
-; (mc-dfs '(2 2 nil) '((3 3 t) (1 1 nil) (3 2 t) (0 3 nil) (3 1 t) ) )
-; (mc-dfs '(3 2 nil) '((3 3 t) (1 1 nil) (3 2 t) (0 3 nil) (3 1 t) (2 2 nil) (2 2 t) (3 1 nil) (0 3 t) ) )
-; (mc-dfs '(3 3 nil) '((3 3 t) (1 1 nil) (3 2 t) (0 3 nil) (3 1 t) (2 2 nil) (2 2 t) (3 1 nil) (0 3 t) (3 2 t) (1 1 t) ) )
-; ("EXPERIMENTAL")
-; (mc-dfs '(3 2 nil) nil)
-; (mc-dfs '(1 1 T) '((3 3 t) ) )
-; (mc-dfs '(1 1 T) nil )
-
-
-; ("FRANK TEST")
-;; Problem 3 sub-problem testing
-
-; (next-state '(3 3 t) 1 0); nil
-; (next-state '(3 3 t) 0 1); '((0 1 NIL))
-; (next-state '(2 2 t) 0 2); NIL
-; (next-state '(3 3 NIL) 1 1); '((1 1 t))
-; (next-state '(1 1 NIL) 1 0); '((3 2 t))
+(dfid '(A B) 1) ;'(A B))
+(dfid '(A B C) 1) ;'(A B C)
+(dfid '((A B) C (D E)) 2) ;'(C A B C D E))
+(dfid '(((A B C)) (D E F) G H) 3) ;'(G H D E F G H A B C D E F G H))
