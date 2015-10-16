@@ -9,22 +9,21 @@
 )
 
 ; Problem 2
-; Input:
-; Return Value:
-
+; Input: The tree s a list and the maximum depth of the tree
+; Return Value: A list of end nodes in the order they are visited
 (defun DFID(L MAX_DEPTH)
 	(cond ((or (NULL L) (< MAX_DEPTH 0) ) nil) ; If L is NULL or MAX_DEPTH is negative, return nil
-		(t (append (DFID L (- MAX_DEPTH 1) ) (LDFS L MAX_DEPTH) ) )
+		(t (append (DFID L (- MAX_DEPTH 1) ) (LDFS L MAX_DEPTH) ) ); else, check your tree one level down in DFID, then call LDFS on your current level, and append
 	)
 )
 
 ; Helper function for DFID
-; Input:
-; Return Value: 
+; Input: The tree as a list and the depth we want to search to in the tree
+; Return Value: A list of end nodes in the order they are visited up to a certain lvel
 (defun LDFS (L DEPTH)
 	(cond ((or (NULL L) (< DEPTH 0) ) nil);	If L is NULL or DEPTH is negative, return nil
 		((atom L) (list L) );	If L is a single atom, return L as a list
-		(t (append (LDFS(first L) (- DEPTH 1) ) (LDFS (rest L) DEPTH ) ) )
+		(t (append (LDFS(first L) (- DEPTH 1) ) (LDFS (rest L) DEPTH ) ) ); else, check one level down, then check at your current level, and append list together
 	)
 )
 
