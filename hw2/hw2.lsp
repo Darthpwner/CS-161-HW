@@ -30,6 +30,7 @@
 (defun LDFS (L DEPTH)
 	(cond ((or (NULL L) (< DEPTH 0) ) nil);	If L is NULL or DEPTH is negative, return nil
 		((atom L) (list L) );	If L is a single atom, return L as a list
+		;((= (length TREE) 1) (LDFS (first L) (- L 1)))
 		(t (append (LDFS(first L) (- DEPTH 1) ) (LDFS (rest L) DEPTH ) ) )
 	)
 )
@@ -187,28 +188,38 @@
 	)
 )
 
+(defun testDFID () 
+	(AND
+		(equal (dfid 'A 0) '(A))
+		(equal (dfid '(A B) 1) '(A B))
+		(equal (dfid '(A B C) 1) '(A B C))
+		(equal (dfid '((A B) C (D E)) 2) '(C A B C D E))
+		(equal (dfid '(((A B C)) (D E F) G H) 3) '(G H D E F G H A B C D E F G H))
+	)
+)
+
 ;("#1")
 (DFS '((A (B)) C (D))); A B C D
 (testDFS); T
 
-;("#2")
-;("ROFL")
+("#2")
 (LDFS '((A (B)) C (D)) 0);	()
 (LDFS '((A (B)) C (D)) 1);	(C)
 (LDFS '((A (B)) C (D)) 2);	(A C D)
 (LDFS '((A (B)) C (D)) 3);	(A B C D)
 (LDFS '((A (B)) C (D)) 4); 	(A B C D) SHOULD REPEAT AFTER THIS
 
-("BITCH")
-(DFID '() 3)
 
-;("LOL")
-;(DFID nil '(A))
-;(DFID '(A) nil)
 
 (dfid '((A (B)) C (D)) 3)
 (dfid '((A (B)) C (D)) 3); '(C A C D A B C D))
-
+("BULLShit")
+;(testDFID)
+(dfid 'A 0) ;'(A))
+		(dfid '(A B) 1) ;'(A B))
+		(dfid '(A B C) 1) ;'(A B C))
+		(dfid '((A B) C (D E)) 2) ;'(C A B C D E))
+		(dfid '(((A B C)) (D E F) G H) 3) ;'(G H D E F G H A B C D E F G H))
 
 ; ("#3")
 ; (final-state '(3 3 NIL))
