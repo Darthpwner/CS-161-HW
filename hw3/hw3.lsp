@@ -215,6 +215,13 @@
 	)
   );end defun
 
+("TEST GOAL-STATE")
+goal-test(())
+goal-test((1)(2))
+goal-test((2)(1))
+goal-test((1)(1))
+("END TEST GOAL-STATE")
+
 ; EXERCISE: Modify this function to return the list of
 ; sucessor states of s.
 ;
