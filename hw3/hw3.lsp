@@ -187,26 +187,26 @@
 ;
 
 ; Algorithm: Search the game board for a box. If you encounter a box, return nil. Else, return true.
+; (defun goal-test (s)
+; 	(cond ((NULL s) nil);	If the ENTIRE gameboard is NULL, return nil
+; 		((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
+; 		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
+		
+; 		((equal t isBox(first (first s) ) ) nil);	If the element at your current position is a box, return nil
+		
+; 		; Traverse right first, then downwards
+; 		(t 
+; 			(cond ((null (first (rest s) ) ) goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
+; 			(t goal-test (first (rest s) ) ); Move to the next column at the current row			
+; 		); end t
+; 	); end cond
+;   );end defun
+
 (defun goal-test (s)
-	(cond ((NULL s) nil);	If the ENTIRE gameboard is NULL, return nil
-		((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
-		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
-		
-		((equal t isBox(first (first s) ) ) nil);	If the element at your current position is a box, return nil
-		
-		; Traverse right first, then downwards
-		(t 
-			(cond ((null (first (rest s) ) ) goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
-			(t goal-test (first (rest s) ) ); Move to the next column at the current row			
-		); end t
-	); end cond
-  );end defun
-
-
-(setq s0 '(
-			()
-		  )
+	(t t)
 )
+
+
 ; (setq s1 '(
 ; 			(1) (2)
 ; 		  )
@@ -220,7 +220,12 @@
 ; 		  )
 ; )
 ("TEST GOAL-STATE")
-goal-test('() ); nil
+
+(setq p1 '((0 0 1 1 1 1 0 0 0) (1 1 1 0 0 1 1 1 1) (1 0 0 0 0 0 2 0 1) (1 0 1 0 0 1 2 0 1) (1 0 4 0 4 1 3 0 1)
+(1 1 1 1 1 1 1 1 1))
+)
+
+;goal-test('() ); nil
 ;goal-test(s0); nil
 ;goal-test((s1); nil
 ;goal-test((s2); nil
