@@ -212,7 +212,7 @@
 (1 1 1 1 1 1 1 1 1))
 )
 
-(setq s2 '((0 2) (0))
+(setq s2 '((20 2) (0))
 )
 ;goal-test('() ); nil
 ;goal-test(s0); nil
