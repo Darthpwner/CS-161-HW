@@ -185,11 +185,13 @@
 		((equal t (isBox(first (first s) ) ) ) nil);	If the element at your current position is a box, return nil
 		
 		; Traverse right first, then downwards
-		(t 
-			(cond ((null (first (rest s) ) ) goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
-			(t goal-test (first (rest s) ) ); Move to the next column at the current row			
+		(t (
+				(cond ((null (first (rest s) ) ) goal-test (rest s) ); Move to the next row if you are on the last element of your current row
+					(t (goal-test (first (rest s) ) ) ); Move to the next column at the current row
+				); end inner cond
+			)			
 		); end t
-	); end cond
+	); end outer cond
   );end defun
 
 ; (setq s1 '(
