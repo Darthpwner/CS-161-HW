@@ -203,7 +203,6 @@
 (defun goal-test (s)
 	(cond ((NULL s) nil);	If the ENTIRE gameboard is NULL, return nil
 		((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
-		((equal (first (first s) ) ) nil); Check specific elements in row and column
 		
 		((equal t isBox(first (first s) ) ) nil);	If the element at your current position is a box, return nil
 		
