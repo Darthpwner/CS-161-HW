@@ -198,15 +198,33 @@
 		(t 
 			(cond ((null (first (rest s) ) ) goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
 			(t goal-test (first (rest s) ) ); Move to the next column at the current row			
-		)
-	)
+		); end t
+	); end cond
   );end defun
 
+
+(setq s0 '(
+			()
+		  )
+)
+; (setq s1 '(
+; 			(1) (2)
+; 		  )
+; )
+; (setq s2 '(
+; 			(2) (1)
+; 		  )
+; )
+; (setq s3 '(
+; 			(1) (1)
+; 		  )
+; )
 ("TEST GOAL-STATE")
-goal-test(())
-goal-test((1)(2))
-goal-test((2)(1))
-goal-test((1)(1))
+goal-test('() ); nil
+;goal-test(s0); nil
+;goal-test((s1); nil
+;goal-test((s2); nil
+;goal-test((s3); t
 ("END TEST GOAL-STATE")
 
 ; EXERCISE: Modify this function to return the list of
