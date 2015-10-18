@@ -210,10 +210,12 @@
 (1 1 1 1 1 1 1 1 1))
 )
 
+(setq s2 '((2) (0))
+)
 ;goal-test('() ); nil
 ;goal-test(s0); nil
-(goal-test p1); nil
-;goal-test((s2); nil
+;(goal-test p1); nil
+(goal-test s2); nil
 ;goal-test((s3); t
 ("END TEST GOAL-STATE")
 
