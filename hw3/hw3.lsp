@@ -186,7 +186,7 @@
 		
 		; Traverse right first, then downwards
 		(t 
-			(cond ((NULL (first (rest s) ) ) ) nil ) 
+			(cond ((NULL (first (rest s) ) ) ) (goal-test (rest s) ) ) 
 		)
 
 
