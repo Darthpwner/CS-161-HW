@@ -186,29 +186,17 @@
 ; terminate until the whole search space is exhausted.
 ;
 
-; INSERT FUNC HERE
-; Helper function of getKeeperPosition
-; Finds the keeper's column location
-(defun getKeeperColumn (r col)	
-  (cond ((null r) nil)
-	(t (if (or (isKeeper (car r)) (isKeeperStar (car r)))
-	       col
-	     (getKeeperColumn (cdr r) (+ col 1))
-	     );end if
-	   );end t
-	);end cond
-  )
-
 ; Algorithm: Search the game board for a box. If you encounter a box, return nil. Else, return true.
 (defun goal-test (s)
 	(cond ((NULL s) nil);	If the ENTIRE gameboard is NULL, return nil
-		((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
+		((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
+		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
 		
 		((equal t isBox(first (first s) ) ) nil);	If the element at your current position is a box, return nil
 		
 		; Traverse right first, then downwards
 		(t 
-			(cond ((null (first (first s) ) ) goal-test (rest s) ) ); Move to the next row if you need to
+			(cond ((null (first (rest s) ) ) goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
 			(t goal-test (first (rest s) ) ); Move to the next column at the current row			
 		)
 	)
