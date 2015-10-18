@@ -221,6 +221,7 @@
 ;goal-test(s0); nil
 ;(goal-test p1); nil
 (goal-test s1)
+(goal-test '((0 1))); nil WORKS
 ;(goal-test s2); nil WORKS
 ;goal-test((s3); t
 ("END TEST GOAL-STATE")
