@@ -182,12 +182,14 @@
 		((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
 		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
 		
+		; GOOD!!!!
 		((equal t (isBox(first (first s) ) ) ) nil);	If the element at your current position is a box, return nil
 		
 		;Traverse right first, then downwards
 		(t 
-			(cond ((NULL (first (rest s) ) ) ) (goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
+			(cond ((NULL (first (rest s) ) ) (goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
 				(t (goal-test (first (rest s) ) ) ); Move to the next column at the current row
+			)
 		); end t
 	); end outer cond
   );end defun
@@ -210,12 +212,12 @@
 (1 1 1 1 1 1 1 1 1))
 )
 
-(setq s2 '((2) (0))
+(setq s2 '((0 2) (0))
 )
 ;goal-test('() ); nil
 ;goal-test(s0); nil
 ;(goal-test p1); nil
-(goal-test s2); nil
+(goal-test s2); nil WORKS
 ;goal-test((s3); t
 ("END TEST GOAL-STATE")
 
