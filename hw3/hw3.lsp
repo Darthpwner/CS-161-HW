@@ -187,8 +187,8 @@
 		
 		;Traverse right first, then downwards
 		(t 
-			(cond ((NULL (first (rest s) ) ) (goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
-				(t (goal-test (first (rest s) ) ) ); Move to the next column at the current row
+			(cond ((NULL (first (rest (first s) ) ) ) (goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
+				;(t (goal-test (rest (first s) ) ) ); Move to the next column at the current row
 			)
 		); end t
 	); end outer cond
@@ -220,7 +220,7 @@
 ;goal-test('() ); nil
 ;goal-test(s0); nil
 ;(goal-test p1); nil
-(goal-test s1)
+;(goal-test s1)
 (goal-test '((0 1))); nil WORKS
 ;(goal-test s2); nil WORKS
 ;goal-test((s3); t
