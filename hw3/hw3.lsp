@@ -126,6 +126,16 @@
 	);end cond
   )
 
+; Helper function: DELETE LATER????
+; Parses through the game board (list of lists) looking for a specific element 
+(defun parseThroughGame (element r c)
+	(cond ((null r) nil);	Reached end of the rows
+		((null c) nil);	Reached end of the columns
+		(equal)
+
+	); end cond	
+)
+
 ;
 ; getKeeperPosition (s firstRow)
 ; Returns a list indicating the position of the keeper (c r).
@@ -176,9 +186,27 @@
 ; terminate until the whole search space is exhausted.
 ;
 
+; INSERT FUNC HERE
+; Helper function of getKeeperPosition
+; Finds the keeper's column location
+(defun getKeeperColumn (r col)	
+  (cond ((null r) nil)
+	(t (if (or (isKeeper (car r)) (isKeeperStar (car r)))
+	       col
+	     (getKeeperColumn (cdr r) (+ col 1))
+	     );end if
+	   );end t
+	);end cond
+  )
+
 ; Algorithm: Search the game board for a box. If you encounter a box, return false. Else, return true.
 (defun goal-test (s)
-  nil
+	(cond ((NULL s) nil);	If the ENTIRE gameboard is NULL, return nil
+		((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
+		; Check specific elements in row and column
+
+
+	)
   );end defun
 
 ; EXERCISE: Modify this function to return the list of
