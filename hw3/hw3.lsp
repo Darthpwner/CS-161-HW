@@ -212,12 +212,16 @@
 (1 1 1 1 1 1 1 1 1))
 )
 
-(setq s2 '((20 2) (0))
+(setq s1 '((1 3 5 99 140 124 23 21))	; PROBLEM IT RETURNS NIL?!?!
+)
+
+(setq s2 '((1 2) (30 9))	; PROBLEM WITH 30
 )
 ;goal-test('() ); nil
 ;goal-test(s0); nil
 ;(goal-test p1); nil
-(goal-test s2); nil WORKS
+(goal-test s1)
+;(goal-test s2); nil WORKS
 ;goal-test((s3); t
 ("END TEST GOAL-STATE")
 
