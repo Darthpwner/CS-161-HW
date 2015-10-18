@@ -115,8 +115,8 @@
 
 ;
 ; Helper function of getKeeperPosition
-;
-(defun getKeeperColumn (r col)
+; Finds the keeper's column location
+(defun getKeeperColumn (r col)	
   (cond ((null r) nil)
 	(t (if (or (isKeeper (car r)) (isKeeperStar (car r)))
 	       col
@@ -175,6 +175,8 @@
 ; this function as the goal testing function, A* will never
 ; terminate until the whole search space is exhausted.
 ;
+
+; Algorithm: Search the game board for a box. If you encounter a box, return false. Else, return true.
 (defun goal-test (s)
   nil
   );end defun
