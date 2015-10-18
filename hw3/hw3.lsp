@@ -126,16 +126,6 @@
 	);end cond
   )
 
-; Helper function: DELETE LATER????
-; Parses through the game board (list of lists) looking for a specific element 
-(defun parseThroughGame (element r c)
-	(cond ((null r) nil);	Reached end of the rows
-		((null c) nil);	Reached end of the columns
-		(equal)
-
-	); end cond	
-)
-
 ;
 ; getKeeperPosition (s firstRow)
 ; Returns a list indicating the position of the keeper (c r).
@@ -187,25 +177,20 @@
 ;
 
 ; Algorithm: Search the game board for a box. If you encounter a box, return nil. Else, return true.
-; (defun goal-test (s)
-; 	(cond ((NULL s) nil);	If the ENTIRE gameboard is NULL, return nil
-; 		((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
-; 		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
-		
-; 		((equal t isBox(first (first s) ) ) nil);	If the element at your current position is a box, return nil
-		
-; 		; Traverse right first, then downwards
-; 		(t 
-; 			(cond ((null (first (rest s) ) ) goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
-; 			(t goal-test (first (rest s) ) ); Move to the next column at the current row			
-; 		); end t
-; 	); end cond
-;   );end defun
-
 (defun goal-test (s)
-	(t t)
-)
-
+	(cond ((NULL s) nil);	If the ENTIRE gameboard is NULL, return nil
+		((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
+		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
+		
+		((equal t isBox(first (first s) ) ) nil);	If the element at your current position is a box, return nil
+		
+		; Traverse right first, then downwards
+		(t 
+			(cond ((null (first (rest s) ) ) goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
+			(t goal-test (first (rest s) ) ); Move to the next column at the current row			
+		); end t
+	); end cond
+  );end defun
 
 ; (setq s1 '(
 ; 			(1) (2)
@@ -227,7 +212,7 @@
 
 ;goal-test('() ); nil
 ;goal-test(s0); nil
-;goal-test((s1); nil
+(goal-test p1); nil
 ;goal-test((s2); nil
 ;goal-test((s3); t
 ("END TEST GOAL-STATE")
