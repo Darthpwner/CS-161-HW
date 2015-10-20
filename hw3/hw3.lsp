@@ -178,8 +178,8 @@
 
 ; Algorithm: Search the game board for a box. If you encounter a box, return nil. Else, return true.
 (defun goal-test (s)
-	(cond ((NULL s) nil);	If the ENTIRE gameboard is NULL, return nil
-		((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
+	(cond ((NULL s) t);	If the ENTIRE gameboard is NULL, return t
+		;((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
 		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
 		
 		; GOOD!!!!
@@ -222,6 +222,8 @@
 ;(goal-test p1); nil
 ;(goal-test s1)
 (goal-test '((0 1))); nil WORKS
+(goal-test '((2 0))); nil WORKS
+(goal-test '((0 2))); nil WORKS
 ;(goal-test s2); nil WORKS
 ;goal-test((s3); t
 ("END TEST GOAL-STATE")
