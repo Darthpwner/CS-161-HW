@@ -183,7 +183,7 @@
 		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
 		
 		; GOOD!!!!
-		((equal t (isBox(first (first s) ) ) ) nil);	If the element at your current position is a box, return nil
+		((isBox(first (first s) ) ) nil);	If the element at your current position is a box, return nil
 		
 		;Traverse right first, then downwards
 		(t 
