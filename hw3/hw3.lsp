@@ -296,35 +296,9 @@
 		((NULL (first (first s) ) ) nil);	Return nil if the user passes in an out of bounds number
 		((or (< r 0) (< c 0) ) nil); Return nil if the user passes in a negative number
 		
-		;(t (length S) )
-		; General algorithm
-		;(append (butlast S #) (list v) (nthcdr S #))
-
-		;(t (- (length S) r) )
-
-		;<front column>
-;		(<S> =  ); Gets the row of the desired change Limits Back
-
-	
-		; GRABS COLUMN IN QUESTION :)
-		;((nthcdr r (butlast S (- (- (length S) r) 1) ))); Limits FRONT
-
-		;GRABS SHIT after selecting and returns a list
-;		((nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ; Isolates shit from the FRONT
-;		((butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) ; Isolates shit from the FRONT
-
-		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
-		;((append (butlast S (- (length S) r) ) (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) <changed> (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
-
-		; Keeps all the setRow in one list :)
-		;((appendSetRow (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) (list v) (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) )
-
-		;OBTAINS ORIGINAL LIST and shit from the back
-		((append (butlast S (- (length S) r) ) (appendSetRow (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) (list v) (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
-
+		; Append the rows at the start using butlast, then make a list consisting of the row containing the set value, and finally add the rows at the end using nthcdr
+		((append (butlast S (- (length S) r) ) (list (appendSetRow (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) (list v) (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
 		
-		; append unchanged lists from the back
-		;(t (- (length S) r) )
 	)
 )
 
