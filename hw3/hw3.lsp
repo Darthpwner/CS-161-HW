@@ -298,7 +298,7 @@
 
 		;(t (- (length S) r) )
 
-		; FRONT IS GOOD
+		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
 		((append (butlast S (- (length S) r) ) (nthcdr (+ r 1) S) ) )
 		; append unchanged lists from the back
 		;(t (- (length S) r) )
@@ -306,7 +306,7 @@
 )
 
 ("SET SQUARE")
-(set-square '((0 4 5) (2 9 3) (50 20 40) (5) (6)) 1 0 3)
+(set-square '((0 4 5) (2 9 3) (50 20 40) (5) (6)) 2 1 3)
 ("END SET SQUARE")
 
 (defun try-move(S D)
