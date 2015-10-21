@@ -321,9 +321,16 @@
 	   					 (1 1 1 1 1 1 1 1 1)) 2 2 1)
 ("END SET SQUARE")
 
+; Helper functions for try-move
+; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
+(defun invalid-move()
+
+)
+
 (defun try-move(S D)
 
 )
+
 ("TRY MOVE")
 
 ("END TRY MOVE")
