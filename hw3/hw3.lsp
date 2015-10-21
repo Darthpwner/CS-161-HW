@@ -298,15 +298,21 @@
 
 		;(t (- (length S) r) )
 
+		;<front column>
+		((butlast S (- (- (length S) r) 1) ) ); Gets the row of the desired change FRONT
+
+
+		;(nthcdr () S)
+
 		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
-		((append (butlast S (- (length S) r) ) (nthcdr (+ r 1) S) ) )
+		;((append (butlast S (- (length S) r) ) <front column> <changed> <end column> (nthcdr (+ r 1) S) ) )
 		; append unchanged lists from the back
 		;(t (- (length S) r) )
 	)
 )
 
 ("SET SQUARE")
-(set-square '((0 4 5) (2 9 3) (50 20 40) (5) (6)) 2 1 3)
+(set-square '((0 4 5) (2 9 3) (50 20 40) (5) (6)) 2 1 100)
 ("END SET SQUARE")
 
 (defun try-move(S D)
