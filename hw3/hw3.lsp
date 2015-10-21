@@ -299,10 +299,11 @@
 		;(t (- (length S) r) )
 
 		;<front column>
-		;((butlast S (- (- (length S) r) 1) ) ); Gets the row of the desired change Limits Back
+;		(<S> =  ); Gets the row of the desired change Limits Back
 
-
-		;((nthcdr r S)); Limits FRONT
+	
+		; GRABS COLUMN IN QUESTION :)
+		((nthcdr r (butlast S (- (- (length S) r) 1) ))); Limits FRONT
 
 		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
 		;((append (butlast S (- (length S) r) ) <front column> <changed> <end column> (nthcdr (+ r 1) S) ) )
@@ -312,7 +313,7 @@
 )
 
 ("SET SQUARE")
-(set-square '((0 4 5) (2 9 3) (50 20 40) (5) (6)) 1 1 100)
+(set-square '((0 4 5) (2 9 3) (50 20 40) (5) (6)) 2 1 100)
 ("END SET SQUARE")
 
 (defun try-move(S D)
