@@ -265,6 +265,9 @@
    );end let
   );
 
+
+
+
 ; next-states helpers
 (defun get-square (S r c)
 	(cond ((NULL (first (first s) ) ) wall); Checks for out of bounds numbers and returns walls
@@ -284,6 +287,10 @@
 ("GET SQUARE")
 (get-square '((0 4 5) (2 9 3) (50 20 40)) -10 0)
 ("END GET SQUARE")
+
+(defun appendSetRow(L v R)
+	(append L v R)
+)
 
 ;Use (nthcdr i list) to jump to that part of the list
 ; Use (butlast list j) to exclude the end of the list
@@ -313,7 +320,7 @@
 		;((append (butlast S (- (length S) r) ) (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) <changed> (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
 
 		;OBTAINS ORIGINAL LIST and shit from the back
-		((append (butlast S (- (length S) r) ) (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) )  (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
+		((append (butlast S (- (length S) r) ) (appendSetRow (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) (list v) (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
 
 		
 		; append unchanged lists from the back
@@ -325,9 +332,10 @@
 (set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 2 2 100)
 ("END SET SQUARE")
 
-(defun appendSetRow(L v R)
-	(append L v R)
-)
+(setq x 5)
+(setq y 7)
+(setq z 9)
+(appendSetRow (list x) (list y) (list z))
 
 (defun try-move(S D)
 
