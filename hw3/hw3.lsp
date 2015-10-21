@@ -269,17 +269,19 @@
 (defun get-square (S r c)
 	(cond ((NULL s) wall)	;Return value of a wall if outside the scope of the problem
 		((and (= r 0) (= c 0) ) (first (first s) ) ); Return position when you find it
-		(;	Keep traversing to find your column first
-			(> c 0) (get-square (append (list (rest (first s) ) ) (rest s) ) r (- c 1) )
-		)
-		(;	Then traverse to find your row
+		
+		(;	Keep traversing to find your row first
 			(> r 0) (get-square (rest s) (- r 1) c) 
+		)
+
+		(;	Then traverse to find your column 
+			(> c 0) (get-square (append (list (rest (first s) ) ) (rest s) ) r (- c 1) )
 		)
 	)
 )
 
 ("GET SQUARE")
-(get-square '((0 4 5) (2 9 3)) 1 100); 4
+(get-square '((0 4 5) (2 9 3) (50 20 40)) 2 2); FIX BUG WHEN GOING OUT OF BOUNDS
 ("END GET SQUARE")
 
 (defun set-square()
