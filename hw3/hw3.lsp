@@ -303,10 +303,16 @@
 
 	
 		; GRABS COLUMN IN QUESTION :)
-		((nthcdr r (butlast S (- (- (length S) r) 1) ))); Limits FRONT
+		;((nthcdr r (butlast S (- (- (length S) r) 1) ))); Limits FRONT
+
+
 
 		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
 		;((append (butlast S (- (length S) r) ) <front column> <changed> <end column> (nthcdr (+ r 1) S) ) )
+
+		;OBTAINS ORIGINAL LIST
+		((append (butlast S (- (length S) r) ) (nthcdr r (butlast S (- (- (length S) r) 1) ) ) (nthcdr (+ r 1) S) ) )
+		
 		; append unchanged lists from the back
 		;(t (- (length S) r) )
 	)
