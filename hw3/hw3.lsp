@@ -265,9 +265,6 @@
    );end let
   );
 
-
-
-
 ; next-states helpers
 (defun get-square (S r c)
 	(cond ((NULL (first (first s) ) ) wall); Checks for out of bounds numbers and returns walls
@@ -289,7 +286,7 @@
 ("END GET SQUARE")
 
 (defun appendSetRow(L v R)
-	(append L v R)
+	(append (append L v R) )
 )
 
 ;Use (nthcdr i list) to jump to that part of the list
@@ -319,8 +316,11 @@
 		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
 		;((append (butlast S (- (length S) r) ) (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) <changed> (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
 
+		; Keeps all the setRow in one list :)
+		((appendSetRow (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) (list v) (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) )
+
 		;OBTAINS ORIGINAL LIST and shit from the back
-		((append (butlast S (- (length S) r) ) (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) (list (list v) ) (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
+		;((append (butlast S (- (length S) r) ) (appendSetRow (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) (list (list v) ) (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
 
 		
 		; append unchanged lists from the back
