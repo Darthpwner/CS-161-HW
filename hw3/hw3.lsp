@@ -279,7 +279,7 @@
 )
 
 ("GET SQUARE")
-(get-square '((0 1)) 0 1); 1
+(get-square '((0 4 5) (2 9 3)) 1 100); 4
 ("END GET SQUARE")
 
 (defun set-square()
