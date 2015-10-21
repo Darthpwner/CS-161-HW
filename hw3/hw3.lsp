@@ -179,16 +179,13 @@
 ; Algorithm: Search the game board for a box. If you encounter a box, return nil. Else, return true.
 (defun goal-test (s)
 	(cond ((NULL s) t);	If the ENTIRE gameboard is NULL, return t
-		;((NULL (first s) ) t); Traversed the entire gameboard and did not encounter a box, return true.
-		;((and (NULL (first s) nil) (NULL (first(first s) ) ) ) t);	Traversed the entire gameboard and did not encounter a box, return true
 		
-		; GOOD!!!!
 		((isBox(first (first s) ) ) nil);	If the element at your current position is a box, return nil
 		
 		;Traverse right first, then downwards
 		(t 
 			(cond ((NULL (first (rest (first s) ) ) ) (goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
-				;(t (goal-test (rest (first s) ) ) ); Move to the next column at the current row
+				(t (goal-test (first (rest s) ) ) );	Move to the next column at the current row
 			)
 		); end t
 	); end outer cond
