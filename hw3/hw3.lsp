@@ -267,7 +267,9 @@
 
 ; next-states helpers
 (defun get-square (S r c)
-	(cond ((NULL (first (first s) ) ) wall)	;Return value of a wall if outside the scope of the problem
+	; BASE CASE DOESN'T WORK YET :(
+	(cond ((NULL (first (first s) ) ) wall); Checks for out of bounds numbers and returns walls
+		((or (< r 0) (< c 0) ) wall); Checks for negative numbers and returns wall
 		((and (= r 0) (= c 0) ) (first (first s) ) ); Return position when you find it
 		
 		(;	Keep traversing to find your row first
@@ -281,7 +283,7 @@
 )
 
 ("GET SQUARE")
-(get-square '((0 4 5) (2 9 3) (50 20 40)) 0 0); FIX BUG WHEN GOING OUT OF BOUNDS
+(get-square '((0 4 5) (2 9 3) (50 20 40)) -10 0); FIX BUG WHEN GOING OUT OF BOUNDS
 ("END GET SQUARE")
 
 (defun set-square()
