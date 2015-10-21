@@ -285,15 +285,16 @@
 (get-square '((0 4 5) (2 9 3) (50 20 40)) -10 0)
 ("END GET SQUARE")
 
-(defun appendSetRow(L v R)
+; Helper functions for set-square
+(defun appendSetRow(L v R); Used to append the inner set row
 	(append (append L v R) )
 )
 
-(defun maxRow(S)
+(defun maxRow(S); Finds max rows for error checking
 	(length S)
 )
 
-(defun maxCol(S)
+(defun maxCol(S); Finds max columns for error checking
 	(length (first S) )
 )
 
@@ -320,21 +321,24 @@
 	   					 (1 1 1 1 1 1 1 1 1)) 2 2 1)
 ("END SET SQUARE")
 
-(setq x 5)
-(setq y 7)
-(setq z 9)
-(appendSetRow (list x) (list y) (list z))
-
 (defun try-move(S D)
 
 )
+("TRY MOVE")
+
+("END TRY MOVE")
 
 
 ; EXERCISE: Modify this function to compute the trivial
 ; admissible heuristic.
 ;
 (defun h0 (s)
-  )
+ 	(cond (t 0) ); Return 0 in all cases
+ )
+
+("h0")
+	(h0 '(1 2 3))
+("END h0")
 
 ; NO TIEBREAKING! :(
 ; GET MINIMUM DISTANCE FROM KEEPER TO GO TO THE NEAREST BOX
