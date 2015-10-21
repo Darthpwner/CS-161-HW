@@ -292,18 +292,17 @@
 ;Use (nthcdr i list) to jump to that part of the list
 ; Use (butlast list j) to exclude the end of the list
 (defun set-square(S r c v)
-	(cond ((and (< v 0) (> v 6)) nil);	Checks to see that v is valid
+	(cond ((or (< v 0) (> v 6)) nil);	Checks to see that v is valid
 		((NULL (first (first s) ) ) nil);	Return nil if the user passes in an out of bounds number
 		((or (< r 0) (< c 0) ) nil); Return nil if the user passes in a negative number
 		
 		; Append the rows at the start using butlast, then make a list consisting of the row containing the set value, and finally add the rows at the end using nthcdr
-		((append (butlast S (- (length S) r) ) (list (appendSetRow (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) (list v) (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
-		
+		((append (butlast S (- (length S) r) ) (list (appendSetRow (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) (list v) (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ) (nthcdr (+ r 1) S) ) )	
 	)
 )
 
 ("SET SQUARE")
-(set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 2 2 100)
+(set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 2 6 7)
 ("END SET SQUARE")
 
 (setq x 5)
