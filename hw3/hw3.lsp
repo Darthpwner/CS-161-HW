@@ -301,8 +301,8 @@
 ; Use (butlast list j) to exclude the end of the list
 (defun set-square(S r c v)
 	(cond ((or (< v 0) (> v 6)) nil);	Checks to see that v is valid
-		((NULL (first (first s) ) ) nil);	Return nil if the user passes in an out of bounds number
-		;((or (< (maxRow S) r) (< (maxCol S) c) ) nil)
+		;((NULL (first (first s) ) ) nil);	Return nil if the user passes in an out of bounds number
+		((or (< (- (maxRow S) 1) r) (< (- (maxCol S) 1) c) ) nil); Return nil if the user passes in an out of bounds number
 		((or (< r 0) (< c 0) ) nil); Return nil if the user passes in a negative number
 		
 		; Append the rows at the start using butlast, then make a list consisting of the row containing the set value, and finally add the rows at the end using nthcdr
@@ -311,7 +311,7 @@
 )
 
 ("SET SQUARE")
-;(set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 2 5 5)
+(set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 2 2 5)
 (set-square '((1 1 1 1 1 1 1 1 1)
 	   					 (1 0 0 0 1 0 0 0 1)
 	   					 (1 0 0 0 2 0 3 4 1)
