@@ -309,7 +309,6 @@
 ;		((nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ; Isolates shit from the FRONT
 ;		((butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) ; Isolates shit from the FRONT
 
-
 		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
 		;((append (butlast S (- (length S) r) ) (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) <changed> (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
 
@@ -325,6 +324,10 @@
 ("SET SQUARE")
 (set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 2 2 100)
 ("END SET SQUARE")
+
+(defun appendSetRow(L v R)
+	(append L v R)
+)
 
 (defun try-move(S D)
 
