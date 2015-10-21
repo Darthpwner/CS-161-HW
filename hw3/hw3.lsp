@@ -270,7 +270,7 @@
 	(cond ((NULL s) wall)	;Return value of a wall if outside the scope of the problem
 		((and (= r 0) (= c 0) ) (first (first s) ) ); Return position when you find it
 		(;	Keep traversing to find your column first
-			((> (c 0) ) (get-square (append (list (rest (first s) ) ) (rest s) ) r (- c 1) ) )
+			((> (c 0) ) (get-square (append (list (rest (first s) ) ) (rest s) ) r (- c 1) ) ) 
 		)
 		(;	Then traverse to find your row
 			((> (r 0) ) (get-square (rest s) (- r 1) c) )
