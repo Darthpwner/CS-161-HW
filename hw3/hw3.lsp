@@ -267,7 +267,7 @@
 
 ; next-states helpers
 (defun get-square (S r c)
-	(cond ((NULL s) wall)	;Return value of a wall if outside the scope of the problem
+	(cond ((NULL (first (first s) ) ) wall)	;Return value of a wall if outside the scope of the problem
 		((and (= r 0) (= c 0) ) (first (first s) ) ); Return position when you find it
 		
 		(;	Keep traversing to find your row first
@@ -281,7 +281,7 @@
 )
 
 ("GET SQUARE")
-(get-square '((0 4 5) (2 9 3) (50 20 40)) 2 2); FIX BUG WHEN GOING OUT OF BOUNDS
+(get-square '((0 4 5) (2 9 3) (50 20 40)) 0 0); FIX BUG WHEN GOING OUT OF BOUNDS
 ("END GET SQUARE")
 
 (defun set-square()
