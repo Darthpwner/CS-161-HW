@@ -286,11 +286,11 @@
 (get-square '((0 4 5) (2 9 3) (50 20 40)) -10 0); FIX BUG WHEN GOING OUT OF BOUNDS
 ("END GET SQUARE")
 
-(defun set-square()
+(defun set-square(S r c v)
 
 )
 
-(defun try-move()
+(defun try-move(S D)
 
 )
 
