@@ -305,13 +305,14 @@
 		; GRABS COLUMN IN QUESTION :)
 		;((nthcdr r (butlast S (- (- (length S) r) 1) ))); Limits FRONT
 
-
+		;GRABS SHIT after selecting and returns a list
+		((nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ; Isolates shit from the FRONT
 
 		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
 		;((append (butlast S (- (length S) r) ) <front column> <changed> <end column> (nthcdr (+ r 1) S) ) )
 
 		;OBTAINS ORIGINAL LIST
-		((append (butlast S (- (length S) r) ) (nthcdr r (butlast S (- (- (length S) r) 1) ) ) (nthcdr (+ r 1) S) ) )
+;		((append (butlast S (- (length S) r) ) (nthcdr r (butlast S (- (- (length S) r) 1) ) ) (nthcdr (+ r 1) S) ) )
 		
 		; append unchanged lists from the back
 		;(t (- (length S) r) )
@@ -319,7 +320,7 @@
 )
 
 ("SET SQUARE")
-(set-square '((0 4 5) (2 9 3) (50 20 40) (5) (6)) 2 1 100)
+(set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 2 2 100)
 ("END SET SQUARE")
 
 (defun try-move(S D)
