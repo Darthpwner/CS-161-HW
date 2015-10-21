@@ -184,8 +184,10 @@
 		
 		;Traverse right first, then downwards
 		(t 
+			;This traversal is fine
 			(cond ((NULL (first (rest (first s) ) ) ) (goal-test (rest s) ) ); Move to the next row if you are on the last element of your current row
-				(t (goal-test (first (rest s) ) ) );	Move to the next column at the current row
+				; Need to limit universe to remove current node from the tree
+				(t (goal-test (second (first s) ) ) );	Move to the next column at the current row
 			)
 		); end t
 	); end outer cond
@@ -221,6 +223,11 @@
 (goal-test '((0 1))); nil WORKS
 (goal-test '((2 0))); nil WORKS
 (goal-test '((0 2))); nil WORKS
+(goal-test '((0) (2))); nil WORKS
+(goal-test '((0) (1) (3)) ); t WORKS
+(goal-test '((0) (100) (3) (4) (2) ) ); nil WORKS
+(goal-test '((0) (1) ) ); t WORKS
+
 ;(goal-test s2); nil WORKS
 ;goal-test((s3); t
 ("END TEST GOAL-STATE")
