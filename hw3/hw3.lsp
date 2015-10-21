@@ -267,7 +267,6 @@
 
 ; next-states helpers
 (defun get-square (S r c)
-	; BASE CASE DOESN'T WORK YET :(
 	(cond ((NULL (first (first s) ) ) wall); Checks for out of bounds numbers and returns walls
 		((or (< r 0) (< c 0) ) wall); Checks for negative numbers and returns wall
 		((and (= r 0) (= c 0) ) (first (first s) ) ); Return position when you find it
@@ -283,12 +282,32 @@
 )
 
 ("GET SQUARE")
-(get-square '((0 4 5) (2 9 3) (50 20 40)) -10 0); FIX BUG WHEN GOING OUT OF BOUNDS
+(get-square '((0 4 5) (2 9 3) (50 20 40)) -10 0)
 ("END GET SQUARE")
 
+;Use (nthcdr i list) to jump to that part of the list
+; Use (butlast list j) to exclude the end of the list
 (defun set-square(S r c v)
+	(cond ((and (< v 0) (> v 6)) nil);	Checks to see that v is valid
+		((NULL (first (first s) ) ) nil);	Return nil if the user passes in an out of bounds number
+		((or (< r 0) (< c 0) ) nil); Return nil if the user passes in a negative number
+		
+		;(t (length S) )
+		; General algorithm
+		;(append (butlast S #) (list v) (nthcdr S #))
 
+		;(t (- (length S) r) )
+
+		; FRONT IS GOOD
+		((append (butlast S (- (length S) r) ) (nthcdr (+ r 1) S) ) )
+		; append unchanged lists from the back
+		;(t (- (length S) r) )
+	)
 )
+
+("SET SQUARE")
+(set-square '((0 4 5) (2 9 3) (50 20 40) (5) (6)) 1 0 3)
+("END SET SQUARE")
 
 (defun try-move(S D)
 
