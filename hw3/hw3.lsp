@@ -307,14 +307,14 @@
 
 		;GRABS SHIT after selecting and returns a list
 ;		((nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ; Isolates shit from the FRONT
-		((butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) ; Isolates shit from the FRONT
+;		((butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) ; Isolates shit from the FRONT
 
 
 		; FRONT IS GOOD, PROBLEM IF YOU PICK THE LAST ROW OR OUT OF BOUNDS ROW
-		;((append (butlast S (- (length S) r) ) <front column> <changed> (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
+		;((append (butlast S (- (length S) r) ) (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) ) <changed> (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
 
 		;OBTAINS ORIGINAL LIST and shit from the back
-		;((append (butlast S (- (length S) r) ) (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
+		((append (butlast S (- (length S) r) ) (list (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) )  (list (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) (nthcdr (+ r 1) S) ) )
 
 		
 		; append unchanged lists from the back
