@@ -318,7 +318,7 @@
 	   					 (1 0 0 0 2 0 3 4 1)
 	   					 (1 0 0 0 1 0 0 0 1)
 	   					 (1 0 0 0 1 0 0 0 1)
-	   					 (1 1 1 1 1 1 1 1 1)) 2 2 1)
+	   					 (1 1 1 1 1 1 1 1 1)) 2 2 6)
 ("END SET SQUARE")
 
 ; Helper functions for try-move
@@ -468,7 +468,7 @@
 )
 
 ("MOVE BLOCKS")
-(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up 2 2)
+(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up 2 1)
 ("END MOVE BLOCKS")
 
 ; Move the keeper
