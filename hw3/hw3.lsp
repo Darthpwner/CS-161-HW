@@ -567,7 +567,8 @@
 
 ; EXERCISE: Modify this function to compute the trivial
 ; admissible heuristic.
-;
+
+; This is uniform cost search since we are not assigning weights to each possible move, and uniform cost search is admissible
 (defun h0 (s)
  	(cond (t 0) ); Return 0 in all cases
  )
@@ -589,6 +590,7 @@
 				(t 0); Else, return 0
 			)
 		) 
+		
 		((equal (length s) 1) (h1 (first s) ) ); Check if S has one more atom or list, then look for misplaced boxes in our gameboard
 		(t (+ (h1 (first s) ) (h1 (rest s) ) ) ); Else, add up the number of misplaced boxes in our gameboard
 	)
