@@ -435,6 +435,8 @@
 
 (invalid-move '((0 2 2) (4 5 5) (7 3 7) ) 'up); t
 
+("ASSHOLE")
+(invalid-move '((1 2 3) (5 2 5) (5 0 5)) 'left)
 ("END INVALID MOVE")
 
 ; Move the block
@@ -533,26 +535,21 @@
 (state-after-move '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 2 5) (5 6 5) (5 0 5))
 (state-after-move '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 0 5) (5 3 5) (5 2 5))
 (state-after-move '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 3 0) (5 2 5) (5 0 5))
-(state-after-move '((1 5 5) (5 2 5) (3 5 4)) 'right);	'((1 5 5) (5 2 5) (0 6 5)) SMALL BUG HERE
+(state-after-move '((1 5 5) (5 2 5) (3 5 4)) 'right);	'((1 5 5) (5 2 5) (0 6 5)) 
 ("END STATE AFTER MOVE")
 
 (defun try-move(S D)
-	(let* 
-		(
-			(r (second (getKeeperPosition S 0))) (c (first (getKeeperPosition S 0)))
-		)
-
-		(cond ((invalid-move S D) nil);	Return NIL if the move is invalid
-			((equal D 'up) ); Check if move is up
-			((equal D 'down) ); Check if move is down
-			((equal D 'left) ); Check if move is left
-			((equal D 'right) ); Check if move is right
-		)
+	(cond ((invalid-move S D) nil);	Return NIL if the move is invalid
+		(t (state-after-move S D) ); Get the moves from state-after-move
 	)
 )
 
 ("TRY MOVE")
-
+(try-move '((1 0 5) (5 2 5) (5 3 5)) 'up); '((1 2 5) (5 3 5) (5 0 5))
+(try-move '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 2 5) (5 6 5) (5 0 5))
+(try-move '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 0 5) (5 3 5) (5 2 5))
+(try-move '((1 2 3) (5 2 5) (5 0 5)) 'left);	NIL
+(try-move '((1 5 5) (5 2 5) (3 5 4)) 'right);	'((1 5 5) (5 2 5) (0 6 5)) 
 ("END TRY MOVE")
 
 
