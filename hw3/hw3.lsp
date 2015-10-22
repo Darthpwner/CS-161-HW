@@ -259,11 +259,15 @@
 	 (x (car pos))
 	 (y (cadr pos))
 	 ;x and y are now the coordinate of the keeper in s.
-	 (result nil)
+	 (result (list (try-move S 'up') (try-move S 'down') (try-move S 'left') (try-move 'right') ) )
 	 )
     (cleanUpList result);end
    );end let
   );
+
+("NEXT STATES")
+
+("END OF NEXT STATES")
 
 ; next-states helpers
 (defun get-square (S r c)
