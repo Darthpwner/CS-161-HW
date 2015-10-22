@@ -446,19 +446,19 @@
 			) 
 
 		((equal D 'down) 
-				(cond ((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ r 2) c box) ) ;Move the block down
+				(cond ((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) ) ;Move the block down
 					(t S);	Return the original state if you cannot move the block 
 				)
 		)
 
 		((equal D 'left)
-			(cond ((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S r (- c 2) box) ) ;Move the block left
+			(cond ((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) box) ) ;Move the block left
 				(t S);	Return the original state if you cannot move the block 
 			)
 		)
 
 		((equal D 'right)
-			(cond ((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S r (+ c 2) box) ) ;Move the block right
+			(cond ((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) box) ) ;Move the block right
 				(t S);	Return the original state if you cannot move the block 
 			)
 		)
