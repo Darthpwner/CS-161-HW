@@ -438,9 +438,9 @@
 ("END INVALID MOVE")
 
 ; Move the block
-(defun move-block(S D r c)
+(defun move-block(S D)
 	(cond ((equal D 'up)
-				(cond ((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- r 2) c box) ) ;Move the block up
+				(cond ((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) ) ;Move the block up
 					(t S);	Return the original state if you cannot move the block 
 				)
 			) 
@@ -468,8 +468,8 @@
 )
 
 ("MOVE BLOCKS")
-(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up 2 1)
-(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up 2 2)
+(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up)
+(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up)
 
 ("END MOVE BLOCKS")
 
