@@ -447,19 +447,19 @@
 
 		((equal D 'down) 
 				(cond ((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) ) ;Move the block down and set to boxstar if box lands on goal
-					(t S);	Move the block down normally
+					((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) );	Move the block down normally
 				)
 		)
 
 		((equal D 'left)
 			(cond ((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) box) ) ;Move the block left and set to boxstar if box lands on goal
-				(t S);	Move the block left normally
+				((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) box) );	Move the block left normally
 			)
 		)
 
 		((equal D 'right)
 			(cond ((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) box) ) ;Move the block right and set to boxstar if box lands on goal
-				(t S);	Move the block right normally
+				((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) box) );	Move the block right normally
 			)
 		)
 	)
