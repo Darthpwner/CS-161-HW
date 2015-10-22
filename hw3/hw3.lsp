@@ -632,7 +632,7 @@
 )
 
 ("MIN DISTANCE UP")
-(min-distance-up '((1 2 0) (1 3 0) (1 0 0) ) ); 1
+(min-distance-up '((1 2 0) (1 3 0) (1 0 0) ) ); -1
 (min-distance-up '((1 2 0) (1 0 0) (1 3 0) ) ); 2
 (min-distance-up '((1 0 0) (1 2 0) (1 3 0) ) ); 1
 ("END MIN DISTANCE UP")
@@ -1014,5 +1014,5 @@
 ; (load-a-star)
 ; (printstates (a* p1 #'goal-test #'next-states #'h0) 0.2)
 
-(load-a-star)
-(printstates (a* p1 #'goal-test #'next-states #'h1) 0.2)
+; (load-a-star)
+; (printstates (a* p1 #'goal-test #'next-states #'h1) 0.2)
