@@ -236,39 +236,6 @@
 ;goal-test((s3); t
 ("END TEST GOAL-STATE")
 
-; EXERCISE: Modify this function to return the list of
-; sucessor states of s.
-;
-; This is the top-level next-states (successor) function.
-; Some skeleton code is provided below.
-; You may delete them totally, depending on your approach.
-;
-; If you want to use it, you will need to set 'result' to be
-; the set of states after moving the keeper in each of the 4 directions.
-; A pseudo-code for this is:
-;
-; ...
-; (result (list (try-move s UP) (try-move s DOWN) (try-move s LEFT) (try-move s RIGHT)))
-; ...
-; 
-; You will need to define the function try-move and decide how to represent UP,DOWN,LEFT,RIGHT.
-; Any NIL result returned from try-move can be removed by cleanUpList.
-;
-(defun next-states (s)
-  (let* ((pos (getKeeperPosition s 0))
-	 (x (car pos))
-	 (y (cadr pos))
-	 ;x and y are now the coordinate of the keeper in s.
-	 (result (list (try-move S 'up') (try-move S 'down') (try-move S 'left') (try-move 'right') ) )
-	 )
-    (cleanUpList result);end
-   );end let
-  );
-
-("NEXT STATES")
-
-("END OF NEXT STATES")
-
 ; next-states helpers
 (defun get-square (S r c)
 	(cond ((NULL (first (first s) ) ) wall); Checks for out of bounds numbers and returns walls
@@ -556,6 +523,39 @@
 (try-move '((1 5 5) (5 2 5) (3 5 4)) 'right);	'((1 5 5) (5 2 5) (0 6 5)) 
 ("END TRY MOVE")
 
+; EXERCISE: Modify this function to return the list of
+; sucessor states of s.
+;
+; This is the top-level next-states (successor) function.
+; Some skeleton code is provided below.
+; You may delete them totally, depending on your approach.
+;
+; If you want to use it, you will need to set 'result' to be
+; the set of states after moving the keeper in each of the 4 directions.
+; A pseudo-code for this is:
+;
+; ...
+; (result (list (try-move s UP) (try-move s DOWN) (try-move s LEFT) (try-move s RIGHT)))
+; ...
+; 
+; You will need to define the function try-move and decide how to represent UP,DOWN,LEFT,RIGHT.
+; Any NIL result returned from try-move can be removed by cleanUpList.
+
+(defun next-states (s)
+  (let* ((pos (getKeeperPosition s 0))
+	 (x (car pos))
+	 (y (cadr pos))
+	 ;x and y are now the coordinate of the keeper in s.
+	 (result (list (try-move S 'up) (try-move S 'down) (try-move S 'left) (try-move S 'right) ) ) ;Run try-moves on all 4 directions
+	 )
+    (cleanUpList result);end
+   );end let
+  );
+  
+("NEXT STATES")
+(next-states '((1 0 0 0 1) (1 0 4 0 1) (1 1 3 5 0) (1 1 2 2 1) (1 1 4 2 1))
+)
+("END OF NEXT STATES")
 
 ; EXERCISE: Modify this function to compute the trivial
 ; admissible heuristic.
