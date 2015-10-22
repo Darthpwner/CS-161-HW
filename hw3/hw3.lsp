@@ -627,33 +627,51 @@
 (defun min-distance-up(S)
 	(cond ((NULL (first S) ) -1); Return -1 if move up is invalid
 		(isBox(up S) 1); return 1 if you have a box upwards (make this move)
-		(t (+ (min-distance-up (try-move S 'up) ) <SHIT>) ); else, keep going upwards
+		(t (+ (min-distance-up (try-move S 'up) ) 1) ); else, keep going upwards
 	)
 )
+
+("MIN DISTANCE UP")
+(min-distance-up '((1 2 0) (1 3 0) (1 0 0) ) ); 1
+(min-distance-up '((1 2 0) (1 0 0) (1 3 0) ) ); 2
+(min-distance-up '((1 2 0) (1 3 0) (1 0 0) ) ); 1
+("END MIN DISTANCE UP")
 
 ; Check the distance from keeper to box downwards
 (defun min-distance-down(S)
 	(cond (< (- (maxRow S) 1) -1); Return -1 if move down is invalid
 		(isBox(down S) 1); return 1 if you have a box downwards (make this move)
-		(t (+ (min-distance-down (try-move S 'down) ) <SHIT>) ); else, keep going downwards
+		(t (+ (min-distance-down (try-move S 'down) ) 1) ); else, keep going downwards
 	)
 )
+
+("MIN DISTANCE DOWN")
+
+("END MIN DISTANCE DOWN")
 
 ; Check the distance from the keeper to box left
 (defun min-distance-left(S)
 	(cond (NULL (first(first S) ) -1); Return -1 if move left is invalid
 		(isBox(left S) 1);	return 1 if you have a box left (make this move)
-		(t (+ (min-distance-left (try-move S 'left) ) <SHIT>) ); else, keep going left
+		(t (+ (min-distance-left (try-move S 'left) ) 1) ); else, keep going left
 	)
 )
+
+("MIN DISTANCE LEFT")
+
+("END MIN DISTANCE LEFT")
 
 ; Check the distance from the keeper to box right
 (defun min-distance-right(S)
 	(cond (< (- (maxCol S) 1) -1) ; Return -1 if move right is invalid
 		(isBox (right S) 1); return 1 if you have a box right (make this move)
-		(t (+ (min-distance-right (try-move S 'right) ) <SHIT>) ); else, keep going right
+		(t (+ (min-distance-right (try-move S 'right) ) 1) ); else, keep going right
 	)
 )
+
+("MIN DISTANCE RIGHT")
+
+("END MIN DISTANCE RIGHT")
 
 ; heuristic goes in order of up, down, left, and right. If we have boxes immediately adjacent in two or more directions, it will evaluate in 
 ; the order I defined above.
