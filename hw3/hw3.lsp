@@ -364,12 +364,19 @@
 
 ; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
 (defun invalid-move(S D)
-	;(cond ((or (isWall (up S) ) (isWall(down S) ) (isWall(left S) ) (isWall(right S) ) ) t); Check for walls immediately to the left, right, up, and down
-	(cond ((and (isWall (up S) ) (equal D 'up) ) t)
-		;(and (isBox (up S)))
-		;()
+
+	; Check for walls immediately to the left, right, up, and down
+	(cond ((and (isWall (up S) ) (equal D 'up) ) t); Check for wall up
+		((and (isWall (down S) ) (equal D 'down) ) t); Check for wall down
+		((and (isWall (left S) ) (equal D 'left) ) t); Check for wall left
+		((and (isWall (right S) ) (equal D 'right) ) t); Check for wall right
+
+		
+
 		(t nil); Did not find an invalid move
 	)
+
+
 )
 
 ("INVALID MOVE")
