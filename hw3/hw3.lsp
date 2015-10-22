@@ -323,12 +323,21 @@
 
 ; Helper functions for try-move
 ; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
-(defun invalid-move()
+(defun invalid-move(S)
+;	(cond (get-square (S (second (getKeeperPosition S 0) ) (first (getKeeperPosition S 0) ) ) t)
+	(cond ((get-square S (second (getKeeperPosition S 0) ) (first (getKeeperPosition S 0) ) ) t)
 
+	)
 )
 
-(defun try-move(S D)
+("INVALID MOVE")
+(invalid-move '(1))
+("END INVALID MOVE")
 
+(defun try-move(S D)
+	(cond ((invalid-move S D) nil);	Return NIL if the move is invalid
+
+	)
 )
 
 ("TRY MOVE")
