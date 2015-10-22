@@ -479,32 +479,28 @@
 ; Move the keeper
 (defun move-keeper(S D)
 	(cond ((equal D 'up)
-				(cond ((or (isStar (up S) ) (isBoxStar (up S) ) ) (set-square (move-block S D) (- (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeperstar) )
-					;if moving onto a star or box star, the position becomes keeper star
-					(t (set-square (move-block S D) (- (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeper) ) 
+				(cond ((or (isStar (up S) ) (isBoxStar (up S) ) ) (set-square (move-block S D) (- (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeperstar) ); If moving onto a goal or pushing a box on a goal, keeper becomes keeperstar
+					(t (set-square (move-block S D) (- (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeper) ); Else, add keeper to the new position
 				) 
-		 	) ;otherwise, simply add keeper to the position
+		 	) 
 		
 			((equal D 'down)
-				(cond ((or (isStar (down S) ) (isBoxStar (down S) ) ) (set-square (move-block S D) (+ (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeperstar) )
-					;if moving onto a star or box star, the position becomes keeper star
-					(t (set-square (move-block S D) (+ (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeper) ) 
+				(cond ((or (isStar (down S) ) (isBoxStar (down S) ) ) (set-square (move-block S D) (+ (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeperstar) ); If moving onto a goal or pushing a box on a goal, keeper becomes keeperstar
+					(t (set-square (move-block S D) (+ (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeper) ); Else, add keeper to the new position
 				)	 
-			) ;otherwise, simply add keeper to the position
-		
+			) 
+
 			((equal D 'left)
-				(cond ((or (isStar (left S) ) (isBoxStar (left S) ) ) (set-square (move-block S D) (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 1) keeperstar) )
-					;if moving onto a star or box star, the position becomes keeper star
-					(t (set-square (move-block S D) (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 1) keeper) ) 
+				(cond ((or (isStar (left S) ) (isBoxStar (left S) ) ) (set-square (move-block S D) (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 1) keeperstar) ); If moving onto a goal or pushing a box on a goal, keeper becomes keeperstar
+					(t (set-square (move-block S D) (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 1) keeper) ); Else, add keeper to the new position
 				) 
-			) ;otherwise, simply add keeper to the position
+			)
 		
 			((equal D 'right)
-				(cond ((or (isStar (right S) ) (isBoxStar (right S) ) ) (set-square (move-block S D) (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 1) keeperstar) )
-					;if moving onto a star or box star, the position becomes keeper star
-					(t (set-square (move-block S D) (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 1) keeper) ) 
+				(cond ((or (isStar (right S) ) (isBoxStar (right S) ) ) (set-square (move-block S D) (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 1) keeperstar) ); If moving onto a goal or pushing a box on a goal, keeper becomes keeperstar
+					(t (set-square (move-block S D) (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 1) keeper) ); Else, add keeper to the new position
 				) 
-			) ;otherwise, simply add keeper to the position
+			)
 	)
 )
 
@@ -893,3 +889,11 @@
     (sleep delay)
     );end dolist
   );end defun
+
+(printstate '((1 1 0 1 1 1)
+		     (1 0 2 0 0 1)
+		     (1 0 3 0 0 1)
+		     (1 1 0 1 1 1)
+		     (1 0 0 0 0 1)
+		     (1 0 0 0 4 1)
+		     (1 1 1 1 1 1)))
