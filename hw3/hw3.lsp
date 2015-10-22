@@ -576,16 +576,12 @@
 	(h0 '(1 2 3))
 ("END h0")
 
-; NO TIEBREAKING! :(
-; GET MINIMUM DISTANCE FROM KEEPER TO GO TO THE NEAREST BOX
-; SHOULD SEPARATE TWO STATES
-; ADD MINIMUM VALUE FOR KEEPER TO GO TO ANY OF THESE BOXES
-
 ; EXERCISE: Modify this function to compute the
 ; number of misplaced boxes in s.
 ;
 
 ; Counts the # of 2's in the gameboard
+; My h1 heuristic is admissable because the total number of moves to place the boxes in the goal state is at least the number of misplaced boxes
 (defun h1 (s)
 	(cond ((NULL s) 0); NULL gameboard has no misplaced boxes
 		((atom s) 
@@ -605,6 +601,11 @@
 (h1 s1);	1
 ("END h1")
 
+; NO TIEBREAKING! :(
+; GET MINIMUM DISTANCE FROM KEEPER TO GO TO THE NEAREST BOX
+; SHOULD SEPARATE TWO STATES
+; ADD MINIMUM VALUE FOR KEEPER TO GO TO ANY OF THESE BOXES
+
 ; EXERCISE: Change the name of this function to h<UID> where
 ; <UID> is your actual student ID number. Then, modify this
 ; function to compute an admissible heuristic value of s.
@@ -620,7 +621,8 @@
 ; SHOULD SEPARATE TWO STATES
 ; ADD MINIMUM VALUE FOR KEEPER TO GO TO ANY OF THESE BOXES
 (defun h904281426 (s)
-  )
+ 
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -942,5 +944,8 @@
     );end dolist
   );end defun
 
-;(load-a-star)
-;(printstates (a* p1 #'goal-test #'next-states #'h0) 0.2)
+; (load-a-star)
+; (printstates (a* p1 #'goal-test #'next-states #'h0) 0.2)
+
+(load-a-star)
+(printstates (a* p1 #'goal-test #'next-states #'h1) 0.2)
