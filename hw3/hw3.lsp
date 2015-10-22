@@ -436,10 +436,29 @@
 
 ; Move the block
 (defun move-block(S D r c)
-	(cond ((equal D 'up) )
-		((equal D 'down) )
-		((equal D 'left) )
-		((equal D 'down) )
+	(cond ((equal D 'up)
+				(cond ((or (isBox (get-square S (- r 1) c) ) (isBoxStar (get-square S (- r 1) c) ) ) (set-square S (- r 2) c box) ) ;move the block if applicable
+					(t S); otherwise, make no changes
+				)
+			) 
+
+		((equal D 'down) 
+				(cond ((or (isBox (get-square S (+ r 1) c) ) (isBoxStar (get-square S (+ r 1) c) ) ) (set-square S (+ r 2) c box) ) ;move the block if applicable
+					(t S); otherwise, make no changes
+				)
+		)
+
+		((equal D 'left)
+			(cond ((or (isBox (get-square S r (- c 1) ) ) (isBoxStar (get-square S r (- c 1) ) ) ) (set-square S r (- c 2) box) ) ;move the block if applicable
+				(t S)
+			)
+		)
+
+		((equal D 'right)
+			(cond ((or (isBox (get-square S r (+ c 1) ) ) (isBoxStar (get-square S r (+ c 1) ) ) ) (set-square S r (+ c 2) box) ) ;move the block if applicable
+				(t S)
+			)
+		) 
 	)
 )
 
@@ -448,7 +467,7 @@
 	(cond ((equal D 'up) )
 		((equal D 'down) )
 		((equal D 'left) )
-		((equal D 'down) )
+		((equal D 'right) )
 	)
 )
 
