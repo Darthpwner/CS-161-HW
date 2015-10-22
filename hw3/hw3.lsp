@@ -561,6 +561,8 @@
 
 ("CHRISTINE PANG")
 (next-states s1)
+("DJOKOVIC")
+(sokoban )
 ("END OF NEXT STATES")
 
 ; EXERCISE: Modify this function to compute the trivial
@@ -582,8 +584,26 @@
 ; EXERCISE: Modify this function to compute the
 ; number of misplaced boxes in s.
 ;
+
+; Counts the # of 2's in the gameboard
 (defun h1 (s)
-  )
+	(cond ((NULL s) 0); NULL gameboard has no misplaced boxes
+		((atom s) 
+			(cond ((isBox s) 1); If S is an atom AND it is misplaced, return 1 as a base case
+				(t 0); Else, return 0
+			)
+		) 
+		((equal (length s) 1) (h1 (first s) ) ); Check if S has one more atom or list, then look for misplaced boxes in our gameboard
+		(t (+ (h1 (first s) ) (h1 (rest s) ) ) ); Else, add up the number of misplaced boxes in our gameboard
+	)
+)
+
+("h1")
+(h1 '((2 2 2 2) ) );	4
+(h1 '((0 0) (2 2) ) );	2
+(h0 '(1 2 3 2 10 -2 2 )); 3
+
+("END h1")
 
 ; EXERCISE: Change the name of this function to h<UID> where
 ; <UID> is your actual student ID number. Then, modify this
@@ -594,6 +614,11 @@
 ; The Lisp 'time' function can be used to measure the
 ; running time of a function call.
 ;
+
+; NO TIEBREAKING! :(
+; GET MINIMUM DISTANCE FROM KEEPER TO GO TO THE NEAREST BOX
+; SHOULD SEPARATE TWO STATES
+; ADD MINIMUM VALUE FOR KEEPER TO GO TO ANY OF THESE BOXES
 (defun h904281426 (s)
   )
 
@@ -916,3 +941,6 @@
     (sleep delay)
     );end dolist
   );end defun
+
+;(load-a-star)
+;(printstates (a* p1 #'goal-test #'next-states #'h0) 0.2)
