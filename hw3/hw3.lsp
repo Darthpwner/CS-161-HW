@@ -590,7 +590,7 @@
 				(t 0); Else, return 0
 			)
 		) 
-		
+
 		((equal (length s) 1) (h1 (first s) ) ); Check if S has one more atom or list, then look for misplaced boxes in our gameboard
 		(t (+ (h1 (first s) ) (h1 (rest s) ) ) ); Else, add up the number of misplaced boxes in our gameboard
 	)
@@ -622,9 +622,25 @@
 ; GET MINIMUM DISTANCE FROM KEEPER TO GO TO THE NEAREST BOX
 ; SHOULD SEPARATE TWO STATES
 ; ADD MINIMUM VALUE FOR KEEPER TO GO TO ANY OF THESE BOXES
-(defun h904281426 (s)
- 
+
+(defun min-distance-from-keeper-to-box(S)
+	(cond ((NULL (first S) ) 0; Search up and move if possible
+			(isBox(up S) )
+		)
+
+		(< (- (maxRow S) 1) 0); Search down and move if possible
+		(NULL (first(first S) ) 0); Search left and move if possible
+		(< (- (maxCol S) 1) 0) ; Search right and move if possible
+	)
 )
+
+(defun h904281426 (s)
+
+)
+
+("hUID")
+
+("END hUID")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
