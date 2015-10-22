@@ -442,26 +442,32 @@
 	(cond ((equal D 'up)
 				(cond ((and (or (isBox (up S) ) (isBoxStar (up S) ) ) (isStar(up2 S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) boxstar) ) ;Move the block up and set to boxstar if box lands on goal
 					((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) );	Move the block up normally
+					(t S); Else, return the original state if no block is not moved
 				)
 			) 
 
 		((equal D 'down) 
 				(cond ((and (or (isBox (down S) ) (isBoxStar (down S) ) ) (isStar(down2 S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) boxstar) ) ;Move the block down and set to boxstar if box lands on goal
 					((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) );	Move the block down normally
+					(t S); Else, return the original state if no block is not moved
 				)
 		)
 
 		((equal D 'left)
 			(cond ((and (or (isBox (left S) ) (isBoxStar (left S) ) ) (isStar(left2 S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) boxstar) ) ;Move the block left and set to boxstar if box lands on goal
 				((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) box) );	Move the block left normally
+				(t S); Else, return the original state if no block is not moved
 			)
 		)
 
 		((equal D 'right)
 			(cond ((and (or (isBox (right S) ) (isBoxStar (right S) ) ) (isStar(right2 S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) boxstar) ) ;Move the block right and set to boxstar if box lands on goal
 				((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) box) );	Move the block right normally
+				(t S); Else, return the original state if no block is not moved
 			)
 		)
+
+		(t S); Else, return the original state if no block is not moved
 	)
 )
 
@@ -508,10 +514,10 @@
 
 ("MOVE KEEPER")
 (move-keeper '((1 0 5) (5 2 5) (5 3 5)) 'up); '((1 2 5) (5 3 5) (5 3 5))
-(move-keeper '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 0 5) (5 6 5) (5 3 5))
+(move-keeper '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 0 5) (5 6 5) (5 0 5))
 (move-keeper '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 3 5) (5 3 5) (5 2 5))
-(move-keeper '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 3 3) (5 2 5) (5 0 5))
-(move-keeper '((1 5 5) (5 2 5) (6 5 4)) 'right);	'((1 5 5) (5 2 5) (6 6 2))
+(move-keeper '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 3 0) (5 2 5) (5 0 5))
+(move-keeper '((1 5 5) (5 2 5) (6 5 4)) 'right);	'((1 5 5) (5 2 5) (6 6 2)); (0 6 5)
 ("END MOVE KEEPER")
 
 ; Return the state that the keeper was originally on after performing the successful move
