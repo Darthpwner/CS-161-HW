@@ -349,7 +349,9 @@
 ; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
 (defun invalid-move(S)
 	(cond ((or (isWall (up S) ) (isWall(down S) ) (isWall(left S) ) (isWall(right S) ) ) t); Check for walls immediately to the left, right, up, and down
-
+		;()
+		;()
+		(t nil); Did not find an invalid move
 	)
 )
 
