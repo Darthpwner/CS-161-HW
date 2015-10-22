@@ -506,14 +506,42 @@
 
 ("MOVE KEEPER")
 (move-keeper '((1 0 5) (5 2 5) (5 3 5)) 'up); '((1 2 5) (5 3 5) (5 3 5))
+(move-keeper '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 2 5) (5 6 5) (5 3 5))
 (move-keeper '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 3 5) (5 3 5) (5 2 5))
 (move-keeper '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 3 3) (5 2 5) (5 0 5))
 (move-keeper '((1 5 5) (5 2 5) (3 6 5)) 'right);	'((1 5 5) (5 2 5) (3 6 2))
 ("END MOVE KEEPER")
 
-; Return the state after performing the successful move
-(defun state-after-move(S D r c)
+; Return the state that the keeper was originally on after performing the successful move
+(defun state-after-move(S D)
+	(cond ((equal D 'up)
+				(cond ((isKeeperStar (get-square S (- (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) ) ) (set-square (keeper-move S D r c) r c star) )
+					()
+				) 
+		 	) 
+		
+			((equal D 'down)
+				(cond ()
+					()
+				)
+			) 
 
+			((equal D 'left)
+				(cond ()
+					()
+				)
+			)
+		
+			((equal D 'right)
+				(cond ()
+					()
+				)
+			)
+	)
+
+
+	((isKeeperStar (get-square S r c)) (set-square (keeper-move S D r c) r c star)) ;if keeper was on star, change it to be star
+	(t (set-square (keeper-move S D r c) r c blank)) ;otherwise, change it to be blank
 )
 
 (defun try-move(S D)
@@ -889,11 +917,3 @@
     (sleep delay)
     );end dolist
   );end defun
-
-(printstate '((1 1 0 1 1 1)
-		     (1 0 2 0 0 1)
-		     (1 0 3 0 0 1)
-		     (1 1 0 1 1 1)
-		     (1 0 0 0 0 1)
-		     (1 0 0 0 4 1)
-		     (1 1 1 1 1 1)))
