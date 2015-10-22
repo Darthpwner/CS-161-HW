@@ -601,8 +601,8 @@
 ("h1")
 (h1 '((2 2 2 2) ) );	4
 (h1 '((0 0) (2 2) ) );	2
-(h0 '(1 2 3 2 10 -2 2 )); 3
-
+(h1 '((1 2 3 2 100 -69 2 ) ) ); 3
+(h1 s1);	1
 ("END h1")
 
 ; EXERCISE: Change the name of this function to h<UID> where
