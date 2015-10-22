@@ -322,19 +322,19 @@
 ("END SET SQUARE")
 
 ; Helper functions for try-move
-(defun up(S)
+(defun left(S); Check the element to immediately to your left
 	(get-square S (second (getKeeperPosition S 0) ) (- (first (getKeeperPosition S 0) ) 1) )
 )
 
-(defun down(S)
+(defun right(S); Check the element to immediately to your right
 	(get-square S (second (getKeeperPosition S 0) ) (+ (first (getKeeperPosition S 0) ) 1) )
 )
 
-(defun left(S)
+(defun up(S); Check the element to immediately up
 	(get-square S (- (second (getKeeperPosition S 0) ) 1) (first (getKeeperPosition S 0) ) )
 )
 
-(defun right(S)
+(defun down(S); Check the element to immediately down
 	(get-square S (+ (second (getKeeperPosition S 0) ) 1) (first (getKeeperPosition S 0) ) )
 )
 
