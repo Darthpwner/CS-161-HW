@@ -371,7 +371,17 @@
 		((and (isWall (left S) ) (equal D 'left) ) t); Check for wall left
 		((and (isWall (right S) ) (equal D 'right) ) t); Check for wall right
 
-		
+		; Check for consecutive boxes to the left, right, up, and down
+		((and (isBox (up S) ) (isBox (up2 S) ) (equal D 'up) ) t); Check for consecutive blocks up
+		((and (isBox (down S) ) (isBox (down2 S) ) (equal D 'down) ) t); Check for consecutive blocks down
+		((and (isBox (left S) ) (isBox (left2 S) ) (equal D 'left) ) t); Check for consecutive blocks left
+		((and (isBox (right S) ) (isBox (right2 S) ) (equal D 'right) ) t); Check for consecutive blocks right
+
+		; Check for block then wall to the left, right, up, and down
+		((and (isBox (up S) ) (isWall (up2 S) ) (equal D 'up) ) t); Check for block then wall up
+		((and (isBox (down S) ) (isWall (down2 S) ) (equal D 'down) ) t); Check for block then wall down
+		((and (isBox (left S) ) (isWall (left2 S) ) (equal D 'left) ) t); Check for block then wall left
+		((and (isBox (right S) ) (isWall (right2 S) ) (equal D 'right) ) t); Check for block then wall right
 
 		(t nil); Did not find an invalid move
 	)
