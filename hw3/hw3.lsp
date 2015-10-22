@@ -436,12 +436,20 @@
 
 ; Move the block
 (defun move-block(S D r c)
-
+	(cond ((equal D 'up) )
+		((equal D 'down) )
+		((equal D 'left) )
+		((equal D 'down) )
+	)
 )
 
 ; Move the keeper
 (defun move-keeper(S D r c)
-
+	(cond ((equal D 'up) )
+		((equal D 'down) )
+		((equal D 'left) )
+		((equal D 'down) )
+	)
 )
 
 ; Return the state after performing the successful move
