@@ -326,16 +326,32 @@
 	(get-square S (second (getKeeperPosition S 0) ) (- (first (getKeeperPosition S 0) ) 1) )
 )
 
+(defun left2(S); Check the element 2 spots to your left
+	(get-square S (second (getKeeperPosition S 0) ) (- (first (getKeeperPosition S 0) ) 2) )
+)
+
 (defun right(S); Check the element to immediately to your right
 	(get-square S (second (getKeeperPosition S 0) ) (+ (first (getKeeperPosition S 0) ) 1) )
+)
+
+(defun right2(S); Check the element 2 spots to your right
+	(get-square S (second (getKeeperPosition S 0) ) (+ (first (getKeeperPosition S 0) ) 2) )
 )
 
 (defun up(S); Check the element to immediately up
 	(get-square S (- (second (getKeeperPosition S 0) ) 1) (first (getKeeperPosition S 0) ) )
 )
 
+(defun up2(S); Check the element 2 spots up
+	(get-square S (- (second (getKeeperPosition S 0) ) 2) (first (getKeeperPosition S 0) ) )
+)
+
 (defun down(S); Check the element to immediately down
 	(get-square S (+ (second (getKeeperPosition S 0) ) 1) (first (getKeeperPosition S 0) ) )
+)
+
+(defun down2(S); Check the element 2 spots down
+	(get-square S (+ (second (getKeeperPosition S 0) ) 2) (first (getKeeperPosition S 0) ) )
 )
 
 ; ("DIRECTIONS") 
@@ -347,16 +363,19 @@
 ; ("END DIRECTIONS")
 
 ; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
-(defun invalid-move(S)
-	(cond ((or (isWall (up S) ) (isWall(down S) ) (isWall(left S) ) (isWall(right S) ) ) t); Check for walls immediately to the left, right, up, and down
-		;()
+(defun invalid-move(S D)
+	;(cond ((or (isWall (up S) ) (isWall(down S) ) (isWall(left S) ) (isWall(right S) ) ) t); Check for walls immediately to the left, right, up, and down
+	(cond ((and (isWall (up S) ) (equal D 'up) ) t)
+		;(and (isBox (up S)))
 		;()
 		(t nil); Did not find an invalid move
 	)
 )
 
 ("INVALID MOVE")
-(invalid-move '((1 3)))
+(invalid-move '((1 3)) 'up)
+(invalid-move '((0 2 2) (4 2 5) (6 3 7) ) 'up)
+
 ("END INVALID MOVE")
 
 (defun try-move(S D)
