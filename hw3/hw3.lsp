@@ -331,7 +331,7 @@
 )
 
 ("INVALID MOVE")
-(invalid-move '(1))
+(invalid-move '((1)))
 ("END INVALID MOVE")
 
 (defun try-move(S D)
