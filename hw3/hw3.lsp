@@ -674,14 +674,44 @@
 ("MIN DISTANCE RIGHT")
 
 ("END MIN DISTANCE RIGHT")
+; 	^				^
+; 	|				|
+; <-  3 ->	or 	<- 6 ->	My heuristic checks in the immediately 
+; 	|				|
+; 	v 				v
 
 ; heuristic goes in order of up, down, left, and right. If we have boxes immediately adjacent in two or more directions, it will evaluate in 
 ; the order I defined above.
 (defun min-distance-from-keeper-to-box(S)
-	(cond (); up is the minimum distance
-		(); down is the minimum distance
-		(); left is the minimum distance
-		(); right is the minimum distance
+	(cond ((and (< (min-distance-up S) (min-distance-down S) ) 
+				(< (min-distance-up S) (min-distance-left S) ) 
+				(< (min-distance-up S) (min-distance-right S) ) 
+				(< (min-distance-up S) 5000) ) 
+			(min-distance-up) 
+		); up is the minimum distance
+		
+		((and (< (min-distance-down S) (min-distance-up S) ) 
+				(< (min-distance-down S) (min-distance-left S) ) 
+				(< (min-distance-down S) (min-distance-right S) ) 
+				(< (min-distance-down S) 5000) ) 
+			(min-distance-down) 
+		); down is the minimum distance
+		
+		((and (< (min-distance-left S) (min-distance-up S) ) 
+				(< (min-distance-left S) (min-distance-down S) ) 
+				(< (min-distance-left S) (min-distance-right S) ) 
+				(< (min-distance-left S) 5000) ) 
+			(min-distance-left) 
+		); left is the minimum distance
+		
+		((and (< (min-distance-right S) (min-distance-up S) ) 
+				(< (min-distance-right S) (min-distance-down S) ) 
+				(< (min-distance-right S) (min-distance-left S) ) 
+				(< (min-distance-right S) 5000) ) 
+			(min-distance-right) 
+		); right is the minimum distance
+
+		(t 0); If there are no valid moves, return 0
 	)	
 )
 
