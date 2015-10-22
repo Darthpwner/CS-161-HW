@@ -481,30 +481,39 @@
 	(cond ((equal D 'up)
 				(cond ((or (isStar (up S) ) (isBoxStar (up S) ) ) (set-square (block-move S D) (- (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeperstar) )
 					;if moving onto a star or box star, the position becomes keeper star
-					(t (set-square (block-move S D r c) (- r 1) c keeper) ) 
+					(t (set-square (block-move S D) (- (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeper) ) 
 				) 
 		 	) ;otherwise, simply add keeper to the position
 		
 			((equal D 'down)
-				(cond ((or (isStar (get-square S r (- c 1) ) ) (isBoxStar (get-square S r (- c 1) ) ) ) (set-square (block-move S D r c) r (- c 1) keeperstar) )
+				(cond ((or (isStar (down S) ) (isBoxStar (down S) ) ) (set-square (block-move S D) (+ (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeperstar) )
 					;if moving onto a star or box star, the position becomes keeper star
-					(t (set-square (block-move S D r c) r (- c 1) keeper) ) 
+					(t (set-square (block-move S D) (+ (second(getKeeperPosition S 0) ) 1) (first(getKeeperPosition S 0) ) keeper) ) 
 				)	 
 			) ;otherwise, simply add keeper to the position
 		
 			((equal D 'left)
-				(cond ((or (isStar (get-square S (+ r 1) c) ) (isBoxStar (get-square S (+ r 1) c) ) ) (set-square (block-move S D r c) (+ r 1) c keeperstar) )
+				(cond ((or (isStar (left S) ) (isBoxStar (left S) ) ) (set-square (block-move S D) (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 1) keeperstar) )
 					;if moving onto a star or box star, the position becomes keeper star
-					(t (set-square (block-move S D r c) (+ r 1) c keeper) ) ) 
+					(t (set-square (block-move S D) (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 1) keeper) ) 
+				) 
 			) ;otherwise, simply add keeper to the position
 		
 			((equal D 'right)
-				(cond ((or (isStar (get-square S r (+ c 1) ) ) (isBoxStar (get-square S r (+ c 1) ) ) ) (set-square (block-move S D r c) r (+ c 1) keeperstar) )
+				(cond ((or (isStar (right S) ) (isBoxStar (right S) ) ) (set-square (block-move S D) (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 1) keeperstar) )
 					;if moving onto a star or box star, the position becomes keeper star
-					(t (set-square (block-move S D r c) r (+ c 1) keeper) ) ) 
+					(t (set-square (block-move S D) (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 1) keeper) ) 
+				) 
 			) ;otherwise, simply add keeper to the position
 	)
 )
+
+("MOVE KEEPER")
+(move-keeper '((1 0 5) (5 2 5) (5 3 5)) 'up); '((1 2 5) (5 3 5) (5 3 5))
+(move-keeper '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 3 5) (5 3 5) (5 2 5))
+(move-keeper '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 3 3) (5 2 5) (5 0 5))
+(move-keeper '((1 5 5) (5 2 5) (3 5 5)) 'right);	'((1 5 5) (5 2 5) (3 3 2))
+("END MOVE KEEPER")
 
 ; Return the state after performing the successful move
 (defun state-after-move(S D r c)
