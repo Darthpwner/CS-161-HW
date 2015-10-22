@@ -354,43 +354,68 @@
 	(get-square S (+ (second (getKeeperPosition S 0) ) 2) (first (getKeeperPosition S 0) ) )
 )
 
-; ("DIRECTIONS") 
-; (up '((0 1 2) (4 3 5) (6 7 8) ) )
-; (down '((0 1 2) (4 3 5) (6 7 8) ) )
-; (left '((0 1 2) (4 3 5) (6 7 8) ) )
-; (right '((0 1 2) (4 3 5) (6 7 8) ) )
+("DIRECTIONS") 
+(up '((0 1 2) (4 3 5) (6 7 8) ) )
+(down '((0 1 2) (4 3 5) (6 7 8) ) )
+(left '((0 1 2) (4 3 5) (6 7 8) ) )
+(right '((0 1 2) (4 3 5) (6 7 8) ) )
 
-; ("END DIRECTIONS")
+(right '((1 2 3)))
+("END DIRECTIONS")
 
 ; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
 (defun invalid-move(S D)
+	; (cond (t D) 
+	; )
 
-	; Check for walls immediately to the left, right, up, and down
+	;Check for walls immediately to the left, right, up, and down
 	(cond ((and (isWall (up S) ) (equal D 'up) ) t); Check for wall up
 		((and (isWall (down S) ) (equal D 'down) ) t); Check for wall down
 		((and (isWall (left S) ) (equal D 'left) ) t); Check for wall left
 		((and (isWall (right S) ) (equal D 'right) ) t); Check for wall right
 
 		; Check for consecutive boxes to the left, right, up, and down
-		((and (isBox (up S) ) (isBox (up2 S) ) (equal D 'up) ) t); Check for consecutive blocks up
-		((and (isBox (down S) ) (isBox (down2 S) ) (equal D 'down) ) t); Check for consecutive blocks down
-		((and (isBox (left S) ) (isBox (left2 S) ) (equal D 'left) ) t); Check for consecutive blocks left
-		((and (isBox (right S) ) (isBox (right2 S) ) (equal D 'right) ) t); Check for consecutive blocks right
+		((and (isBox (up S) ) (isBox (up2 S) ) (equal D 'up) ) t); Check for consecutive boxes up
+		((and (isBox (down S) ) (isBox (down2 S) ) (equal D 'down) ) t); Check for consecutive boxes down
+		((and (isBox (left S) ) (isBox (left2 S) ) (equal D 'left) ) t); Check for consecutive boxes left
+		((and (isBox (right S) ) (isBox (right2 S) ) (equal D 'right) ) t); Check for consecutive boxes right
 
-		; Check for block then wall to the left, right, up, and down
-		((and (isBox (up S) ) (isWall (up2 S) ) (equal D 'up) ) t); Check for block then wall up
-		((and (isBox (down S) ) (isWall (down2 S) ) (equal D 'down) ) t); Check for block then wall down
-		((and (isBox (left S) ) (isWall (left2 S) ) (equal D 'left) ) t); Check for block then wall left
-		((and (isBox (right S) ) (isWall (right2 S) ) (equal D 'right) ) t); Check for block then wall right
+		; Check for consecutive boxes (box then box on top of goal) to the left, right, up, and down
+		((and (isBox (up S) ) (isBoxStar (up2 S) ) (equal D 'up) ) t); Check for consecutive boxes (box then box on top of goal) up
+		((and (isBox (down S) ) (isBoxStar (down2 S) ) (equal D 'down) ) t); Check for consecutive boxes (box then box on top of goal) down
+		((and (isBox (left S) ) (isBoxStar (left2 S) ) (equal D 'left) ) t); Check for consecutive boxes (box then box on top of goal) left
+		((and (isBox (right S) ) (isBoxStar (right2 S) ) (equal D 'right) ) t); Check for consecutive boxes (box then box on top of goal) right		
+
+		; Check for consecutive boxes (box on top of goal then box) to the left, right, up, and down
+		((and (isBoxStar (up S) ) (isBox (up2 S) ) (equal D 'up) ) t); Check for consecutive boxes (box on top of goal then box) up
+		((and (isBoxStar (down S) ) (isBox (down2 S) ) (equal D 'down) ) t); Check for consecutive boxes (box on top of goal then box) down
+		((and (isBoxStar (left S) ) (isBox (left2 S) ) (equal D 'left) ) t); Check for consecutive boxes (box on top of goal then box) left
+		((and (isBoxStar (right S) ) (isBox (right2 S) ) (equal D 'right) ) t); Check for consecutive boxes (box on top of goal then box) right		
+
+		; Check for consecutive boxes on top of goals to the left, right, up, and down
+		((and (isBoxStar (up S) ) (isBoxStar (up2 S) ) (equal D 'up) ) t); Check for consecutive boxes on top of goals up
+		((and (isBoxStar (down S) ) (isBoxStar (down2 S) ) (equal D 'down) ) t); Check for consecutive boxes on top of goals down
+		((and (isBoxStar (left S) ) (isBoxStar (left2 S) ) (equal D 'left) ) t); Check for consecutive boxes on top of goals left
+		((and (isBoxStar (right S) ) (isBoxStar(right2 S) ) (equal D 'right) ) t); Check for consecutive boxes on top of goals right
+
+		; Check for box then wall to the left, right, up, and down
+		((and (isBox (up S) ) (isWall (up2 S) ) (equal D 'up) ) t); Check for box then wall up
+		((and (isBox (down S) ) (isWall (down2 S) ) (equal D 'down) ) t); Check for box then wall down
+		((and (isBox (left S) ) (isWall (left2 S) ) (equal D 'left) ) t); Check for box then wall left
+		((and (isBox (right S) ) (isWall (right2 S) ) (equal D 'right) ) t); Check for box then wall right
+
+		; Check for box on top of a goal then wall to the left, right, up, and down
+		((and (isBoxStar (up S) ) (isWall (up2 S) ) (equal D 'up) ) t); Check for box on goal then wall up
+		((and (isBoxStar (down S) ) (isWall (down2 S) ) (equal D 'down) ) t); Check for box on goal then wall down
+		((and (isBoxStar (left S) ) (isWall (left2 S) ) (equal D 'left) ) t); Check for box on goal then wall left
+		((and (isBoxStar (right S) ) (isWall (right2 S) ) (equal D 'right) ) t); Check for box on goal then wall right
 
 		(t nil); Did not find an invalid move
 	)
-
-
 )
 
 ("INVALID MOVE")
-(invalid-move '((1 3)) 'up)
+(invalid-move '((1 3 5)) 'right)
 (invalid-move '((0 2 2) (4 2 5) (6 3 7) ) 'up)
 
 ("END INVALID MOVE")
