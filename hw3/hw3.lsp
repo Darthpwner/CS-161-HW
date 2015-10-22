@@ -437,7 +437,7 @@
 ; Move the block
 (defun move-block(S D r c)
 	(cond ((equal D 'up)
-				(cond ((or (isBox (up S) ) (isBoxStar (up S) ) (set-square S (- r 2) c box) ) ;Move the block up
+				(cond ((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- r 2) c box) ) ;Move the block up
 					(t S);	Return the original state if you cannot move the block 
 				)
 			) 
@@ -463,6 +463,10 @@
 		(t S);	Return the original state if you cannot move the block 
 	)
 )
+
+("MOVE BLOCKS")
+(move-block '((1 0 5) (5 2 3) (5 3 5)) 'up 2 2)
+("END MOVE BLOCKS")
 
 ; Move the keeper
 (defun move-keeper(S D r c)
