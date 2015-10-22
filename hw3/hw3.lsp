@@ -437,28 +437,30 @@
 ; Move the block
 (defun move-block(S D r c)
 	(cond ((equal D 'up)
-				(cond ((or (isBox (get-square S (- r 1) c) ) (isBoxStar (get-square S (- r 1) c) ) ) (set-square S (- r 2) c box) ) ;move the block if applicable
-					(t S); otherwise, make no changes
+				(cond ((or (isBox (get-square S (- r 1) c) ) (isBoxStar (get-square S (- r 1) c) ) ) (set-square S (- r 2) c box) ) ;Move the block up
+					(t S);	Return the original state if you cannot move the block 
 				)
 			) 
 
 		((equal D 'down) 
-				(cond ((or (isBox (get-square S (+ r 1) c) ) (isBoxStar (get-square S (+ r 1) c) ) ) (set-square S (+ r 2) c box) ) ;move the block if applicable
-					(t S); otherwise, make no changes
+				(cond ((or (isBox (get-square S (+ r 1) c) ) (isBoxStar (get-square S (+ r 1) c) ) ) (set-square S (+ r 2) c box) ) ;Move the block down
+					(t S);	Return the original state if you cannot move the block 
 				)
 		)
 
 		((equal D 'left)
-			(cond ((or (isBox (get-square S r (- c 1) ) ) (isBoxStar (get-square S r (- c 1) ) ) ) (set-square S r (- c 2) box) ) ;move the block if applicable
-				(t S)
+			(cond ((or (isBox (get-square S r (- c 1) ) ) (isBoxStar (get-square S r (- c 1) ) ) ) (set-square S r (- c 2) box) ) ;Move the block left
+				(t S);	Return the original state if you cannot move the block 
 			)
 		)
 
 		((equal D 'right)
-			(cond ((or (isBox (get-square S r (+ c 1) ) ) (isBoxStar (get-square S r (+ c 1) ) ) ) (set-square S r (+ c 2) box) ) ;move the block if applicable
-				(t S)
+			(cond ((or (isBox (get-square S r (+ c 1) ) ) (isBoxStar (get-square S r (+ c 1) ) ) ) (set-square S r (+ c 2) box) ) ;Move the block right
+				(t S);	Return the original state if you cannot move the block 
 			)
-		) 
+		)
+
+		(t S);	Return the original state if you cannot move the block 
 	)
 )
 
