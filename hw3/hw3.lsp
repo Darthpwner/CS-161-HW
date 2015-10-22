@@ -364,6 +364,9 @@
 
 
 (right '((1 2 3)))
+
+("FUCK ARKO")
+(up '((1 0 5) (5 2 5) (5 3 5)) )
 ("END DIRECTIONS")
 
 ; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
@@ -465,7 +468,7 @@
 )
 
 ("MOVE BLOCKS")
-(move-block '((1 0 5) (5 2 3) (5 3 5)) 'up 2 2)
+(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up 2 2)
 ("END MOVE BLOCKS")
 
 ; Move the keeper
