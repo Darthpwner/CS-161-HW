@@ -623,19 +623,50 @@
 ; SHOULD SEPARATE TWO STATES
 ; ADD MINIMUM VALUE FOR KEEPER TO GO TO ANY OF THESE BOXES
 
-(defun min-distance-from-keeper-to-box(S)
-	(cond ((NULL (first S) ) 0; Search up and move if possible
-			(isBox(up S) )
-		)
-
-		(< (- (maxRow S) 1) 0); Search down and move if possible
-		(NULL (first(first S) ) 0); Search left and move if possible
-		(< (- (maxCol S) 1) 0) ; Search right and move if possible
+; Check the distance from keeper to box upwards
+(defun min-distance-up(S)
+	(cond ((NULL (first S) ) -1); Return -1 if move up is invalid
+		(isBox(up S) 1); return 1 if you have a box upwards (make this move)
+		(t (+ (min-distance-up (try-move S 'up) ) <SHIT>) ); else, keep going upwards
 	)
 )
 
-(defun h904281426 (s)
+; Check the distance from keeper to box downwards
+(defun min-distance-down(S)
+	(cond (< (- (maxRow S) 1) -1); Return -1 if move down is invalid
+		(isBox(down S) 1); return 1 if you have a box downwards (make this move)
+		(t (+ (min-distance-down (try-move S 'down) ) <SHIT>) ); else, keep going downwards
+	)
+)
 
+; Check the distance from the keeper to box left
+(defun min-distance-left(S)
+	(cond (NULL (first(first S) ) -1); Return -1 if move left is invalid
+		(isBox(left S) 1);	return 1 if you have a box left (make this move)
+		(t (+ (min-distance-left (try-move S 'left) ) <SHIT>) ); else, keep going left
+	)
+)
+
+; Check the distance from the keeper to box right
+(defun min-distance-right(S)
+	(cond (< (- (maxCol S) 1) -1) ; Return -1 if move right is invalid
+		(isBox (right S) 1); return 1 if you have a box right (make this move)
+		(t (+ (min-distance-right (try-move S 'right) ) <SHIT>) ); else, keep going right
+	)
+)
+
+; heuristic goes in order of up, down, left, and right. If we have boxes immediately adjacent in two or more directions, it will evaluate in 
+; the order I defined above.
+(defun min-distance-from-keeper-to-box(S)
+	(cond (); up is the minimum distance
+		(); down is the minimum distance
+		(); left is the minimum distance
+		(); right is the minimum distance
+	)	
+)
+
+(defun h904281426 (s)
+	(min-distance-from-keeper-to-box S); Heuristic returns the minimum distance of the keeper to the box
 )
 
 ("hUID")
