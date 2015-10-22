@@ -440,30 +440,28 @@
 ; Move the block
 (defun move-block(S D)
 	(cond ((equal D 'up)
-				(cond ((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) ) ;Move the block up
-					(t S);	Return the original state if you cannot move the block 
+				(cond ((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) ) ;Move the block up and set to boxstar if box lands on goal
+					((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) );	Move the block up normally
 				)
 			) 
 
 		((equal D 'down) 
-				(cond ((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) ) ;Move the block down
-					(t S);	Return the original state if you cannot move the block 
+				(cond ((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) ) ;Move the block down and set to boxstar if box lands on goal
+					(t S);	Move the block down normally
 				)
 		)
 
 		((equal D 'left)
-			(cond ((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) box) ) ;Move the block left
-				(t S);	Return the original state if you cannot move the block 
+			(cond ((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) box) ) ;Move the block left and set to boxstar if box lands on goal
+				(t S);	Move the block left normally
 			)
 		)
 
 		((equal D 'right)
-			(cond ((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) box) ) ;Move the block right
-				(t S);	Return the original state if you cannot move the block 
+			(cond ((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) box) ) ;Move the block right and set to boxstar if box lands on goal
+				(t S);	Move the block right normally
 			)
 		)
-
-		(t S);	Return the original state if you cannot move the block 
 	)
 )
 
@@ -509,7 +507,7 @@
 (move-keeper '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 0 5) (5 6 5) (5 3 5))
 (move-keeper '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 3 5) (5 3 5) (5 2 5))
 (move-keeper '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 3 3) (5 2 5) (5 0 5))
-(move-keeper '((1 5 5) (5 2 5) (3 6 5)) 'right);	'((1 5 5) (5 2 5) (3 6 2))
+(move-keeper '((1 5 5) (5 2 5) (6 5 4)) 'right);	'((1 5 5) (5 2 5) (6 6 2))
 ("END MOVE KEEPER")
 
 ; Return the state that the keeper was originally on after performing the successful move
