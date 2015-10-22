@@ -687,28 +687,28 @@
 				(< (min-distance-up S) (min-distance-left S) ) 
 				(< (min-distance-up S) (min-distance-right S) ) 
 				(< (min-distance-up S) 5000) ) 
-			(min-distance-up) 
+			(min-distance-up S) 
 		); up is the minimum distance
 		
 		((and (< (min-distance-down S) (min-distance-up S) ) 
 				(< (min-distance-down S) (min-distance-left S) ) 
 				(< (min-distance-down S) (min-distance-right S) ) 
 				(< (min-distance-down S) 5000) ) 
-			(min-distance-down) 
+			(min-distance-down S) 
 		); down is the minimum distance
 		
 		((and (< (min-distance-left S) (min-distance-up S) ) 
 				(< (min-distance-left S) (min-distance-down S) ) 
 				(< (min-distance-left S) (min-distance-right S) ) 
 				(< (min-distance-left S) 5000) ) 
-			(min-distance-left) 
+			(min-distance-left S) 
 		); left is the minimum distance
 		
 		((and (< (min-distance-right S) (min-distance-up S) ) 
 				(< (min-distance-right S) (min-distance-down S) ) 
 				(< (min-distance-right S) (min-distance-left S) ) 
 				(< (min-distance-right S) 5000) ) 
-			(min-distance-right) 
+			(min-distance-right S) 
 		); right is the minimum distance
 
 		(t 0); If there are no valid moves, return 0
