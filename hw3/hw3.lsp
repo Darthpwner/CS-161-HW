@@ -551,10 +551,16 @@
     (cleanUpList result);end
    );end let
   );
-  
+ 
+(setq s1 '( (1 1 1 1 1) (1 0 0 4 1) (1 0 2 0 1) (1 0 3 0 1) (1 0 0 0 1) (1 1 1 1 1))
+)
+
 ("NEXT STATES")
 (next-states '((1 0 0 0 1) (1 0 4 0 1) (1 1 3 5 0) (1 1 2 2 1) (1 1 4 2 1))
 )
+
+("CHRISTINE PANG")
+(next-states s1)
 ("END OF NEXT STATES")
 
 ; EXERCISE: Modify this function to compute the trivial
