@@ -440,25 +440,25 @@
 ; Move the block
 (defun move-block(S D)
 	(cond ((equal D 'up)
-				(cond ((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) boxstar) ) ;Move the block up and set to boxstar if box lands on goal
+				(cond ((and (or (isBox (up S) ) (isBoxStar (up S) ) ) (isStar(up2 S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) boxstar) ) ;Move the block up and set to boxstar if box lands on goal
 					((or (isBox (up S) ) (isBoxStar (up S) ) ) (set-square S (- (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) );	Move the block up normally
 				)
 			) 
 
 		((equal D 'down) 
-				(cond ((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) boxstar) ) ;Move the block down and set to boxstar if box lands on goal
+				(cond ((and (or (isBox (down S) ) (isBoxStar (down S) ) ) (isStar(down2 S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) boxstar) ) ;Move the block down and set to boxstar if box lands on goal
 					((or (isBox (down S) ) (isBoxStar (down S) ) ) (set-square S (+ (second(getKeeperPosition S 0) ) 2) (first(getKeeperPosition S 0) ) box) );	Move the block down normally
 				)
 		)
 
 		((equal D 'left)
-			(cond ((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) boxstar) ) ;Move the block left and set to boxstar if box lands on goal
+			(cond ((and (or (isBox (left S) ) (isBoxStar (left S) ) ) (isStar(left2 S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) boxstar) ) ;Move the block left and set to boxstar if box lands on goal
 				((or (isBox (left S) ) (isBoxStar (left S) ) ) (set-square S (second(getKeeperPosition S 0) ) (- (first(getKeeperPosition S 0) ) 2) box) );	Move the block left normally
 			)
 		)
 
 		((equal D 'right)
-			(cond ((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) boxstar) ) ;Move the block right and set to boxstar if box lands on goal
+			(cond ((and (or (isBox (right S) ) (isBoxStar (right S) ) ) (isStar(right2 S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) boxstar) ) ;Move the block right and set to boxstar if box lands on goal
 				((or (isBox (right S) ) (isBoxStar (right S) ) ) (set-square S (second(getKeeperPosition S 0) ) (+ (first(getKeeperPosition S 0) ) 2) box) );	Move the block right normally
 			)
 		)
@@ -471,7 +471,11 @@
 (move-block '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 2 3) (5 2 5) (5 0 5))
 (move-block '((1 5 5) (5 2 5) (3 5 5)) 'right);	'((1 5 5) (5 2 5) (3 5 2))
 
-
+("PUSSY")
+(move-block '((1 4 5) (5 2 5) (5 3 5)) 'up); '((1 5 5) (5 2 5) (5 3 5))
+(move-block '((1 3 5) (5 2 5) (5 4 5)) 'down);	'((1 3 5) (5 2 5) (5 5 5))
+(move-block '((4 2 3) (5 2 5) (5 0 5)) 'left);	'((5 2 3) (5 2 5) (5 0 5))
+(move-block '((1 5 5) (5 2 5) (3 5 4)) 'right);	'((1 5 5) (5 2 5) (3 5 5))
 ("END MOVE BLOCKS")
 
 ; Move the keeper
