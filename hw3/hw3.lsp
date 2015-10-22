@@ -469,6 +469,8 @@
 
 ("MOVE BLOCKS")
 (move-block '((1 0 5) (5 2 5) (5 3 5)) 'up 2 1)
+(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up 2 2)
+
 ("END MOVE BLOCKS")
 
 ; Move the keeper
