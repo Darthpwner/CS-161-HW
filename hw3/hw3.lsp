@@ -424,7 +424,16 @@
 (invalid-move '((1 3 5)) 'up); t
 (invalid-move '((1 3 5)) 'righ); nil
 
+;Consecutive boxes
+(invalid-move '((1 0 5) (5 2 3)) 'left); t
+
+(invalid-move '((1 0 5) (3 5 4)) 'right); nil
+
+(invalid-move '((6 0 5) (2 5 4) (4 0 0)) 'down); nil
+
 (invalid-move '((0 2 2) (4 2 5) (7 3 7) ) 'up); t
+
+(invalid-move '((0 2 2) (4 5 5) (7 3 7) ) 'up); t
 
 ("END INVALID MOVE")
 
