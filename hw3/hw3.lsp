@@ -360,6 +360,9 @@
 (left '((0 1 2) (4 3 5) (6 7 8) ) )
 (right '((0 1 2) (4 3 5) (6 7 8) ) )
 
+(up2 '((0 -69 2) (4 100 5) (60 3 8) ) )
+
+
 (right '((1 2 3)))
 ("END DIRECTIONS")
 
@@ -370,9 +373,9 @@
 
 	;Check for walls immediately to the left, right, up, and down
 	(cond ((and (isWall (up S) ) (equal D 'up) ) t); Check for wall up
-		((and (isWall (down S) ) (equal D 'down) ) t); Check for wall down
-		((and (isWall (left S) ) (equal D 'left) ) t); Check for wall left
-		((and (isWall (right S) ) (equal D 'right) ) t); Check for wall right
+		 ((and (isWall (down S) ) (equal D 'down) ) t); Check for wall down
+		 ((and (isWall (left S) ) (equal D 'left) ) t); Check for wall left
+		 ((and (isWall (right S) ) (equal D 'right) ) t); Check for wall right
 
 		; Check for consecutive boxes to the left, right, up, and down
 		((and (isBox (up S) ) (isBox (up2 S) ) (equal D 'up) ) t); Check for consecutive boxes up
@@ -398,13 +401,13 @@
 		((and (isBoxStar (left S) ) (isBoxStar (left2 S) ) (equal D 'left) ) t); Check for consecutive boxes on top of goals left
 		((and (isBoxStar (right S) ) (isBoxStar(right2 S) ) (equal D 'right) ) t); Check for consecutive boxes on top of goals right
 
-		; Check for box then wall to the left, right, up, and down
+		; ; Check for box then wall to the left, right, up, and down
 		((and (isBox (up S) ) (isWall (up2 S) ) (equal D 'up) ) t); Check for box then wall up
 		((and (isBox (down S) ) (isWall (down2 S) ) (equal D 'down) ) t); Check for box then wall down
 		((and (isBox (left S) ) (isWall (left2 S) ) (equal D 'left) ) t); Check for box then wall left
 		((and (isBox (right S) ) (isWall (right2 S) ) (equal D 'right) ) t); Check for box then wall right
 
-		; Check for box on top of a goal then wall to the left, right, up, and down
+		; ; Check for box on top of a goal then wall to the left, right, up, and down
 		((and (isBoxStar (up S) ) (isWall (up2 S) ) (equal D 'up) ) t); Check for box on goal then wall up
 		((and (isBoxStar (down S) ) (isWall (down2 S) ) (equal D 'down) ) t); Check for box on goal then wall down
 		((and (isBoxStar (left S) ) (isWall (left2 S) ) (equal D 'left) ) t); Check for box on goal then wall left
@@ -415,8 +418,13 @@
 )
 
 ("INVALID MOVE")
-(invalid-move '((1 3 5)) 'right)
-(invalid-move '((0 2 2) (4 2 5) (6 3 7) ) 'up)
+(invalid-move '((1 3 5)) 'right); t
+(invalid-move '((1 3 5)) 'left); t
+(invalid-move '((1 3 5)) 'down); t
+(invalid-move '((1 3 5)) 'up); t
+(invalid-move '((1 3 5)) 'righ); nil
+
+(invalid-move '((0 2 2) (4 2 5) (7 3 7) ) 'up); t
 
 ("END INVALID MOVE")
 
