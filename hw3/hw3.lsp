@@ -368,9 +368,6 @@
 
 ; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
 (defun invalid-move(S D)
-	; (cond (t D) 
-	; )
-
 	;Check for walls immediately to the left, right, up, and down
 	(cond ((and (isWall (up S) ) (equal D 'up) ) t); Check for wall up
 		 ((and (isWall (down S) ) (equal D 'down) ) t); Check for wall down
@@ -437,9 +434,33 @@
 
 ("END INVALID MOVE")
 
-(defun try-move(S D)
-	(cond ((invalid-move S D) nil);	Return NIL if the move is invalid
+; Move the block
+(defun move-block(S D r c)
 
+)
+
+; Move the keeper
+(defun move-keeper(S D r c)
+
+)
+
+; Return the state after performing the successful move
+(defun state-after-move(S D r c)
+
+)
+
+(defun try-move(S D)
+	(let* 
+		(
+			(r (second (getKeeperPosition S 0))) (c (first (getKeeperPosition S 0)))
+		)
+
+		(cond ((invalid-move S D) nil);	Return NIL if the move is invalid
+			((equal D 'up) ); Check if move is up
+			((equal D 'down) ); Check if move is down
+			((equal D 'left) ); Check if move is left
+			((equal D 'right) ); Check if move is right
+		)
 	)
 )
 
