@@ -29,6 +29,7 @@
 ; (which will affect your score).
 ;  
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; General utility functions
 ; They are not necessary for this homework.
@@ -190,6 +191,51 @@
 	); end outer cond
 );end defun
 
+; (setq s1 '(
+; 			(1) (2)
+; 		  )
+; )
+; (setq s2 '(
+; 			(2) (1)
+; 		  )
+; )
+; (setq s3 '(
+; 			(1) (1)
+; 		  )
+; )
+("TEST GOAL-STATE")
+
+(setq p1 '((0 0 1 1 1 1 0 0 0) (1 1 1 0 0 1 1 1 1) (1 0 0 0 0 0 2 0 1) (1 0 1 0 0 1 2 0 1) (1 0 4 0 4 1 3 0 1)
+(1 1 1 1 1 1 1 1 1))
+)
+
+(setq s1 '((1 3 5 99 140 124 23 21))	; PROBLEM IT RETURNS NIL?!?!
+)
+
+(setq s2 '((1 2) (30 9))	; PROBLEM WITH 30
+)
+;goal-test('() ); nil
+;goal-test(s0); nil
+;(goal-test p1); nil
+;(goal-test s1)
+(goal-test '((0 1))); t
+(goal-test '((2 0))); nil 
+(goal-test '((0 2))); nil 
+(goal-test '((0) (2))); nil 
+(goal-test '((0) (1) (3)) ); t WORKS
+(goal-test '((0) (100) (3) (4) (2) ) ); nil
+(goal-test '((0) (1) ) ); t 
+(goal-test '((0 100 20) (0 0 0 0 100 109) (4234 9232 01) (130 418 9102 2) ) ); nil
+(goal-test '((0) (1) ) ); t 
+("BITCH")
+(goal-test p1); nil
+(goal-test s1); t
+(goal-test s2); nil
+
+;(goal-test s2); nil WORKS
+;goal-test((s3); t
+("END TEST GOAL-STATE")
+
 ; next-states helpers
 (defun get-square (S r c)
 	(cond ((NULL (first (first s) ) ) wall); Checks for out of bounds numbers and returns walls
@@ -205,6 +251,10 @@
 		)
 	)
 )
+
+("GET SQUARE")
+(get-square '((0 4 5) (2 9 3) (50 20 40)) -10 0)
+("END GET SQUARE")
 
 ; Helper functions for set-square
 (defun appendSetRow(L v R); Used to append the inner set row
@@ -230,6 +280,17 @@
 		((append (butlast S (- (length S) r) ) (list (appendSetRow (butlast (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) (- (length (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) c) ) (list v) (nthcdr (+ c 1) (first (nthcdr r (butlast S (- (- (length S) r) 1) ) ) ) ) ) ) (nthcdr (+ r 1) S) ) )	
 	)
 )
+
+("SET SQUARE")
+(set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 2 2 5)
+(set-square '((0 4 5) (2 9 3) (50 20 40 500 600 89) (5) (6)) 3 1 5)
+(set-square '((1 1 1 1 1 1 1 1 1)
+	   					 (1 0 0 0 1 0 0 0 1)
+	   					 (1 0 0 0 2 0 3 4 1)
+	   					 (1 0 0 0 1 0 0 0 1)
+	   					 (1 0 0 0 1 0 0 0 1)
+	   					 (1 1 1 1 1 1 1 1 1)) 2 2 6)
+("END SET SQUARE")
 
 ; Helper functions for try-move
 (defun left(S); Check the element to immediately to your left
@@ -263,6 +324,21 @@
 (defun down2(S); Check the element 2 spots down
 	(get-square S (+ (second (getKeeperPosition S 0) ) 2) (first (getKeeperPosition S 0) ) )
 )
+
+("DIRECTIONS") 
+(up '((0 1 2) (4 3 5) (6 7 8) ) )
+(down '((0 1 2) (4 3 5) (6 7 8) ) )
+(left '((0 1 2) (4 3 5) (6 7 8) ) )
+(right '((0 1 2) (4 3 5) (6 7 8) ) )
+
+(up2 '((0 -69 2) (4 100 5) (60 3 8) ) )
+
+
+(right '((1 2 3)))
+
+("FUCK ARKO")
+(up '((1 0 5) (5 2 5) (5 3 5)) )
+("END DIRECTIONS")
 
 ; Can't move if keeper (3) is next to a wall (1), consecutive boxes (2) (2), or box + weight (2) (1)
 (defun invalid-move(S D)
@@ -312,6 +388,28 @@
 	)
 )
 
+("INVALID MOVE")
+(invalid-move '((1 3 5)) 'right); t
+(invalid-move '((1 3 5)) 'left); t
+(invalid-move '((1 3 5)) 'down); t
+(invalid-move '((1 3 5)) 'up); t
+(invalid-move '((1 3 5)) 'righ); nil
+
+;Consecutive boxes
+(invalid-move '((1 0 5) (5 2 3)) 'left); t
+
+(invalid-move '((1 0 5) (3 5 4)) 'right); nil
+
+(invalid-move '((6 0 5) (2 5 4) (4 0 0)) 'down); nil
+
+(invalid-move '((0 2 2) (4 2 5) (7 3 7) ) 'up); t
+
+(invalid-move '((0 2 2) (4 5 5) (7 3 7) ) 'up); t
+
+("ASSHOLE")
+(invalid-move '((1 2 3) (5 2 5) (5 0 5)) 'left)
+("END INVALID MOVE")
+
 ; Move the block
 (defun move-block(S D)
 	(cond ((equal D 'up)
@@ -346,6 +444,19 @@
 	)
 )
 
+("MOVE BLOCKS")
+(move-block '((1 0 5) (5 2 5) (5 3 5)) 'up); '((1 2 5) (5 2 5) (5 3 5))
+(move-block '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 3 5) (5 2 5) (5 2 5))
+(move-block '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 2 3) (5 2 5) (5 0 5))
+(move-block '((1 5 5) (5 2 5) (3 5 5)) 'right);	'((1 5 5) (5 2 5) (3 5 2))
+
+("PUSSY")
+(move-block '((1 4 5) (5 2 5) (5 3 5)) 'up); '((1 5 5) (5 2 5) (5 3 5))
+(move-block '((1 3 5) (5 2 5) (5 4 5)) 'down);	'((1 3 5) (5 2 5) (5 5 5))
+(move-block '((4 2 3) (5 2 5) (5 0 5)) 'left);	'((5 2 3) (5 2 5) (5 0 5))
+(move-block '((1 5 5) (5 2 5) (3 5 4)) 'right);	'((1 5 5) (5 2 5) (3 5 5))
+("END MOVE BLOCKS")
+
 ; Move the keeper
 (defun move-keeper(S D)
 	(cond ((equal D 'up)
@@ -374,6 +485,14 @@
 	)
 )
 
+("MOVE KEEPER")
+(move-keeper '((1 0 5) (5 2 5) (5 3 5)) 'up); '((1 2 5) (5 3 5) (5 3 5))
+(move-keeper '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 0 5) (5 6 5) (5 0 5))
+(move-keeper '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 3 5) (5 3 5) (5 2 5))
+(move-keeper '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 3 0) (5 2 5) (5 0 5))
+(move-keeper '((1 5 5) (5 2 5) (6 5 4)) 'right);	'((1 5 5) (5 2 5) (6 6 2)); (0 6 5)
+("END MOVE KEEPER")
+
 ; Return the state that the keeper was originally on after performing the successful move
 (defun state-after-move(S D)
 	(cond
@@ -382,12 +501,27 @@
 	)
 )
 
-; Attempts the move and returns NIL if invalid or the state after performing the move
+("STATE AFTER MOVE")
+(state-after-move '((1 0 5) (5 2 5) (5 3 5)) 'up); '((1 2 5) (5 3 5) (5 0 5))
+(state-after-move '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 2 5) (5 6 5) (5 0 5))
+(state-after-move '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 0 5) (5 3 5) (5 2 5))
+(state-after-move '((1 2 3) (5 2 5) (5 0 5)) 'left);	'((2 3 0) (5 2 5) (5 0 5))
+(state-after-move '((1 5 5) (5 2 5) (3 5 4)) 'right);	'((1 5 5) (5 2 5) (0 6 5)) 
+("END STATE AFTER MOVE")
+
 (defun try-move(S D)
 	(cond ((invalid-move S D) nil);	Return NIL if the move is invalid
 		(t (state-after-move S D) ); Get the moves from state-after-move
 	)
 )
+
+("TRY MOVE")
+(try-move '((1 0 5) (5 2 5) (5 3 5)) 'up); '((1 2 5) (5 3 5) (5 0 5))
+(try-move '((1 0 5) (5 4 5) (5 3 5)) 'up); '((1 2 5) (5 6 5) (5 0 5))
+(try-move '((1 3 5) (5 2 5) (5 0 5)) 'down);	'((1 0 5) (5 3 5) (5 2 5))
+(try-move '((1 2 3) (5 2 5) (5 0 5)) 'left);	NIL
+(try-move '((1 5 5) (5 2 5) (3 5 4)) 'right);	'((1 5 5) (5 2 5) (0 6 5)) 
+("END TRY MOVE")
 
 ; EXERCISE: Modify this function to return the list of
 ; sucessor states of s.
@@ -417,6 +551,19 @@
     (cleanUpList result);end
    );end let
   );
+ 
+(setq s1 '( (1 1 1 1 1) (1 0 0 4 1) (1 0 2 0 1) (1 0 3 0 1) (1 0 0 0 1) (1 1 1 1 1))
+)
+
+("NEXT STATES")
+(next-states '((1 0 0 0 1) (1 0 4 0 1) (1 1 3 5 0) (1 1 2 2 1) (1 1 4 2 1))
+)
+
+("CHRISTINE PANG")
+(next-states s1)
+("DJOKOVIC")
+(sokoban )
+("END OF NEXT STATES")
 
 ; EXERCISE: Modify this function to compute the trivial
 ; admissible heuristic.
@@ -425,6 +572,10 @@
 (defun h0 (s)
  	(cond (t 0) ); Return 0 in all cases
  )
+
+("h0")
+	(h0 '(1 2 3))
+("END h0")
 
 ; EXERCISE: Modify this function to compute the
 ; number of misplaced boxes in s.
@@ -445,6 +596,18 @@
 	)
 )
 
+("h1")
+(h1 '((2 2 2 2) ) );	4
+(h1 '((0 0) (2 2) ) );	2
+(h1 '((1 2 3 2 100 -69 2 ) ) ); 3
+(h1 s1);	1
+("END h1")
+
+; NO TIEBREAKING! :(
+; GET MINIMUM DISTANCE FROM KEEPER TO GO TO THE NEAREST BOX
+; SHOULD SEPARATE TWO STATES
+; ADD MINIMUM VALUE FOR KEEPER TO GO TO ANY OF THESE BOXES
+
 ; EXERCISE: Change the name of this function to h<UID> where
 ; <UID> is your actual student ID number. Then, modify this
 ; function to compute an admissible heuristic value of s.
@@ -455,6 +618,11 @@
 ; running time of a function call.
 ;
 
+; NO TIEBREAKING! :(
+; GET MINIMUM DISTANCE FROM KEEPER TO GO TO THE NEAREST BOX
+; SHOULD SEPARATE TWO STATES
+; ADD MINIMUM VALUE FOR KEEPER TO GO TO ANY OF THESE BOXES
+
 ; Check the distance from keeper to box upwards
 (defun min-distance-up(S)
 	(cond ((equal (try-move S 'up) nil) 5000); Return 5000 (Max Heuristic value) if move up is invalid (BUGGY)
@@ -462,6 +630,14 @@
 		(t (+ (min-distance-up (try-move S 'up) ) 1) ); else, keep going upwards
 	)
 )
+
+("MIN DISTANCE UP")
+(min-distance-up '( (1 2 0) (1 3 0) (1 0 0) ) ); 5000
+(min-distance-up '((0 0 0) (1 2 0) (1 0 0) (1 3 0) ) ); 1
+(min-distance-up '((1 2 0) (1 0 0) (1 6 0) (1 0 0) ) ); 5000 PROBLEM WITH RECURSION! (5001)
+(min-distance-up '((1 2 0) (1 0 0) (1 0 0) (1 6 0) ) ); 5000 PROBLEM WITH RECURSION! (5002)
+(min-distance-up '((1 0 0) (1 2 0) (1 3 0) ) ); 0
+("END MIN DISTANCE UP")
 
 ; Check the distance from keeper to box downwards
 (defun min-distance-down(S)
@@ -471,6 +647,10 @@
 	)
 )
 
+("MIN DISTANCE DOWN")
+
+("END MIN DISTANCE DOWN")
+
 ; Check the distance from the keeper to box left
 (defun min-distance-left(S)
 	(cond ((equal (try-move S 'left) nil) 5000); Return 5000 (Max Heuristic Value) if move left is invalid
@@ -478,6 +658,10 @@
 		(t (+ (min-distance-left (try-move S 'left) ) 1) ); else, keep going left
 	)
 )
+
+("MIN DISTANCE LEFT")
+
+("END MIN DISTANCE LEFT")
 
 ; Check the distance from the keeper to box right
 (defun min-distance-right(S)
@@ -487,6 +671,9 @@
 	)
 )
 
+("MIN DISTANCE RIGHT")
+
+("END MIN DISTANCE RIGHT")
 ; 	^				^
 ; 	|				|
 ; <-  3 ->	or 	<- 6 ->	My heuristic checks in the immediately 
@@ -528,10 +715,25 @@
 	)	
 )
 
-; My h904281426 heuristic is admissible because it seeks the shortest path to a box, so it does not overcount the number of steps.
 (defun h904281426 (s)
 	(min-distance-from-keeper-to-box S); Heuristic returns the minimum distance of the keeper to the box
 )
+
+(setq matthew '( (0 0 0 0 0 0 0) (0 0 0 0 2 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 2 0 0 3 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 0 0 0 2 0 0) (0 0 0 0 0 0 0) )
+); 4 up, 2 left, 3 down: RETURN 2
+
+(setq frank '( (0 0 0 0 0 0 0) (0 0 0 0 2 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (1 2 0 0 3 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 0 0 0 0 0 0) (0 0 0 0 2 0 0) (0 0 0 0 0 0 0) )
+); 4 up, invalid left, 3 down: RETURN 3
+
+
+("hUID")
+(h904281426 '( (1 2 0) (1 3 0) (1 0 0) ));	0
+(h904281426 '( (1 0 0) (0 2 0 )(1 0 0) (1 3 0) ));	1
+(h904281426 '( (1 0 0) (0 2 0 ) (0 0 0) (0 0 0) (0 0 0) (1 0 0) (1 3 0) ));	4
+(h904281426 matthew);	2
+(h904281426 frank);	3
+
+("END hUID")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -852,3 +1054,12 @@
     (sleep delay)
     );end dolist
   );end defun
+
+; (load-a-star)
+; (printstates (a* p1 #'goal-test #'next-states #'h0) 0.2)
+
+; (load-a-star)
+; (printstates (a* p1 #'goal-test #'next-states #'h1) 0.2)
+
+(load-a-star)
+(printstates (a* p20 #'goal-test #'next-states #'h1) 0.2)
