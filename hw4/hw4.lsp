@@ -42,6 +42,17 @@
 (check-row '() 2); t because it is empty list CHECK THIS CONDITION
 ("END CHECK ROW")
 
+; Takes the absolute value of the "number" input
+(defun absolute-value(number)
+	(cond ((< number 0) (- 0 number) ); If number is negative, then return it as positive
+		(t number); else, return the number's original value
+	)
+)
+
+(abs -69); 69
+(abs 0); 0
+(abs 102); 102
+
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
 ; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
 (defun check-diagonal-left(N Q)
