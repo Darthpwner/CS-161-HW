@@ -16,6 +16,8 @@
 (construct-board 0)
 (construct-board 1)
 (construct-board 2)
+(construct-board 8)
+
 
 
 (defun place-queen(N)
