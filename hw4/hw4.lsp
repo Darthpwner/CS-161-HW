@@ -7,7 +7,7 @@
 )
 
 ; QUEENS helper functions
-; Constructs a board diagram with N number of rows
+; Constructs a board diagram with N number of rows and cols
 ; _ _ _ _ _ _ _
 ; 1 2 3 ...	  N
 (defun construct-board(N)
@@ -55,10 +55,23 @@
 
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
 ; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
-(defun check-diagonal-left(N Q)
-	(cond ); Checked all the diagonals
+(defun check-left-diagonal-move-left(N Q)
+	(cond (and () () ) t); Checked all the diagonals
 		();	Check the current left diagnoal
-		();	Move to next left diagonal
+		(); Move to next left diagonal on a column to the right
+)
+
+(defun check-left-diagonal-move-right(N Q)
+	(cond (and () () ) t); Checked all the diagonals
+		();	Check the current left diagnoal
+		();	Move to next left diagonal on a column to the left
+)
+
+; N is a list representing the rows of your board, Q checks for the column matches in the queens
+; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
+(defun check-diagonal-left(N Q)
+	(cond (and (check-left-diagonal-move-left N Q) (check-left-diagonal-move-right N Q) ) t); Checked all the left diagonals
+		(t nil); else, there 
 )
 
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
@@ -66,7 +79,8 @@
 (defun check-diagonal-right(N Q)
 	(cond ); Checked all the right diagonals
 		();	Check the current right diagnoal
-		(); Move to the next right diagonal
+		(); Move to the next right diagonal on a column to the left
+		(); Move to the next right diagonal on a column to the right
 )
 
 (defun place-queen(N)
