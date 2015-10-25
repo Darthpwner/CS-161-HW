@@ -27,20 +27,20 @@
 ; These assume that previous states were valid and the added element Q is the next free column on your list
 
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
-; Returns t if the row is valid, nil if a queen shares the same column
+; Returns t if the added column is valid, nil if a queen shares the same column
 ; Algorithm, look for repeated member states in the list and see if it equals Q
-(defun check-row(N Q)
+(defun check-column(N Q)
 	(cond ((null N) t);	You went through the entire list and did not find a match, so it is safe to place a Queen
 		((equal Q (first N) ) nil); Found a match in the list, don't place a queen
-		(t (check-row (rest N) Q) ); Check the next row
+		(t (check-column (rest N) Q) ); Check the next row
 	)
 )
 
-("CHECK ROW")
-(check-row '(1 2 3) 4); t
-(check-row '(0 1 2) 2); nil
-(check-row '() 2); t because it is empty list CHECK THIS CONDITION
-("END CHECK ROW")
+("CHECK COLUMN")
+(check-column '(1 2 3) 4); t
+(check-column '(0 1 2) 2); nil
+(check-column '() 2); t because it is empty list CHECK THIS CONDITION
+("END CHECK COLUMN")
 
 ; Takes the absolute value of the "number" input
 (defun absolute-value(number)
