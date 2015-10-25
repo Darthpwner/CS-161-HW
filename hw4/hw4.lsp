@@ -53,6 +53,25 @@
 (abs 0); 0
 (abs 102); 102
 
+; (defun getCurrentPosition(N)
+
+; )
+
+; |X_i - X_j| != |i - j|
+(defun check-diagonal(N row q); Always pass in row as 0
+	(cond ((> row N) t);	You went through the entire list and did not find a match in a diagonal, so it is safe to place a Queen
+		();	Found a match in a diagonal, don't place the queen
+		(t (check-diagonal (rest N) Q) );	Check remaining diagonals
+	)
+)
+
+(defun check-column(N Q)
+	(cond ((null N) t);	You went through the entire list and did not find a match in a column, so it is safe to place a Queen
+		((equal Q (first N) ) nil); Found a match in a column, don't place a queen
+		(t (check-column (rest N) Q) ); Check the next row
+	)
+)
+
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
 ; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
 (defun check-left-diagonal-move-left(N Q)
