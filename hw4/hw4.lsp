@@ -191,12 +191,16 @@
 ; 		(); Move to the next right diagonal on a column to the right
 ; )
 
-; Performs the add, then calls the check constraints
-(defun place-queen(N)
-	(cond ((and (check-diagonal N) (check-column N) ) <Make move>); First make the move, then add and check
-
+; Performs the add, then calls the check constraints. If the add is invalid, revert to the previous state
+(defun place-queen(N Q)
+	(cond ((not(and (check-diagonal (append (list Q) N) ) (check-column (append (list Q) N) ) ) ) butlast N 1); Check if the move is invalid. If it is, revert back to the previous valid state
+		(append (list Q) N); Otherwise, return the state of the board after making the move
 	)
 )
+
+("PLACE QUEEN")
+(place-queen '(1 2 3 4) 5); (1 2 3 4 5)
+("END PLACE QUEEN")
 
 
 
