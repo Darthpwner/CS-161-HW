@@ -190,8 +190,6 @@
 
 ("END PLACE QUEEN")
 
-
-
 (defun next-state(N)
 
 )
