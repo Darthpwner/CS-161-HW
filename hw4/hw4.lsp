@@ -183,7 +183,11 @@
 )
 
 ("PLACE QUEEN")
-(place-queen '(1 2 3 4) 5); (1 2 3 4 5)
+(place-queen '(3 1 4) 2); (3 1 4 2)
+(place-queen '(3 1 4) 1); (3 1 4)
+(place-queen '(3 1 4) 3); (3 1 4)
+(place-queen '(3 1 4) 4); (3 1 4)
+
 ("END PLACE QUEEN")
 
 
