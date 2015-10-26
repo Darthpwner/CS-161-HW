@@ -64,7 +64,7 @@
 
 ; |X_i - X_j| == |i - j|
 (defun check-diagonal(N)
-	(check-diagonal-helper N (rest N) 1);	n1 and n2 are offset initially by a differnece of 1
+	(check-diagonal-helper N (rest N) 1);	n1 and n2 are offset initially by a differnece of 1, always pass in rowIndex as 1
 )
 
 ; n1 and n2 will initially be the same
@@ -73,6 +73,7 @@
 		((equal (absolute-value(- (first n1) (first n2) ) ) rowIndex) nil); Found a diagonal match, don't place a queen
 		((not (equal (rest n2) nil) ) (check-diagonal-helper n1 (rest n2) (+ rowIndex 1) ) ); If you are not at the last row, check next row and column against the current row and column in the list
 		(t (check-diagonal-helper (rest n1) (nthcdr 1 (rest n1)) (setq rowIndex 1) ) ); Move to next row and column (item) in the list and reset rowIndex
+		; HOW DO YOU RECURSIVELY RESET ROWINDEX :(
 	)
 )
 
