@@ -56,15 +56,16 @@
 ; |X_i - X_j| == |i - j|
 (defun check-diagonal(N startRow row Q); Always pass in startRow as 1  
 	
-	(cond ((> startRow (length N) ) t);	Stop if the startRow is greater than N
-		;	 Check if |X_i - X_j| == |i - j|. This means you have a diagonal match
-		((equal (absolute-value(- row startRow) ) (absolute-value(- Q (first N) ) ) ) nil)
+	(cond ((> startRow (length N) ) t);	Safe to place a queen if the startRow is greater than N
+		;	 Check if |X_i - X_j| == |i - j|. This means you have a diagonal match, so don't place  queen
+		((equal (absolute-value(- row startRow) ) (absolute-value(- Q (first N) ) ) ) nil);	FUCKS UP WHEN YOU GET TO A SAME ROW
 		(t (check-diagonal (rest N) (+ startRow 1) row Q) )
 	)
 )
 
 ("CHECK DIAGONAL")
-(check-diagonal '(4 1 2 1) 1 3 2);	t
+(check-diagonal '(4 1 2 1) 1 3 2);	nil
+(check-diagonal '(3 1 4 2) 1 2 1);	t
 
 ("END CHECK DIAGONAL")
 
