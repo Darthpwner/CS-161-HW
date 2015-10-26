@@ -49,9 +49,9 @@
 	)
 )
 
-(abs -69); 69
-(abs 0); 0
-(abs 102); 102
+; (abs -69); 69
+; (abs 0); 0
+; (abs 102); 102
 
 ; |X_i - X_j| == |i - j|
 (defun check-diagonal(N startRow row Q); Always pass in startRow as 1  
@@ -63,8 +63,10 @@
 	)
 )
 
-()
-(defun check-diagonal '(4 1 2 1) 1 3 2);
+("CHECK DIAGONAL")
+(check-diagonal '(4 1 2 1) 1 3 2);	t
+
+("END CHECK DIAGONAL")
 
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
 ; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
