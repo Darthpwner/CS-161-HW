@@ -2,9 +2,14 @@
 ; N Queens Solver
 
 ; Calls helper functions to solve the N-Queens problem on a board (N * N size)
+; N is the size of the board in terms of number of squares
 (defun QUEENS(N)
-
+	(try-move '() 1 N)
 )
+
+("QUEENS")
+(QUEENS 1)
+("END QUEENS")
 
 ; QUEENS helper functions
 ; Constructs a board diagram with N number of rows and cols
@@ -199,17 +204,15 @@
 
 ; Checks if we reached a valid final state
 (defun final-state(N Q N-size)
-	(cond ((and (not(invalid-state N) (< (length N) N-size) ) nil); Check if the move is invalid AND length N < max. If it is, return nil
+	(cond ((and (not(invalid-state N) (< (length N) N-size) ) ) nil); Check if the move is invalid AND length N < max. If it is, return nil
 		(t t); Otherwise, return t since move was valid
 	)
 )
 
-(defun try-move(N rowIndex)
-	(cond ((final-state N rowIndex (length N) ) N);	//Return N if we have reached the final state
+(defun try-move(N rowIndex N-size)
+	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
 		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
-		((< rowIndex (length N) ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
+		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
 		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
 	)
 )
-
-(try-move 5 1)
