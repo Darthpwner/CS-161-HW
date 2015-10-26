@@ -65,7 +65,7 @@
 )
 
 ; |X_i - X_j| != |i - j|
-(defun check-diagonal(N startRow row); Always pass in startRow as 1  
+(defun check-diagonal(N startRow row Q); Always pass in startRow as 1  
 	
 	(cond (> startRow (length N) );	Stop if the startRow is greater than N
 		; Look at rows above "row"
@@ -74,8 +74,10 @@
 		)
 
 		;
-		((equal (absolute-value(- row startRow) ) (absolute-value(- <column> <startColumn>) ) ) nil)
+		((equal (absolute-value(- row startRow) ) (absolute-value(- Q (first N) ) ) ) nil)
 		;
+
+		; First and rest for column
 
 		; Look at rows below "row"
 		(cond (> startRow row)
