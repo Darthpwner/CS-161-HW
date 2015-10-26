@@ -53,17 +53,6 @@
 (abs 0); 0
 (abs 102); 102
 
-(defun getCurrentRow(startRow)
-	(startRow)
-)
-
-(defun check-column(N Q)
-	(cond ((null N) t);	You went through the entire list and did not find a match, so it is safe to place a Queen
-		((equal Q (first N) ) nil); Found a match in the list, don't place a queen
-		(t (check-column (rest N) Q) ); Check the next row
-	)
-)
-
 ; |X_i - X_j| == |i - j|
 (defun check-diagonal(N startRow row Q); Always pass in startRow as 1  
 	
@@ -74,44 +63,38 @@
 	)
 )
 
+()
 (defun check-diagonal '(4 1 2 1) 1 3 2);
 
-(defun check-column(N Q)
-	(cond ((null N) t);	You went through the entire list and did not find a match in a column, so it is safe to place a Queen
-		((equal Q (first N) ) nil); Found a match in a column, don't place a queen
-		(t (check-column (rest N) Q) ); Check the next row
-	)
-)
-
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
 ; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
-(defun check-left-diagonal-move-left(N Q)
-	(cond (and () () ) t); Checked all the diagonals
-		();	Check the current left diagnoal
-		(); Move to next left diagonal on a column to the right
-)
+; (defun check-left-diagonal-move-left(N Q)
+; 	(cond (and () () ) t); Checked all the diagonals
+; 		();	Check the current left diagnoal
+; 		(); Move to next left diagonal on a column to the right
+; )
 
-(defun check-left-diagonal-move-right(N Q)
-	(cond (and () () ) t); Checked all the diagonals
-		();	Check the current left diagnoal
-		();	Move to next left diagonal on a column to the left
-)
+; (defun check-left-diagonal-move-right(N Q)
+; 	(cond (and () () ) t); Checked all the diagonals
+; 		();	Check the current left diagnoal
+; 		();	Move to next left diagonal on a column to the left
+; )
 
-; N is a list representing the rows of your board, Q checks for the column matches in the queens
-; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
-(defun check-diagonal-left(N Q)
-	(cond (and (check-left-diagonal-move-left N Q) (check-left-diagonal-move-right N Q) ) t); Checked all the left diagonals
-		(t nil); else, there 
-)
+; ; N is a list representing the rows of your board, Q checks for the column matches in the queens
+; ; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
+; (defun check-diagonal-left(N Q)
+; 	(cond (and (check-left-diagonal-move-left N Q) (check-left-diagonal-move-right N Q) ) t); Checked all the left diagonals
+; 		(t nil); else, there 
+; )
 
-; N is a list representing the rows of your board, Q checks for the column matches in the queens
-; Returns t if the diagonal going right is valid, nil if another queen is on the same diagonal
-(defun check-diagonal-right(N Q)
-	(cond ); Checked all the right diagonals
-		();	Check the current right diagnoal
-		(); Move to the next right diagonal on a column to the left
-		(); Move to the next right diagonal on a column to the right
-)
+; ; N is a list representing the rows of your board, Q checks for the column matches in the queens
+; ; Returns t if the diagonal going right is valid, nil if another queen is on the same diagonal
+; (defun check-diagonal-right(N Q)
+; 	(cond ); Checked all the right diagonals
+; 		();	Check the current right diagnoal
+; 		(); Move to the next right diagonal on a column to the left
+; 		(); Move to the next right diagonal on a column to the right
+; )
 
 (defun place-queen(N)
 
