@@ -64,36 +64,17 @@
 	)
 )
 
-; |X_i - X_j| != |i - j|
+; |X_i - X_j| == |i - j|
 (defun check-diagonal(N startRow row Q); Always pass in startRow as 1  
 	
-	(cond (> startRow (length N) );	Stop if the startRow is greater than N
-		; Look at rows above "row"
-		(cond (< startRow row)	
-
-		)
-
-		;
+	(cond ((> startRow (length N) ) t);	Stop if the startRow is greater than N
+		;	 Check if |X_i - X_j| == |i - j|. This means you have a diagonal match
 		((equal (absolute-value(- row startRow) ) (absolute-value(- Q (first N) ) ) ) nil)
-		;
-
-		; First and rest for column
-
-		; Look at rows below "row"
-		(cond (> startRow row)
-
-		)
-	)
-
-	; Look at rows below "row"
-
-	(cond ((> row N) t);	You went through the entire list and did not find a match in a diagonal, so it is safe to place a Queen
-		();	Found a match in a diagonal, don't place the queen
-		(t (check-diagonal (rest N) (+ row 1) Q) );	Check remaining diagonals
+		(t (check-diagonal (rest N) (+ startRow 1) row Q) )
 	)
 )
 
-(defun check-diagonal '(4 1 2 1) 1 2)
+(defun check-diagonal '(4 1 2 1) 1 3 2);
 
 (defun check-column(N Q)
 	(cond ((null N) t);	You went through the entire list and did not find a match in a column, so it is safe to place a Queen
