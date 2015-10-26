@@ -54,18 +54,50 @@
 ; (abs 102); 102
 
 ; |X_i - X_j| == |i - j|
-(defun check-diagonal(N startRow row Q); Always pass in startRow as 1  
+; (defun check-diagonal(N startRow row Q); Always pass in startRow as 1  
 	
-	(cond ((> startRow (length N) ) t);	Safe to place a queen if the startRow is greater than N
-		;	 Check if |X_i - X_j| == |i - j|. This means you have a diagonal match, so don't place  queen
-		((equal (absolute-value(- row startRow) ) (absolute-value(- Q (first N) ) ) ) nil);	FUCKS UP WHEN YOU GET TO A SAME ROW
-		(t (check-diagonal (rest N) (+ startRow 1) row Q) )
+; 	(cond ((> startRow (length N) ) t);	Safe to place a queen if the startRow is greater than N
+; 		((and (not (equal startRow row) ) (equal (absolute-value(- row startRow) ) (absolute-value(- Q (first N) ) ) ) ) nil);	 Check if |X_i - X_j| == |i - j|. This means you have a diagonal match, so don't place queen. NOTE: This check also enforces that you cannot check startRow with row	
+; 		(t (check-diagonal (rest N) (+ startRow 1) row Q) )
+; 	)
+; )
+
+; |X_i - X_j| == |i - j|
+(defun check-diagonal(N)
+	(check-diagonal-helper N N 1);	n1 and n2 will always be the same when passed in and rowIndex always starts at 1
+)
+
+; n1 and n2 will initially be the same
+(defun check-diagonal-helper(n1 n2 rowIndex);	Always pass in rowIndex as 1
+	; FIX THE SHIT BELOW
+	(cond ((null n1) t); You went through the entire list and did not find a match, so it is safe to place a Queen
+		((equal (absolute-value(- (first n1) (first(rest n2) ) ) ) rowIndex) nil); Found a diagonal match, don't place a queen
+		(t (check-diagonal-helper n1 (rest n2) (+ rowIndex 1) ) ); Check next row and column against the current row and column in the list
+		(t (check-diagonal-helper (rest n1) (rest n2) (setq rowIndex 1) ) ); Move to next row and column (item) in the list
 	)
 )
 
 ("CHECK DIAGONAL")
-(check-diagonal '(4 1 2 1) 1 3 2);	nil
-(check-diagonal '(3 1 4 2) 1 2 1);	t
+("2 x 2")
+(check-diagonal '(1 2) ); nil
+(check-diagonal '(1 2) ); nil
+(check-diagonal '(2 1) );	nil
+(check-diagonal '(2 1) );	nil
+("END 2 x 2")
+
+("3 x 3")
+(check-diagonal '(1 2 3) ); nil
+(check-diagonal '(2 1 3) ); nil
+(check-diagonal '(3 1 1) ); nil
+(check-diagonal '(1 1 1) ); t
+(check-diagonal '(2 2 2) ); t
+
+
+("END 3 x 3")
+
+(check-diagonal '(4 1 2 1) );	nil
+(check-diagonal '(3 1 4 2) );	t
+
 
 ("END CHECK DIAGONAL")
 
