@@ -26,26 +26,47 @@
 ; Constraint check helper functions
 ; These assume that previous states were valid and the added element Q is the next free column on your list
 
+(defun check-column(N)
+	(check-column-helper N (rest N) 1); Start off with 1
+)
+
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
 ; Returns t if the added column is valid, nil if a queen shares the same column
 ; Algorithm, look for repeated member states in the list and see if it equals Q
-(defun check-column(N Q)
-	(cond ((null N) t);	You went through the entire list and did not find a match, so it is safe to place a Queen
-		((equal Q (first N) ) nil); Found a match in the list, don't place a queen
-		(t (check-column (rest N) Q) ); Check the next row
+
+; This function CHECKS BEFORE ADDING!
+; (defun check-column(N Q)
+; 	(cond ((null N) t);	You went through the entire list and did not find a match, so it is safe to place a Queen
+; 		((equal Q (first N) ) nil); Found a match in the list, don't place a queen
+; 		(t (check-column-helper(rest N) Q) ); Check the next row
+; 	)
+; )
+
+; Search for all possible duplicates up to the length of n1
+; n1 is your original list, n2 is the modified list, Q is the column for which you try to find duplicates
+(defun check-column-helper(n1 n2)
+	(cond ((equal 1 (length n1) ) t);	You went through the entire list and did not find a match, so it is safe to place a Queen
+		((equal (first n1) (first n2) ) nil); Found a match in the list, don't place a queen
+		((not (equal (rest n2) nil) ) (check-column-helper n1 (rest n2) ) )
+		(t (check-column-helper (rest n1) (nthcdr 1 (rest n1) ) ) ); Check the next possible column
 	)
 )
 
 ("CHECK COLUMN")
-(check-column '(1 2 3) 4); t
-(check-column '(0 1 2) 2); nil
-(check-column '() 2); t because it is empty list CHECK THIS CONDITION
+(check-column '(1 2 3) ); t
+(check-column '(0 1 1) ); nil
+(check-column '() ); t because it is empty list CHECK THIS CONDITION
+(check-column '(1 2 3 4 5) ); t
+(check-column '(5 4 3 2 1) ); t
+(check-column '(5 4 3 2 2) ); nil
+(check-column '(5 4 3 2 5) ); nil
 ("END CHECK COLUMN")
 
 ; (abs -69); 69
 ; (abs 0); 0
 ; (abs 102); 102
 
+; This function ADDS THEN CHECKS
 (defun check-diagonal(N)
 	(check-diagonal-helper N (rest N) 1);	n1 and n2 are offset initially by a differnece of 1, always pass in rowIndex as 1
 )
@@ -159,6 +180,7 @@
 ; 		(); Move to the next right diagonal on a column to the right
 ; )
 
+; Performs the add, then calls the check constraints
 (defun place-queen(N)
 
 )
