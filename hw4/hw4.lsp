@@ -27,7 +27,7 @@
 ; These assume that previous states were valid and the added element Q is the next free column on your list
 
 (defun check-column(N)
-	(check-column-helper N (rest N) 1); Start off with 1
+	(check-column-helper N (rest N) )
 )
 
 ; N is a list representing the rows of your board, Q checks for the column matches in the queens
@@ -55,7 +55,7 @@
 ("CHECK COLUMN")
 (check-column '(1 2 3) ); t
 (check-column '(0 1 1) ); nil
-(check-column '() ); t because it is empty list CHECK THIS CONDITION
+(check-column '() ); nil because it is empty list CHECK THIS CONDITION
 (check-column '(1 2 3 4 5) ); t
 (check-column '(5 4 3 2 1) ); t
 (check-column '(5 4 3 2 2) ); nil
@@ -86,7 +86,8 @@
 
 ; Checking diagonals uses the following algorithm: if |X_i - X_j| == |i - j|, return nil (diagonal match); else, return t at the end
 (defun check-diagonal-helper(n1 n2 rowIndex);	Always pass in rowIndex as 1
-	(cond ((equal 1 (length n1) ) t); You went through the entire list and did not find a match, so it is safe to place a Queen
+	(cond ((NULL n1) nil) 
+		((equal 1 (length n1) ) t); You went through the entire list and did not find a match, so it is safe to place a Queen
 		((equal (absolute-value(- (first n1) (first n2) ) ) rowIndex) nil); Found a diagonal match, don't place a queen
 		((not (equal (rest n2) nil) ) (check-diagonal-helper n1 (rest n2) (+ rowIndex 1) ) ); If you are not at the last row, check next row and column against the current row and column in the list
 		(t (check-diagonal-helper (rest n1) (nthcdr 1 (rest n1)) (rowIndex-reset) ) ); Move to next row and column (item) in the list and reset rowIndex
@@ -95,6 +96,9 @@
 ; End of check diagonal helper functions
 
 ("CHECK DIAGONAL")
+("EMPTY")
+(check-diagonal '())
+
 ("2 x 2")
 (check-diagonal '(1 2) ); nil
 (check-diagonal '(1 2) ); nil
