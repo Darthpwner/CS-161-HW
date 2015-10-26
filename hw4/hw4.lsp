@@ -42,6 +42,15 @@
 (check-column '() 2); t because it is empty list CHECK THIS CONDITION
 ("END CHECK COLUMN")
 
+; (abs -69); 69
+; (abs 0); 0
+; (abs 102); 102
+
+(defun check-diagonal(N)
+	(check-diagonal-helper N (rest N) 1);	n1 and n2 are offset initially by a differnece of 1, always pass in rowIndex as 1
+)
+
+; check-diagonal helper functions
 ; Takes the absolute value of the "number" input
 (defun absolute-value(number)
 	(cond ((< number 0) (- 0 number) ); If number is negative, then return it as positive
@@ -49,33 +58,20 @@
 	)
 )
 
-; (abs -69); 69
-; (abs 0); 0
-; (abs 102); 102
-
-; |X_i - X_j| == |i - j|
-; (defun check-diagonal(N startRow row Q); Always pass in startRow as 1  
-	
-; 	(cond ((> startRow (length N) ) t);	Safe to place a queen if the startRow is greater than N
-; 		((and (not (equal startRow row) ) (equal (absolute-value(- row startRow) ) (absolute-value(- Q (first N) ) ) ) ) nil);	 Check if |X_i - X_j| == |i - j|. This means you have a diagonal match, so don't place queen. NOTE: This check also enforces that you cannot check startRow with row	
-; 		(t (check-diagonal (rest N) (+ startRow 1) row Q) )
-; 	)
-; )
-
-; |X_i - X_j| == |i - j|
-(defun check-diagonal(N)
-	(check-diagonal-helper N (rest N) 1);	n1 and n2 are offset initially by a differnece of 1, always pass in rowIndex as 1
+; Resets the row index to 1 when we move to the next row to compare (used instead of setq)
+(defun rowIndex-reset()
+	1
 )
 
-; n1 and n2 will initially be the same
+; Checking diagonals uses the following algorithm: if |X_i - X_j| == |i - j|, return nil (diagonal match); else, return t at the end
 (defun check-diagonal-helper(n1 n2 rowIndex);	Always pass in rowIndex as 1
 	(cond ((equal 1 (length n1) ) t); You went through the entire list and did not find a match, so it is safe to place a Queen
 		((equal (absolute-value(- (first n1) (first n2) ) ) rowIndex) nil); Found a diagonal match, don't place a queen
 		((not (equal (rest n2) nil) ) (check-diagonal-helper n1 (rest n2) (+ rowIndex 1) ) ); If you are not at the last row, check next row and column against the current row and column in the list
-		(t (check-diagonal-helper (rest n1) (nthcdr 1 (rest n1)) (setq rowIndex 1) ) ); Move to next row and column (item) in the list and reset rowIndex
-		; HOW DO YOU RECURSIVELY RESET ROWINDEX :(
+		(t (check-diagonal-helper (rest n1) (nthcdr 1 (rest n1)) (rowIndex-reset) ) ); Move to next row and column (item) in the list and reset rowIndex
 	)
 )
+; End of check diagonal helper functions
 
 ("CHECK DIAGONAL")
 ("2 x 2")
