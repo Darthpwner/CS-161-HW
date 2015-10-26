@@ -190,7 +190,18 @@
 
 ("END PLACE QUEEN")
 
-(defun next-state(N)
+; Checks if we reached a valid final state
+(defun final-state(N Q N-size)
+	(cond ((and (not(invalid-state N) (< (length N) N-size) ) nil); Check if the move is invalid AND length N < max. If it is, return nil
+		(t t); Otherwise, return t since move was valid
+	)
+)
 
+(defun try-move(N rowIndex)
+	(cond ())
+	; (cond (< rowIndex N);
+	; 	((place-queen-bool N rowIndex) (place-queen N rowIndex) )
+
+	; )
 )
 
