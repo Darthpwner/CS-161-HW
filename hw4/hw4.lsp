@@ -46,6 +46,7 @@
 ; 	)
 ; )
 
+; check-column helper function
 ; Search for all possible duplicates up to the length of n1
 ; n1 is your original list, n2 is the modified list
 (defun check-column-helper(n1 n2)
@@ -192,7 +193,9 @@
 
 ; Performs the add, then calls the check constraints
 (defun place-queen(N)
+	(cond ((and (check-diagonal N) (check-column N) ) <Make move>); First make the move, then add and check
 
+	)
 )
 
 
