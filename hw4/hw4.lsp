@@ -193,7 +193,7 @@
 
 ; Performs the add, then calls the check constraints. If the add is invalid, revert to the previous state
 (defun place-queen(N Q)
-	(cond ((not(and (check-diagonal (append (list Q) N) ) (check-column (append (list Q) N) ) ) ) butlast N 1); Check if the move is invalid. If it is, revert back to the previous valid state
+	(cond ((not(and (check-diagonal (append (list Q) N) ) (check-column (append (list Q) N) ) ) ) (butlast N 1) ); Check if the move is invalid. If it is, revert back to the previous valid state
 		(append (list Q) N); Otherwise, return the state of the board after making the move
 	)
 )
