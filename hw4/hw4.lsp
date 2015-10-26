@@ -182,6 +182,13 @@
 	)
 )
 
+; Boolean version of the place-queen function
+(defun placed-queen-successfully(N Q)
+	(cond ((not(invalid-state (append N (list Q) ) ) ) nil); Check if the move is invalid. If it is, return nil
+		(t t); Otherwise, return true because queen was placed successfully
+	)
+)
+
 ("PLACE QUEEN")
 (place-queen '(3 1 4) 2); (3 1 4 2)
 (place-queen '(3 1 4) 1); (3 1 4)
@@ -198,10 +205,11 @@
 )
 
 (defun try-move(N rowIndex)
-	(cond ())
-	; (cond (< rowIndex N);
-	; 	((place-queen-bool N rowIndex) (place-queen N rowIndex) )
-
-	; )
+	(cond ((final-state N rowIndex (length N) ) N);	//Return N if we have reached the final state
+		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
+		((< rowIndex (length N) ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
+		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
+	)
 )
 
+(try-move 5 1)
