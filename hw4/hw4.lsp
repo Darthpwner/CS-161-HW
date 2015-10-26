@@ -1,16 +1,6 @@
 ; CS 161 HW 4
 ; N Queens Solver
 
-; Calls helper functions to solve the N-Queens problem on a board (N * N size)
-; N is the size of the board in terms of number of squares
-(defun QUEENS(N)
-	(try-move '() 1 N)
-)
-
-("QUEENS")
-(QUEENS 1)
-("END QUEENS")
-
 ; QUEENS helper functions
 ; Constructs a board diagram with N number of rows and cols
 ; _ _ _ _ _ _ _
@@ -204,7 +194,7 @@
 
 ; Checks if we reached a valid final state
 (defun final-state(N Q N-size)
-	(cond ((and (not(invalid-state N) (< (length N) N-size) ) ) nil); Check if the move is invalid AND length N < max. If it is, return nil
+	(cond ((and (not(invalid-state N) ) (< (length N) N-size) ) nil); Check if the move is invalid AND length N < max. If it is, return nil
 		(t t); Otherwise, return t since move was valid
 	)
 )
@@ -216,3 +206,13 @@
 		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
 	)
 )
+
+; Calls helper functions to solve the N-Queens problem on a board (N * N size)
+; N is the size of the board in terms of number of squares
+(defun QUEENS(N)
+	(try-move '() 1 N)
+)
+
+("QUEENS")
+(QUEENS 1)
+("END QUEENS")
