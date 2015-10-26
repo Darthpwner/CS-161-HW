@@ -161,39 +161,23 @@
 
 ("END CHECK DIAGONAL")
 
-; N is a list representing the rows of your board, Q checks for the column matches in the queens
-; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
-; (defun check-left-diagonal-move-left(N Q)
-; 	(cond (and () () ) t); Checked all the diagonals
-; 		();	Check the current left diagnoal
-; 		(); Move to next left diagonal on a column to the right
-; )
+; Checks if state is invalid (breaks check-column or check-diagonal conditions or both)
+(defun invalid-state(N)
+	(cond ((and (check-column N) (check-diagonal N) ) t)
+		(t nil)
+	)
+)
 
-; (defun check-left-diagonal-move-right(N Q)
-; 	(cond (and () () ) t); Checked all the diagonals
-; 		();	Check the current left diagnoal
-; 		();	Move to next left diagonal on a column to the left
-; )
-
-; ; N is a list representing the rows of your board, Q checks for the column matches in the queens
-; ; Returns t if the diagonal going left is valid, nil if another queen is on the same diagonal
-; (defun check-diagonal-left(N Q)
-; 	(cond (and (check-left-diagonal-move-left N Q) (check-left-diagonal-move-right N Q) ) t); Checked all the left diagonals
-; 		(t nil); else, there 
-; )
-
-; ; N is a list representing the rows of your board, Q checks for the column matches in the queens
-; ; Returns t if the diagonal going right is valid, nil if another queen is on the same diagonal
-; (defun check-diagonal-right(N Q)
-; 	(cond ); Checked all the right diagonals
-; 		();	Check the current right diagnoal
-; 		(); Move to the next right diagonal on a column to the left
-; 		(); Move to the next right diagonal on a column to the right
-; )
+("INVALID STATE")
+(invalid-state '(1 2 3 4 5)); nil
+(invalid-state '(1)); t
+(invalid-state '(2 1)); nil
+(invalid-state '(3 1 4 2)); t
+("END INVALID STATE")
 
 ; Performs the add, then calls the check constraints. If the add is invalid, revert to the previous state
 (defun place-queen(N Q)
-	(cond ((not(and (check-diagonal (append (list Q) N) ) (check-column (append (list Q) N) ) ) ) (butlast N 1) ); Check if the move is invalid. If it is, revert back to the previous valid state
+	(cond ((not(and (check-diagonal (append N (list Q) ) ) (check-column (append (list Q) N) ) ) ) (butlast N 1) ); Check if the move is invalid. If it is, revert back to the previous valid state
 		(append (list Q) N); Otherwise, return the state of the board after making the move
 	)
 )
