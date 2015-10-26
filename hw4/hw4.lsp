@@ -177,8 +177,8 @@
 
 ; Performs the add, then calls the check constraints. If the add is invalid, revert to the previous state
 (defun place-queen(N Q)
-	(cond ((not(invalid-state (append N (list Q) ) ) ) (butlast N 1) ); Check if the move is invalid. If it is, revert back to the previous valid state
-		(append (list Q) N); Otherwise, return the state of the board after making the move
+	(cond ((not(invalid-state (append N (list Q) ) ) ) N); Check if the move is invalid. If it is, revert back to the previous valid state
+		(t (append N (list Q) ) ); Otherwise, return the state of the board after making the move
 	)
 )
 
