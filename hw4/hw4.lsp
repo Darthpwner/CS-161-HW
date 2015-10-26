@@ -94,9 +94,41 @@
 
 ("END 3 x 3")
 
+("4 x 4")
 (check-diagonal '(4 1 2 1) );	nil
 (check-diagonal '(3 1 4 2) );	t
 
+("5 x 5")
+(check-diagonal '(1 3 5 2 4) ); t
+(check-diagonal '(2 5 1 3 4) ); nil
+(check-diagonal '(4 1 3 5 2) ); t
+(check-diagonal '(1 2 4 5 3) ); nil
+
+("6 x 6")
+(check-diagonal '(5 3 1 6 4 2) ); t
+(check-diagonal '(5 4 1 3 2 1) ); nil
+(check-diagonal '(1 3 5 4 6 1) ); nil
+(check-diagonal '(2 2 3 1 4 6) ); nil
+(check-diagonal '(1 6 5 2 4 3) ); nil
+
+("7x7")
+(check-diagonal '(6 4 2 7 5 3 1)) ;true
+(check-diagonal '(6 5 2 7 5 3 1)) ;nil
+(check-diagonal '(6 4 2 3 5 3 1)) ;nil
+(check-diagonal '(6 4 2 7 5 3 3)) ;nil
+(check-diagonal '(6 4 2 7 6 3 1)) ;nil
+("8x8")
+(check-diagonal '(4 2 7 3 6 8 5 1)) ;true
+(check-diagonal '(4 2 7 1 6 8 5 1)) ;nil
+(check-diagonal '(4 2 7 3 6 5 5 1)) ;nil
+(check-diagonal '(4 2 3 2 6 8 5 1)) ;nil
+(check-diagonal '(4 2 7 3 6 8 3 1)) ;nil
+(check-diagonal '(6 4 7 1 8 2 5 3)) ;true
+("10x10")
+(check-diagonal '(7 4 2 9 5 10 8 6 3 1)) ;true
+(check-diagonal '(7 4 2 9 5 10 9 6 3 1)) ;nil
+(check-diagonal '(7 4 2 9 5 10 8 6 3 10)) ;nil
+(check-diagonal '(7 6 2 9 5 10 8 4 3 1)) ;nil
 
 ("END CHECK DIAGONAL")
 
