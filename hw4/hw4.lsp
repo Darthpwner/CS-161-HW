@@ -197,19 +197,23 @@
 
 ; Checks if we reached a valid final state
 (defun final-state(N Q N-size)
-	; (cond ((and (not (invalid-state N)) (equal (length N) N-size) ) t); Check if the move is valid AND length N == N-size. If it is, return t
-	; 	(t nil); Otherwise, return nil since we are in an invalid state
-	; )
-	(cond ((or (valid-state N) (not(equal (length N) N-size) ) ) nil)
-		(t t)
+	(cond ((and (valid-state N) (equal (length N) N-size) ) t);	Check if the move is valid AND (length N) == N-size. If it is, return t
+		(t nil);	Otherwise, return nil
 	)
 )
 
 ("FINAL-STATE")
-(final-state '(1) 1 1)
+(final-state '(1) 1 0); nil
+(final-state '(1) 1 2); nil
+(final-state '(1) 1 1); t
+(final-state '(1 2) 1 2); nil
+(final-state '(1 2) 1 1); nil
+(final-state '(1 2) 1 3); nil
+(final-state '(3 1 4 2) 1 3); nil
+(final-state '(3 1 4 2) 1 4); t
+(final-state '(3 1 4 2) 1 5); nil
 
-(final-state '(3 1 4 2) 1 4)
-("PUSSY FINAL-STATE")
+("END FINAL-STATE")
 
 (defun try-move(N rowIndex N-size)
 	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
