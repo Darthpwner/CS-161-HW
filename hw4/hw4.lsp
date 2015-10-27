@@ -212,7 +212,6 @@
 (final-state '(3 1 4 2) 1 3); nil
 (final-state '(3 1 4 2) 1 4); t
 (final-state '(3 1 4 2) 1 5); nil
-
 ("END FINAL-STATE")
 
 (defun try-move(N rowIndex N-size)
@@ -252,3 +251,32 @@
 (QUEENS 19)
 (QUEENS 20)
 ("END QUEENS")
+
+; FIGURE OUT HOW TO USE DFS
+;;;
+;;; Depth first search
+;;;
+
+;;; The function tree search is taken from Norvig's PAIP:
+(defun tree-search (states goal-p successors combiner)
+  "Find a state that satisfies goal-p.  Start with states,
+   and search according to successors and combiner."
+  ; (format t "~&;; states: ~a" states)
+  (cond ((endp states) nil)                              ; Dead end.
+        ((funcall goal-p (first states))                 ; Eureka!
+         (append (list (eureka (first states)))
+                 (tree-search (rest states)
+                              goal-p successors
+                              combiner)))
+        (t (tree-search                                  ; Keep looking.
+            (funcall combiner
+                     (funcall successors (first states))
+                     (rest states))
+            goal-p successors combiner))))
+
+;;; Using a combiner of append we implement a 
+;;; depth-first-search
+
+(defun depth-first-search (start goal-p successors)
+  "Search by expanding the deepest active state."
+  (tree-search (list start) goal-p successors #'append))
