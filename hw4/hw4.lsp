@@ -156,31 +156,27 @@
 
 ("END CHECK DIAGONAL")
 
-; Checks if state is invalid (breaks check-column or check-diagonal conditions or both)
-(defun invalid-state(N)
-	(cond ((and (check-column N) (check-diagonal N) ) t)
-		(t nil)
+; Checks if state is valid (satisfies check-column AND check-diagonal conditions)
+(defun valid-state(N)
+	(cond ((and (check-column N) (check-diagonal N) ) t); State is valid if it passes check-column and check-diagonal, so return t
+		(t nil); Otherwise, state is invalid, so return nil
 	)
 )
 
-("INVALID STATE")
-(invalid-state '(1 2 3 4 5)); nil
-(invalid-state '(1)); t
-(invalid-state '(2 1)); nil
-(invalid-state '(3 1 4 2)); t
-("END INVALID STATE")
+("VALID STATE")
+(valid-state '(1 2 3 4 5)); nil
+(valid-state '(1)); t
+(valid-state '(2 1)); nil
+(valid-state '(3 1 4 2)); t
+(valid-state '(2 4 1 3)); t
+("VALID STATE")
+
+; REFACTOR THE SHIT BELOW!!!!
 
 ; Performs the add, then calls the check constraints. If the add is invalid, revert to the previous state
 (defun place-queen(N Q)
-	(cond ((not(invalid-state (append N (list Q) ) ) ) N); Check if the move is invalid. If it is, revert back to the previous valid state
+	(cond ((not(valid-state (append N (list Q) ) ) ) N); Check if the move is invalid. If it is, revert back to the previous valid state
 		(t (append N (list Q) ) ); Otherwise, return the state of the board after making the move
-	)
-)
-
-; Boolean version of the place-queen function
-(defun placed-queen-successfully(N Q)
-	(cond ((not(invalid-state (append N (list Q) ) ) ) nil); Check if the move is invalid. If it is, return nil
-		(t t); Otherwise, return true because queen was placed successfully
 	)
 )
 
@@ -192,12 +188,28 @@
 
 ("END PLACE QUEEN")
 
-; Checks if we reached a valid final state
-(defun final-state(N Q N-size)
-	(cond ((and (not(invalid-state N) ) (< (length N) N-size) ) nil); Check if the move is invalid AND length N < max. If it is, return nil
-		(t t); Otherwise, return t since move was valid
+; Boolean version of the place-queen function
+(defun placed-queen-successfully(N Q)
+	(cond ((not(valid-state (append N (list Q) ) ) ) nil); Check if the move is invalid. If it is, return nil
+		(t t); Otherwise, return true because queen was placed successfully
 	)
 )
+
+; Checks if we reached a valid final state
+(defun final-state(N Q N-size)
+	; (cond ((and (not (invalid-state N)) (equal (length N) N-size) ) t); Check if the move is valid AND length N == N-size. If it is, return t
+	; 	(t nil); Otherwise, return nil since we are in an invalid state
+	; )
+	(cond ((or (valid-state N) (not(equal (length N) N-size) ) ) nil)
+		(t t)
+	)
+)
+
+("FINAL-STATE")
+(final-state '(1) 1 1)
+
+(final-state '(3 1 4 2) 1 4)
+("PUSSY FINAL-STATE")
 
 (defun try-move(N rowIndex N-size)
 	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
