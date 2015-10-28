@@ -214,6 +214,12 @@
 (final-state '(3 1 4 2) 1 5); nil
 ("END FINAL-STATE")
 
+(defun DFS(N)
+	(cond (final-state)
+
+	)
+)
+
 (defun try-move(N rowIndex N-size)
 	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
 		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
@@ -258,6 +264,7 @@
 ;;;
 
 ;;; The function tree search is taken from Norvig's PAIP:
+<states> <goal-p> <successors> <combiner>
 (defun tree-search (states goal-p successors combiner)
   "Find a state that satisfies goal-p.  Start with states,
    and search according to successors and combiner."
