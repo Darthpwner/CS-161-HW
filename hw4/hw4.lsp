@@ -171,6 +171,25 @@
 (valid-state '(2 4 1 3)); t
 ("VALID STATE")
 
+; Checks if we reached a valid final state
+(defun final-state(N Q N-size)
+	(cond ((and (valid-state N) (equal (length N) N-size) ) t);	Check if the move is valid AND (length N) == N-size. If it is, return t
+		(t nil);	Otherwise, return nil
+	)
+)
+
+("FINAL-STATE")
+(final-state '(1) 1 0); nil
+(final-state '(1) 1 2); nil
+(final-state '(1) 1 1); t
+(final-state '(1 2) 1 2); nil
+(final-state '(1 2) 1 1); nil
+(final-state '(1 2) 1 3); nil
+(final-state '(3 1 4 2) 1 3); nil
+(final-state '(3 1 4 2) 1 4); t
+(final-state '(3 1 4 2) 1 5); nil
+("END FINAL-STATE")
+
 ; REFACTOR THE SHIT BELOW!!!!
 
 ; Performs the add, then calls the check constraints. If the add is invalid, revert to the previous state
@@ -195,30 +214,45 @@
 	)
 )
 
-; Checks if we reached a valid final state
-(defun final-state(N Q N-size)
-	(cond ((and (valid-state N) (equal (length N) N-size) ) t);	Check if the move is valid AND (length N) == N-size. If it is, return t
-		(t nil);	Otherwise, return nil
-	)
-)
 
-("FINAL-STATE")
-(final-state '(1) 1 0); nil
-(final-state '(1) 1 2); nil
-(final-state '(1) 1 1); t
-(final-state '(1 2) 1 2); nil
-(final-state '(1 2) 1 1); nil
-(final-state '(1 2) 1 3); nil
-(final-state '(3 1 4 2) 1 3); nil
-(final-state '(3 1 4 2) 1 4); t
-(final-state '(3 1 4 2) 1 5); nil
-("END FINAL-STATE")
 
 (defun DFS(N)
-	(cond (final-state)
-
+	(cond ((final-state) N);	Return N if we have reached the final state
+		((NULL N) nil);	Return NIL if there are no possible solutions
 	)
 )
+
+;
+; FIGURE OUT HOW TO USE DFS
+;;;
+;;; Depth first search
+;;;
+
+;;; The function tree search is taken from Norvig's PAIP:
+<states> <goal-p> <successors> <combiner>
+(defun tree-search (states goal-p successors combiner)
+  "Find a state that satisfies goal-p.  Start with states,
+   and search according to successors and combiner."
+  ; (format t "~&;; states: ~a" states)
+  (cond ((endp states) nil)                              ; Dead end.
+        ((funcall goal-p (first states))                 ; Eureka!
+         (append (list (eureka (first states)))
+                 (tree-search (rest states)
+                              goal-p successors
+                              combiner)))
+        (t (tree-search                                  ; Keep looking.
+            (funcall combiner
+                     (funcall successors (first states))
+                     (rest states))
+            goal-p successors combiner))))
+
+;;; Using a combiner of append we implement a 
+;;; depth-first-search
+
+(defun depth-first-search (start goal-p successors)
+  "Search by expanding the deepest active state."
+  (tree-search (list start) goal-p successors #'append))
+;
 
 (defun try-move(N rowIndex N-size)
 	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
@@ -257,33 +291,3 @@
 (QUEENS 19)
 (QUEENS 20)
 ("END QUEENS")
-
-; FIGURE OUT HOW TO USE DFS
-;;;
-;;; Depth first search
-;;;
-
-;;; The function tree search is taken from Norvig's PAIP:
-<states> <goal-p> <successors> <combiner>
-(defun tree-search (states goal-p successors combiner)
-  "Find a state that satisfies goal-p.  Start with states,
-   and search according to successors and combiner."
-  ; (format t "~&;; states: ~a" states)
-  (cond ((endp states) nil)                              ; Dead end.
-        ((funcall goal-p (first states))                 ; Eureka!
-         (append (list (eureka (first states)))
-                 (tree-search (rest states)
-                              goal-p successors
-                              combiner)))
-        (t (tree-search                                  ; Keep looking.
-            (funcall combiner
-                     (funcall successors (first states))
-                     (rest states))
-            goal-p successors combiner))))
-
-;;; Using a combiner of append we implement a 
-;;; depth-first-search
-
-(defun depth-first-search (start goal-p successors)
-  "Search by expanding the deepest active state."
-  (tree-search (list start) goal-p successors #'append))
