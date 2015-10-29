@@ -207,6 +207,8 @@
 
 ("END PLACE QUEEN")
 
+
+
 ; Boolean version of the place-queen function
 (defun placed-queen-successfully(N Q)
 	(cond ((not(valid-state (append N (list Q) ) ) ) nil); Check if the move is invalid. If it is, return nil
@@ -214,32 +216,30 @@
 	)
 )
 
-
-
-(defun DFS(N)
-	(cond ((final-state) N);	Return N if we have reached the final state
-		((NULL N) nil);	Return NIL if there are no possible solutions
-		()
-	)
-)
-
 ; DFS Algorithm:
-; 1) Place in the first row, first col
-; 2) Call valid state and see if move was okay
-; 2a) If valid, go to the next row and place in next col
-; 2b) else, backtrack one row and place in the next col
-; 3) Repeat steps 1 through 2b
+; 1) Check if final state, if it is, return t
+; 2) Place in the first row, first col
+; 3) Call valid state and see if move was okay
+; 3a) If valid, go to the next row and place in next col
+; 3b) else, backtrack one row and place in the next col
+; 4) Repeat steps 1 through 3b
 
 (defun DFS(N)
-	(cond ((NULL N) NIL); If N is NULL, return NIL
-		((final-state N) N);	Return N if we have reached the final state
+	(cond ((NULL N) NIL); If N is NULL, return NIL since there are no possible solutions
+		((final-state N (length N) ) N);	Return N if we have reached the final state
 		(t (append (DFS(first N) ) (DFS(rest N) ) ) ); else, traverse downwards, then to the right, and append the list together
 	)
 )
 
+("DFS")
+(DFS '(2 4 1 3));	 t
+
+("END DFS")
+
 (defun try-move(N rowIndex N-size)
 	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
 		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
+		((placed-queen-successfully N rowIndex) (try-move N (+ row-index 1) rowIndex-reset) ); If move was successful, try the next state
 		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
 		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
 	)
