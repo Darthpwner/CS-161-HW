@@ -218,22 +218,16 @@
 ; Keep a counter and see how many possible moves there are
 
 ; Need next states parameter
-(defun possible-moves(N next-states count N-size)
-	(cond ((< (- N-size (length N) ) 0) next-states);	If N-size < 0, you have tried every possible move from your state N, so return next-states
-		((valid-state (place-queen N count) ) (possible-moves N (list (append N (place-queen N count) ) ) (+ count 1) (- N-size 1) ) )
-		(t (possible-moves N next-states (+ count 1) (- N-size 1) ) )
-	)
-)
-
 ; N is the current state, next-states will return the final list of lists, N-size is used to keep track of where you are
-(defun possible-moves(N next-states N-size)
-	(cond ((< (- N-size (length N) ) 0) next-states);	If N-size < 0, you have tried every possible move from your state N, so return next-states
-		((<cond>) (<return>))
+(defun possible-moves(N next-states N-size count)
+	(cond ((> count (- N-size (length N) ) ) next-states);	If count > N-size - (length N), you have tried every possible move from your state N, so return next-states
+		((placed-queen-successfully N count) (possible-moves N (list next-states (place-queen N count) ) N-size (+ count 1) ) );	
+		(t (possible-moves N next-states N-size (+ count 1) ) );	If state is invalid, then just move on to the next column
 	)
 )
 
 ("POSSIBLE MOVES")
-(possible-moves '() '() 1 4); ((1) (2) (3) (4))
+(possible-moves '() '()' 1 4); ((1) (2) (3) (4))
 ("END OF POSSIBLE MOVES")
 
 
