@@ -207,14 +207,25 @@
 
 ("END PLACE QUEEN")
 
-
-
 ; Boolean version of the place-queen function
 (defun placed-queen-successfully(N Q)
 	(cond ((not(valid-state (append N (list Q) ) ) ) nil); Check if the move is invalid. If it is, return nil
 		(t t); Otherwise, return true because queen was placed successfully
 	)
 )
+
+; Returns a list of lists (possible game states)
+; Keep a counter and see how many possible moves there are
+(defun possible-moves(N count N-size)
+	(cond ((> count (- N-size (length N) ) ) N); If count > N-size - (length N), we have no more possible states to check at our current level
+		(t (possible-moves (append (list N) (list count) ) (+ count 1) N-size) )
+	)
+)
+
+("POSSIBLE MOVES")
+(possible-moves '()' 1 4)
+("END OF POSSIBLE MOVES")
+
 
 ; DFS Algorithm:
 ; 1) Check if final state, if it is, return t
@@ -227,7 +238,7 @@
 (defun DFS(N rowIndex colIndex N-size)
 	(cond ((> rowIndex N-size) NIL);	Return nil if no possible options left on the board
 		((final-state N N-size) N);	//Return N if we have reached the final state
-		((placed-queen-successfully N row-index) (DFS (place-queen N colIndex) 1 N-size) ); If the move is valid, keep searching down the tree
+		((placed-queen-successfully N col-index) (DFS (place-queen N colIndex) 1 N-size) ); If the move is valid, keep searching down the tree
 		(t (DFS (place-queen N (+ rowIndex 1) ) rowIndex N-size) ); If the move is invalid, back track and move to the next sibling node
 	)
 )
@@ -239,25 +250,15 @@
 (DFS '() 1 1 1);	(2 4 1 3)
 ("END DFS")
 
-(defun try-move(N rowIndex N-size)
-	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
-		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
-		((placed-queen-successfully N rowIndex) (try-move N (+ row-index 1) rowIndex-reset) ); If move was successful, try the next state
-		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
-		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
-	)
-)
-
-
 ;
 ; FIGURE OUT HOW TO USE DFS
-;;;
-;;; Depth first search
-;;;
+;;
+;; Depth first search
+;;
 
 ; ;;; The function tree search is taken from Norvig's PAIP:
 ; <states> <goal-p> <successors> <combiner>
-; (defun tree-search (states goal-p successors combiner)
+; (defun tree-search (N goal-p successors combiner)
 ;   "Find a state that satisfies goal-p.  Start with states,
 ;    and search according to successors and combiner."
 ;   ; (format t "~&;; states: ~a" states)
@@ -281,13 +282,13 @@
 ;   (tree-search (list start) goal-p successors #'append))
 ; ;
 
-(defun try-move(N rowIndex N-size)
-	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
-		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
-		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
-		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
-	)
-)
+; (defun try-move(N rowIndex N-size)
+; 	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
+; 		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
+; 		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
+; 		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
+; 	)
+; )
 
 ; Calls helper functions to solve the N-Queens problem on a board (N * N size)
 ; N is the size of the board in terms of number of squares
