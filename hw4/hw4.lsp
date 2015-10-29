@@ -220,11 +220,9 @@
 ; Need next states parameter
 ; N is the current state, next-states will return the final list of lists, N-size is used to keep track of where you are
 (defun possible-moves(N next-states count N-size)
-	; (cond ((> count (- N-size (length N) ) ) next-states);	If count > N-size - (length N), you have tried every possible move from your state N, so return next-states
-	(cond ((> count N-size) next-states);	If count > N-size - (length N), you have tried every possible move from your state N, so return next-states
-		;	If you can place a queen 			; Recursively call (N is original state) (return condition) (N-size ) (count + 1)
-		;((placed-queen-successfully N count) (possible-moves N (append next-states (place-queen N count) ) N-size (+ count 1) ) );	
-		((placed-queen-successfully N count) (possible-moves N (append next-states (list (place-queen N count) ) ) (+ count 1) N-size) )
+	(cond ((> count (- N-size (length N) ) ) next-states);	If count > N-size - (length N), you have tried every possible move from your state N, so return next-states
+	;(cond ((> count N-size) next-states);	If count > N-size - (length N), you have tried every possible move from your state N, so return next-states
+		((placed-queen-successfully N count) (possible-moves N (append next-states (list (place-queen N count) ) ) (+ count 1) N-size) ); If you can place a queen, add it to the list of possible moves
 		(t (possible-moves N next-states (+ count 1) N-size) );	If state is invalid, then just move on to the next column
 	)
 )
@@ -232,7 +230,7 @@
 ("POSSIBLE MOVES")
 ;(possible-moves '() '() 1 0); ( (1) )
 (possible-moves '() '() 1 1); ( (1) )
-(possible-moves '() '() 1 4); ( (1) (2) (3) (4) )
+(possible-moves '() '() 1 10); ( (1) (2) (3) (4) )
 ("END OF POSSIBLE MOVES")
 
 
