@@ -230,7 +230,7 @@
 (possible-moves '(1 4 2 5) '() 1 5); ( (1) (2) (3) (4) )
 (possible-moves '(3 2 1) '() 1 3); ( (1) (2) (3) (4) )
 (possible-moves '(1) '() 1 3); ( (1) (2) (3) (4) )
-(possible-moves '() '() 1 50); ( (1) (2) (3) (4) )
+;(possible-moves '() '() 1 50); ( (1) (2) (3) (4) )
 ("END OF POSSIBLE MOVES")
 
 
@@ -250,9 +250,9 @@
 ; )
 
 (defun DFS(N N-size)
-	(cond ((<cond>) NIL); If <cond>, return NIL
-		((final-state N N-size) N);	Return N if it is the final state
-		((<cond>) (DFS (first(possible-moves N '() 1 N-size) ) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+	;(cond ((> (length N) N-size) NIL); If (length N) > N-size, return NIL
+	(cond ((final-state N N-size) N);	Return N if it is the final state
+		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
 		(t (DFS(rest(possible-moves N '() 1 N-size) ) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
@@ -261,6 +261,7 @@
 ; (DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
 ; (DFS '() 1 1 4);	(2 4 1 3)
 ; (DFS '() 1 1 1);	(2 4 1 3)
+(DFS '() 1); 	(2 4 1 3)
 (DFS '() 4); 	(2 4 1 3)
 ("END DFS")
 
