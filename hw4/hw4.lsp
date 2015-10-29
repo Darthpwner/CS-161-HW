@@ -230,6 +230,7 @@
 (possible-moves '(1 4 2 5) '() 1 5); ( (1) (2) (3) (4) )
 (possible-moves '(3 2 1) '() 1 3); ( (1) (2) (3) (4) )
 (possible-moves '(1) '() 1 3); ( (1) (2) (3) (4) )
+(possible-moves '() '() 1 50); ( (1) (2) (3) (4) )
 ("END OF POSSIBLE MOVES")
 
 
@@ -240,20 +241,27 @@
 ; 3a) If valid, go to the next row and place in next col
 ; 3b) else, backtrack one row and place in the next col
 ; 4) Repeat steps 1 through 3b
+; (defun DFS(N rowIndex colIndex N-size)
+; 	(cond ((> rowIndex N-size) NIL);	Return nil if no possible options left on the board
+; 		((final-state N N-size) N);	//Return N if we have reached the final state
+; 		((placed-queen-successfully N col-index) (DFS (place-queen N colIndex) 1 N-size) ); If the move is valid, keep searching down the tree
+; 		(t (DFS (place-queen N (+ rowIndex 1) ) rowIndex N-size) ); If the move is invalid, back track and move to the next sibling node
+; 	)
+; )
 
-(defun DFS(N rowIndex colIndex N-size)
-	(cond ((> rowIndex N-size) NIL);	Return nil if no possible options left on the board
-		((final-state N N-size) N);	//Return N if we have reached the final state
-		((placed-queen-successfully N col-index) (DFS (place-queen N colIndex) 1 N-size) ); If the move is valid, keep searching down the tree
-		(t (DFS (place-queen N (+ rowIndex 1) ) rowIndex N-size) ); If the move is invalid, back track and move to the next sibling node
+(defun DFS(N N-size)
+	(cond ((<cond>) NIL); If <cond>, return NIL
+		((final-state N N-size) N);	Return N if it is the final state
+		((<cond>) (DFS (first(possible-moves N '() 1 N-size) ) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		(t (DFS(rest(possible-moves N '() 1 N-size) ) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
 
-
 ("DFS")
-(DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
-(DFS '() 1 1 4);	(2 4 1 3)
-(DFS '() 1 1 1);	(2 4 1 3)
+; (DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
+; (DFS '() 1 1 4);	(2 4 1 3)
+; (DFS '() 1 1 1);	(2 4 1 3)
+(DFS '() 4); 	(2 4 1 3)
 ("END DFS")
 
 ;
