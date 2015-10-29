@@ -169,6 +169,7 @@
 (valid-state '(2 1)); nil
 (valid-state '(3 1 4 2)); t
 (valid-state '(2 4 1 3)); t
+(valid-state '()); nil
 ("VALID STATE")
 
 ; Checks if we reached a valid final state
@@ -319,8 +320,8 @@
 ; (DFS '() 1 1 4);	(2 4 1 3)
 ; (DFS '() 1 1 1);	(2 4 1 3)
 (DFS '() 1 1); 	(2 4 1 3)
-;(DFS '() 1 2); 	(2 4 1 3)
-;(DFS '() 1 3); 	(2 4 1 3)
+(DFS '() 1 2); 	(2 4 1 3)
+(DFS '() 1 3); 	(2 4 1 3)
 (DFS '(2 4) 1 4)
 (DFS '() 1 4); 	(2 4 1 3)
 ("END DFS")
