@@ -190,8 +190,6 @@
 (final-state '(3 1 4 2) 5); nil
 ("END FINAL-STATE")
 
-; REFACTOR THE SHIT BELOW!!!!
-
 ; Performs the add, then calls the check constraints. If the add is invalid, revert to the previous state
 (defun place-queen(N Q)
 	(cond ((not(valid-state (append N (list Q) ) ) ) N); Check if the move is invalid. If it is, revert back to the previous valid state
@@ -234,6 +232,8 @@
 
 ("END OF POSSIBLE MOVES")
 
+; REFACTOR THE SHIT BELOW!!!!
+
 (defun previous-state(N)
 	(butlast N 1)
 )
@@ -257,37 +257,19 @@
 
 ; If invalid, DFS calls (+ col 1)
 ; NOTE: Always pass 1 in for col
-(defun DFS(N col N-size)
-	(cond ((final-state N N-size) N);	Return N if it is the final state
-		((> col N-size) NIL);
-		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-		((equal (possible-moves N '() 1 N-size) NIL)  (DFS(rest(possible-moves (previous-state N) '() 1 N-size) ) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
-		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
-	)
-)
-
-
+; (defun DFS(N col N-size)
+; 	(cond ((final-state N N-size) N);	Return N if it is the final state
+; 		((> col N-size) NIL);
+; 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+; 		((equal (possible-moves N '() 1 N-size) NIL)  (DFS(rest(possible-moves (previous-state N) '() 1 N-size) ) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
+; 		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
+; 	)
+; )
 
 ;So essentially I have two functions. The first is the main DFS function. This one takes in the size of the board and the current-state. 
 ;The base case for this is to return the current state if its the final solution. If its not then is calls a second helper function. 
 ;This function essentially gets passed in all the next states from the current state. The base case for this one is to return nil if theres no next states left. 
 ;It then runs the main function on each of the next states.
-
-; (defun DFS(N col N-size)
-; 	(cond ((> col N-size) NIL);
-; 		; Stay on the upper level!!!
-; 		;((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS-helper (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-; 		((DFS (first(possible-moves N '() 1 N-size) ) col N-size) )
-; 		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
-; 	)
-; )
-
-; (defun DFS-helper(N col N-size) 
-; 	(cond ((final-state N N-size) N);	Return N if it is the final state
-; 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-; 		(t NIL)
-; 	)
-; )
 
 (defun DFS (N col N-size)
 	(cond ((> col N-size) NIL)
