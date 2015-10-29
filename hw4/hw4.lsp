@@ -260,19 +260,53 @@
 (defun DFS(N col N-size)
 	(cond ((final-state N N-size) N);	Return N if it is the final state
 		((> col N-size) NIL);
-		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
 		((equal (possible-moves N '() 1 N-size) NIL)  (DFS(rest(possible-moves (previous-state N) '() 1 N-size) ) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
-		(t (DFS(rest(possible-moves N '() 1 N-size) ) col N-size) ); If the path is not valid, call it on the rest of DFS
+		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
+
+;
+
+;So essentially I have two functions. The first is the main DFS function. This one takes in the size of the board and the current-state. 
+;The base case for this is to return the current state if its the final solution. If its not then is calls a second helper function. 
+;This function essentially gets passed in all the next states from the current state. The base case for this one is to return nil if theres no next states left. 
+;It then runs the main function on each of the next states.
+
+(defun DFS(N col N-size)
+	(cond ((final-state) N N-size ) N);	Return N if it is the final state
+		(t (DFS-helper N col N-size) ); Call DFS-helper
+)
+
+(defun DFS-helper(N col N-size) 
+	(cond ((> col N-size) NIL);	If no next states left, return NIL
+		
+	)
+)
+
+;;;;;;;;;;
+(defun multDFS (col n ans)
+	(cond ((> col n) nil) ;return nil if none of the valid columns we looked at worked
+		((queenDFS col n ans)) ;return a list with a valid queen added, if possible
+		(t (multDFS (+ col 1) n ans)) ;otherwise, try repeating with the next column
+	)
+)
+		
+(defun queenDFS (col n ans)
+	(cond ((= (length ans) n) ans) ;return ans if queens don't attack each other and it is of the right length
+		((isValid (+ 1 (length ans)) col 1 ans) (multDFS 1 n (append ans (list col)))) ;if col is valid, run multDFS with it appended
+		(t nil) ;otherwise, end here and backtrack (try with a different col)
+	)
+)
+;;;;;;;;;;;;;;;;
 
 ("DFS")
 ; (DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
 ; (DFS '() 1 1 4);	(2 4 1 3)
 ; (DFS '() 1 1 1);	(2 4 1 3)
 (DFS '() 1 1); 	(2 4 1 3)
-(DFS '() 1 2); 	(2 4 1 3)
-(DFS '() 1 3); 	(2 4 1 3)
+;(DFS '() 1 2); 	(2 4 1 3)
+;(DFS '() 1 3); 	(2 4 1 3)
 (DFS '(2 4) 1 4)
 (DFS '() 1 4); 	(2 4 1 3)
 ("END DFS")
