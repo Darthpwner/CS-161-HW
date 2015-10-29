@@ -218,7 +218,7 @@
 ; Keep a counter and see how many possible moves there are
 (defun possible-moves(N count N-size)
 	(cond ((> count (- N-size (length N) ) ) N); If count > N-size - (length N), we have no more possible states to check at our current level
-		(t (possible-moves (append (list N) (list count) ) (+ count 1) N-size) )
+		(t (possible-moves (list N (list count) ) (+ count 1) N-size) )
 	)
 )
 
