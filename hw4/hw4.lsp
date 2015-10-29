@@ -288,21 +288,19 @@
 	)
 )
 
-;;;;;;;;;;
+;;;
 ; (defun multDFS (col n ans)
-; 	(cond ((> col n) nil) ;return nil if none of the valid columns we looked at worked
-; 		((queenDFS col n ans)) ;return a list with a valid queen added, if possible
-; 		(t (multDFS (+ col 1) n ans)) ;otherwise, try repeating with the next column
-; 	)
+; 	if out of bounds return nil
+; 		call dfs-helper with a valid queen added
+; 		otherwise try repeting with the next column	
 ; )
 		
 ; (defun queenDFS (col n ans)
-; 	(cond ((= (length ans) n) ans) ;return ans if queens don't attack each other and it is of the right length
-; 		((isValid (+ 1 (length ans)) col 1 ans) (multDFS 1 n (append ans (list col)))) ;if col is valid, run multDFS with it appended
-; 		(t nil) ;otherwise, end here and backtrack (try with a different col)
-; 	)
+; 	if final state, return N
+; 		if the column is valid, take this route 
+; 		otherwise, backtrack with a different col
 ; )
-; ;;;;;;;;;;;;;;;;
+;;
 
 ("DFS")
 ; (DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
