@@ -258,8 +258,8 @@
 
 (defun DFS(N N-size)
 	(cond ((final-state N N-size) N);	Return N if it is the final state
-		((equal (possible-moves N '() 1 N-size) NIL)  (DFS (previous-state N) N-size) ); If there are no more possible moves, return NIL
 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		((equal (possible-moves N '() 1 N-size) NIL)  (DFS (previous-state N) N-size) ); If there are no more possible moves at the current level, backtrack
 		(t (DFS(rest(possible-moves N '() 1 N-size) ) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
