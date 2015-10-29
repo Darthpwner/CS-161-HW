@@ -278,6 +278,7 @@
 		; Stay on the upper level!!!
 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS-helper (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
 		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
+	)
 )
 
 (defun DFS-helper(N col N-size) 
