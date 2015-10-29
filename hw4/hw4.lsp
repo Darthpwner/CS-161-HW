@@ -224,16 +224,29 @@
 ; 3b) else, backtrack one row and place in the next col
 ; 4) Repeat steps 1 through 3b
 
-(defun DFS(N)
-	(cond ((NULL N) NIL); If N is NULL, return NIL since there are no possible solutions
-		((final-state N (length N) ) N);	Return N if we have reached the final state
-		(t (append (DFS(first N) ) (DFS(rest N) ) ) ); else, traverse downwards, then to the right, and append the list together
+; (defun DFS(N)
+; 	(cond ((NULL N) NIL); If N is NULL, return NIL since there are no possible solutions
+; 		((final-state N (length N) ) N);	Return N if we have reached the final state
+		
+; 		(() place-queen N 1); Place in the next possible row, next possible column
+; 		;(t (append (DFS(first N) ) (DFS(rest N) ) ) ); else, traverse downwards, then to the right, and append the list together
+; 	)
+; )
+
+(defun DFS(N rowIndex N-size)
+	(cond ((NULL N) NIL); If N is NULL, return NIL since there are no possible solutions 
+		((final-state N N-size) N);	//Return N if we have reached the final state
+
+		((placed-queen-successfully (place-queen N rowIndex) ) (DFS (place-queen N rowIndex) (+ rowIndex 1) N-size) ); If the move is valid, keep searching down the tree
+;		((placed-queen-successfully) (DFS (place-queen N rowIndex) (+ rowIndex 1) N-size) ); If the move is valid, keep searching down the tree
+		(t (DFS (place-queen N (+ rowIndex 1) ) rowIndex N-size) ); If the move is invalid, back track and move to the next sibling node
 	)
 )
 
-("DFS")
-(DFS '(2 4 1 3));	 t
 
+("DFS")
+(DFS '(2 4 1 3));	 (2 4 1 3)
+(DFS '() 1 4);	(2 4 1 3)
 ("END DFS")
 
 (defun try-move(N rowIndex N-size)
@@ -292,26 +305,26 @@
 	(try-move '() 1 N)
 )
 
-("QUEENS")
-(QUEENS 1)
-("FIX SHIT")
-(QUEENS 2)
-(QUEENS 3)
-(QUEENS 4)
-(QUEENS 5)
-(QUEENS 6)
-(QUEENS 7)
-(QUEENS 8)
-(QUEENS 9)
-(QUEENS 10)
-(QUEENS 11)
-(QUEENS 12)
-(QUEENS 13)
-(QUEENS 14)
-(QUEENS 15)
-(QUEENS 16)
-(QUEENS 17)
-(QUEENS 18)
-(QUEENS 19)
-(QUEENS 20)
-("END QUEENS")
+; ("QUEENS")
+; (QUEENS 1)
+; ("FIX SHIT")
+; (QUEENS 2)
+; (QUEENS 3)
+; (QUEENS 4)
+; (QUEENS 5)
+; (QUEENS 6)
+; (QUEENS 7)
+; (QUEENS 8)
+; (QUEENS 9)
+; (QUEENS 10)
+; (QUEENS 11)
+; (QUEENS 12)
+; (QUEENS 13)
+; (QUEENS 14)
+; (QUEENS 15)
+; (QUEENS 16)
+; (QUEENS 17)
+; (QUEENS 18)
+; (QUEENS 19)
+; (QUEENS 20)
+; ("END QUEENS")
