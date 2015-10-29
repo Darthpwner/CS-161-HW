@@ -172,22 +172,22 @@
 ("VALID STATE")
 
 ; Checks if we reached a valid final state
-(defun final-state(N Q N-size)
+(defun final-state(N N-size)
 	(cond ((and (valid-state N) (equal (length N) N-size) ) t);	Check if the move is valid AND (length N) == N-size. If it is, return t
 		(t nil);	Otherwise, return nil
 	)
 )
 
 ("FINAL-STATE")
-(final-state '(1) 1 0); nil
-(final-state '(1) 1 2); nil
-(final-state '(1) 1 1); t
-(final-state '(1 2) 1 2); nil
-(final-state '(1 2) 1 1); nil
-(final-state '(1 2) 1 3); nil
-(final-state '(3 1 4 2) 1 3); nil
-(final-state '(3 1 4 2) 1 4); t
-(final-state '(3 1 4 2) 1 5); nil
+(final-state '(1) 0); nil
+(final-state '(1) 2); nil
+(final-state '(1) 1); t
+(final-state '(1 2) 2); nil
+(final-state '(1 2) 1); nil
+(final-state '(1 2) 3); nil
+(final-state '(3 1 4 2) 3); nil
+(final-state '(3 1 4 2) 4); t
+(final-state '(3 1 4 2) 5); nil
 ("END FINAL-STATE")
 
 ; REFACTOR THE SHIT BELOW!!!!
@@ -238,7 +238,7 @@
 )
 
 (defun try-move(N rowIndex N-size)
-	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
+	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
 		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
 		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
 		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
@@ -279,7 +279,7 @@
 ; ;
 
 (defun try-move(N rowIndex N-size)
-	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
+	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
 		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
 		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
 		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
