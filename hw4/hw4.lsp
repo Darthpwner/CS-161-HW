@@ -255,7 +255,6 @@
 ; 	)
 ; )
 
-
 ; If invalid, DFS calls (+ col 1)
 ; NOTE: Always pass 1 in for col
 (defun DFS(N col N-size)
@@ -277,22 +276,6 @@
 (DFS '(2 4) 1 4)
 (DFS '() 1 4); 	(2 4 1 3)
 ("END DFS")
-
-; (defun multDFS (col n ans)
-; 	(cond ((> col n) nil) ;return nil if none of the valid columns we looked at worked
-; 		((queenDFS col n ans)) ;return a list with a valid queen added, if possible
-; 		(t (multDFS (+ col 1) n ans)) ;otherwise, try repeating with the next column
-; 	)
-; )
-		
-; (defun queenDFS (col n ans)
-; 	(cond ((= (length ans) n) ans) ;return ans if queens don't attack each other and it is of the right length
-; 		((isValid (+ 1 (length ans)) col 1 ans) (multDFS 1 n (append ans (list col)))) ;if col is valid, run multDFS with it appended
-; 		(t nil) ;otherwise, end here and backtrack (try with a different col)
-; 	)
-; )
-
-; (queenDFS 1 4 '())
 
 ; (defun try-move(N rowIndex N-size)
 ; 	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
