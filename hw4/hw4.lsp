@@ -261,7 +261,7 @@
 ; 	(cond ((final-state N N-size) N);	Return N if it is the final state
 ; 		((> col N-size) NIL);
 ; 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-;		((equal (possible-moves N '() 1 N-size) NIL)  (DFS(rest(possible-moves (previous-state N) '() 1 N-size) ) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
+; 		((equal (possible-moves N '() 1 N-size) NIL)  (DFS(rest(possible-moves (previous-state N) '() 1 N-size) ) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
 ; 		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
 ; 	)
 ; )
@@ -274,38 +274,34 @@
 ;It then runs the main function on each of the next states.
 
 (defun DFS(N col N-size)
-	(cond ((final-state) N N-size ) N);	Return N if it is the final state
-		((> col N-size) NIL);	If col > N-size, return NIL
+	(cond ((> col N-size) NIL);
 		; Stay on the upper level!!!
-		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS-helper (first(possible-moves N '() 1 N-size) ) col N-size) );	Check down the tree using the DFS-helper function
-		(t (DFS-helper (rest(possible-moves N) ) (+ col 1) N-size) ); Call DFS-helper
+		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS-helper (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
 )
 
 (defun DFS-helper(N col N-size) 
-	(cond ((equal (possible-moves N '() 1 N-size) NIL) NIL); If no possible moves left, return NIL
-		; check if you can place a valid queen
-		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recurisvely call DFS on the first of possible-moves
-		;if not, call DFS with col ++ (because you want to move on to the next column)
-;		(t (DFS (rest(possible-moves N) ) '() 1 N-size) (+ col 1) N-size)  ; 
-		(t ((DFS (rest(possible-moves N) '() 1 N-size) ) col N-size) )
+	(cond ((final-state N N-size) N);	Return N if it is the final state
+		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		(t NIL)
 	)
 )
 
 ;;;;;;;;;;
-(defun multDFS (col n ans)
-	(cond ((> col n) nil) ;return nil if none of the valid columns we looked at worked
-		((queenDFS col n ans)) ;return a list with a valid queen added, if possible
-		(t (multDFS (+ col 1) n ans)) ;otherwise, try repeating with the next column
-	)
-)
+; (defun multDFS (col n ans)
+; 	(cond ((> col n) nil) ;return nil if none of the valid columns we looked at worked
+; 		((queenDFS col n ans)) ;return a list with a valid queen added, if possible
+; 		(t (multDFS (+ col 1) n ans)) ;otherwise, try repeating with the next column
+; 	)
+; )
 		
-(defun queenDFS (col n ans)
-	(cond ((= (length ans) n) ans) ;return ans if queens don't attack each other and it is of the right length
-		((isValid (+ 1 (length ans)) col 1 ans) (multDFS 1 n (append ans (list col)))) ;if col is valid, run multDFS with it appended
-		(t nil) ;otherwise, end here and backtrack (try with a different col)
-	)
-)
-;;;;;;;;;;;;;;;;
+; (defun queenDFS (col n ans)
+; 	(cond ((= (length ans) n) ans) ;return ans if queens don't attack each other and it is of the right length
+; 		((isValid (+ 1 (length ans)) col 1 ans) (multDFS 1 n (append ans (list col)))) ;if col is valid, run multDFS with it appended
+; 		(t nil) ;otherwise, end here and backtrack (try with a different col)
+; 	)
+; )
+; ;;;;;;;;;;;;;;;;
 
 ("DFS")
 ; (DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
