@@ -255,12 +255,13 @@
 ; 	)
 ; )
 
-
-(defun DFS(N N-size)
+; NOTE: Always pass 1 in for col
+(defun DFS(N col N-size)
 	(cond ((final-state N N-size) N);	Return N if it is the final state
-		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-		((equal (possible-moves N '() 1 N-size) NIL)  (DFS (previous-state N) N-size) ); If there are no more possible moves at the current level, backtrack
-		(t (DFS(rest(possible-moves N '() 1 N-size) ) N-size) ); If the path is not valid, call it on the rest of DFS
+		((> col N-size) NIL);
+		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		((equal (possible-moves N '() 1 N-size) NIL)  (DFS (previous-state N) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
+		(t (DFS(rest(possible-moves N '() 1 N-size) ) col N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
 
@@ -268,11 +269,26 @@
 ; (DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
 ; (DFS '() 1 1 4);	(2 4 1 3)
 ; (DFS '() 1 1 1);	(2 4 1 3)
-(DFS '() 1); 	(2 4 1 3)
-(DFS '(2 4) 4)
-(DFS '() 4); 	(2 4 1 3)
+(DFS '() 1 1); 	(2 4 1 3)
+(DFS '(2 4) 1 4)
+(DFS '() 1 4); 	(2 4 1 3)
 ("END DFS")
 
+; (defun multDFS (col n ans)
+; 	(cond ((> col n) nil) ;return nil if none of the valid columns we looked at worked
+; 		((queenDFS col n ans)) ;return a list with a valid queen added, if possible
+; 		(t (multDFS (+ col 1) n ans)) ;otherwise, try repeating with the next column
+; 	)
+; )
+		
+; (defun queenDFS (col n ans)
+; 	(cond ((= (length ans) n) ans) ;return ans if queens don't attack each other and it is of the right length
+; 		((isValid (+ 1 (length ans)) col 1 ans) (multDFS 1 n (append ans (list col)))) ;if col is valid, run multDFS with it appended
+; 		(t nil) ;otherwise, end here and backtrack (try with a different col)
+; 	)
+; )
+
+; (queenDFS 1 4 '())
 
 ; (defun try-move(N rowIndex N-size)
 ; 	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
@@ -285,7 +301,7 @@
 ; Calls helper functions to solve the N-Queens problem on a board (N * N size)
 ; N is the size of the board in terms of number of squares
 (defun QUEENS(N)
-	(try-move '() 1 N)
+	(DFS '() 1 N)
 )
 
 ; ("QUEENS")
