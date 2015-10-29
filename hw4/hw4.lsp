@@ -234,6 +234,11 @@
 
 ("END OF POSSIBLE MOVES")
 
+(defun previous-state(N)
+	(butlast N 1)
+)
+
+(previous-state '(1 2 3))
 
 ; DFS Algorithm:
 ; 1) Check if final state, if it is, return t
@@ -267,37 +272,6 @@
 (DFS '(2 4) 4)
 ("END DFS")
 
-;
-; FIGURE OUT HOW TO USE DFS
-;;
-;; Depth first search
-;;
-
-; ;;; The function tree search is taken from Norvig's PAIP:
-; <states> <goal-p> <successors> <combiner>
-; (defun tree-search (N goal-p successors combiner)
-;   "Find a state that satisfies goal-p.  Start with states,
-;    and search according to successors and combiner."
-;   ; (format t "~&;; states: ~a" states)
-;   (cond ((endp states) nil)                              ; Dead end.
-;         ((funcall goal-p (first states))                 ; Eureka!
-;          (append (list (eureka (first states)))
-;                  (tree-search (rest states)
-;                               goal-p successors
-;                               combiner)))
-;         (t (tree-search                                  ; Keep looking.
-;             (funcall combiner
-;                      (funcall successors (first states))
-;                      (rest states))
-;             goal-p successors combiner))))
-
-; ;;; Using a combiner of append we implement a 
-; ;;; depth-first-search
-
-; (defun depth-first-search (start goal-p successors)
-;   "Search by expanding the deepest active state."
-;   (tree-search (list start) goal-p successors #'append))
-; ;
 
 ; (defun try-move(N rowIndex N-size)
 ; 	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
