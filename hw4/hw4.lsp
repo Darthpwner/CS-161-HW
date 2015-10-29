@@ -257,36 +257,66 @@
 
 ; If invalid, DFS calls (+ col 1)
 ; NOTE: Always pass 1 in for col
-; (defun DFS(N col N-size)
-; 	(cond ((final-state N N-size) N);	Return N if it is the final state
-; 		((> col N-size) NIL);
-; 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-; 		((equal (possible-moves N '() 1 N-size) NIL)  (DFS(rest(possible-moves (previous-state N) '() 1 N-size) ) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
-; 		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
-; 	)
-; )
+(defun DFS(N col N-size)
+	(cond ((final-state N N-size) N);	Return N if it is the final state
+		((> col N-size) NIL);
+		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		((equal (possible-moves N '() 1 N-size) NIL)  (DFS(rest(possible-moves (previous-state N) '() 1 N-size) ) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
+		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
+	)
+)
 
-;
+
 
 ;So essentially I have two functions. The first is the main DFS function. This one takes in the size of the board and the current-state. 
 ;The base case for this is to return the current state if its the final solution. If its not then is calls a second helper function. 
 ;This function essentially gets passed in all the next states from the current state. The base case for this one is to return nil if theres no next states left. 
 ;It then runs the main function on each of the next states.
 
-(defun DFS(N col N-size)
-	(cond ((> col N-size) NIL);
-		; Stay on the upper level!!!
-		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS-helper (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+; (defun DFS(N col N-size)
+; 	(cond ((> col N-size) NIL);
+; 		; Stay on the upper level!!!
+; 		;((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS-helper (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+; 		((DFS (first(possible-moves N '() 1 N-size) ) col N-size) )
+; 		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
+; 	)
+; )
+
+; (defun DFS-helper(N col N-size) 
+; 	(cond ((final-state N N-size) N);	Return N if it is the final state
+; 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+; 		(t NIL)
+; 	)
+; )
+
+(defun DFS (N col N-size)
+	(cond ((> col N-size) NIL)
+		((DFS-helper N col N-size) )
 		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
 
-(defun DFS-helper(N col N-size) 
+(defun DFS-helper(N col N-size)
 	(cond ((final-state N N-size) N);	Return N if it is the final state
 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-		(t NIL)
+		(t nil)
 	)
 )
+
+; (defun multDFS (col n ans)
+; 	(cond ((> col n) nil) ;return nil if none of the valid columns we looked at worked
+; 		((queenDFS col n ans)) ;return a list with a valid queen added, if possible
+; 		(t (multDFS (+ col 1) n ans)) ;otherwise, try repeating with the next column
+; 	)
+; )
+		
+; (defun queenDFS (col n ans)
+; 	(cond ((= (length ans) n) ans) ;return ans if queens don't attack each other and it is of the right length
+; 		((isValid (+ 1 (length ans)) col 1 ans) (multDFS 1 n (append ans (list col)))) ;if col is valid, run multDFS with it appended
+; 		(t nil) ;otherwise, end here and backtrack (try with a different col)
+; 	)
+; )
+
 
 ;;;
 ; (defun multDFS (col n ans)
