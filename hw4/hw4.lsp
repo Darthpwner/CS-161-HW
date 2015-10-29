@@ -219,8 +219,32 @@
 (defun DFS(N)
 	(cond ((final-state) N);	Return N if we have reached the final state
 		((NULL N) nil);	Return NIL if there are no possible solutions
+		()
 	)
 )
+
+; DFS Algorithm:
+; 1) Place in the first row, first col
+; 2) Call valid state and see if move was okay
+; 2a) If valid, go to the next row and place in next col
+; 2b) else, backtrack one row and place in the next col
+; 3) Repeat steps 1 through 2b
+
+(defun DFS(N)
+	(cond ((NULL N) NIL); If N is NULL, return NIL
+		((final-state N) N);	Return N if we have reached the final state
+		(t (append (DFS(first N) ) (DFS(rest N) ) ) ); else, traverse downwards, then to the right, and append the list together
+	)
+)
+
+(defun try-move(N rowIndex N-size)
+	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
+		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
+		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
+		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
+	)
+)
+
 
 ;
 ; FIGURE OUT HOW TO USE DFS
@@ -228,31 +252,31 @@
 ;;; Depth first search
 ;;;
 
-;;; The function tree search is taken from Norvig's PAIP:
-<states> <goal-p> <successors> <combiner>
-(defun tree-search (states goal-p successors combiner)
-  "Find a state that satisfies goal-p.  Start with states,
-   and search according to successors and combiner."
-  ; (format t "~&;; states: ~a" states)
-  (cond ((endp states) nil)                              ; Dead end.
-        ((funcall goal-p (first states))                 ; Eureka!
-         (append (list (eureka (first states)))
-                 (tree-search (rest states)
-                              goal-p successors
-                              combiner)))
-        (t (tree-search                                  ; Keep looking.
-            (funcall combiner
-                     (funcall successors (first states))
-                     (rest states))
-            goal-p successors combiner))))
+; ;;; The function tree search is taken from Norvig's PAIP:
+; <states> <goal-p> <successors> <combiner>
+; (defun tree-search (states goal-p successors combiner)
+;   "Find a state that satisfies goal-p.  Start with states,
+;    and search according to successors and combiner."
+;   ; (format t "~&;; states: ~a" states)
+;   (cond ((endp states) nil)                              ; Dead end.
+;         ((funcall goal-p (first states))                 ; Eureka!
+;          (append (list (eureka (first states)))
+;                  (tree-search (rest states)
+;                               goal-p successors
+;                               combiner)))
+;         (t (tree-search                                  ; Keep looking.
+;             (funcall combiner
+;                      (funcall successors (first states))
+;                      (rest states))
+;             goal-p successors combiner))))
 
-;;; Using a combiner of append we implement a 
-;;; depth-first-search
+; ;;; Using a combiner of append we implement a 
+; ;;; depth-first-search
 
-(defun depth-first-search (start goal-p successors)
-  "Search by expanding the deepest active state."
-  (tree-search (list start) goal-p successors #'append))
-;
+; (defun depth-first-search (start goal-p successors)
+;   "Search by expanding the deepest active state."
+;   (tree-search (list start) goal-p successors #'append))
+; ;
 
 (defun try-move(N rowIndex N-size)
 	(cond ((final-state N rowIndex N-size ) N);	//Return N if we have reached the final state
