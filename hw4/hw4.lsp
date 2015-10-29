@@ -216,18 +216,20 @@
 
 ; Returns a list of lists (possible game states)
 ; N is the current state, next-states will return the final list of lists, count is your iterator, N-size is the size of your board
-; NOTE: Always pass in count as 1 to get all the possible moves
+; NOTE: Always pass in next-states as '() and count as 1 to get all the possible moves
 (defun possible-moves(N next-states count N-size)
 	(cond ((> count N-size) next-states);	If count > N-size, you have tried every possible move from your state N, so return next-states
+		((or (> (length n) N-size) (= (length n) N-size) ) nil); Prevents next states when you reach N-size
 		((placed-queen-successfully N count) (possible-moves N (append next-states (list (place-queen N count) ) ) (+ count 1) N-size) ); If you can place a queen, add it to the list of possible moves
 		(t (possible-moves N next-states (+ count 1) N-size) );	If state is invalid, then just move on to the next column
 	)
 )
 
 ("POSSIBLE MOVES")
-;(possible-moves '() '() 1 0); ( (1) )
 (possible-moves '() '() 1 1); ( (1) )
-(possible-moves '(1 4 2 5) '() 1 4); ( (1) (2) (3) (4) )
+(possible-moves '(1 4 2 5) '() 1 5); ( (1) (2) (3) (4) )
+(possible-moves '(3 2 1) '() 1 3); ( (1) (2) (3) (4) )
+(possible-moves '(1) '() 1 3); ( (1) (2) (3) (4) )
 ("END OF POSSIBLE MOVES")
 
 
