@@ -216,14 +216,17 @@
 
 ; Returns a list of lists (possible game states)
 ; Keep a counter and see how many possible moves there are
-(defun possible-moves(N count N-size)
-	(cond ((> count (- N-size (length N) ) ) N); If count > N-size - (length N), we have no more possible states to check at our current level
-		(t (possible-moves (list N (list count) ) (+ count 1) N-size) )
+
+; Need next states parameter
+(defun possible-moves(N next-states count N-size)
+	(cond ((< (- N-size (length N) ) 0) next-states);	If N-size < 0, you have tried every possible move from your state N, so return next-states
+		((valid-state (place-queen N count) ) (possible-moves N (list (append N (place-queen N count) ) ) (+ count 1) (- N-size 1) ) )
+		(t (possible-moves N next-states (+ count 1) (- N-size 1) ) )
 	)
 )
 
 ("POSSIBLE MOVES")
-(possible-moves '()' 1 4)
+(possible-moves '() '() 1 4); ((1) (2) (3) (4))
 ("END OF POSSIBLE MOVES")
 
 
