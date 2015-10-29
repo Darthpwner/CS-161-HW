@@ -225,6 +225,13 @@
 	)
 )
 
+; N is the current state, next-states will return the final list of lists, N-size is used to keep track of where you are
+(defun possible-moves(N next-states N-size)
+	(cond ((< (- N-size (length N) ) 0) next-states);	If N-size < 0, you have tried every possible move from your state N, so return next-states
+		((<cond>) (<return>))
+	)
+)
+
 ("POSSIBLE MOVES")
 (possible-moves '() '() 1 4); ((1) (2) (3) (4))
 ("END OF POSSIBLE MOVES")
