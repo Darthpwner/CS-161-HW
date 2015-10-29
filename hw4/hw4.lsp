@@ -224,29 +224,19 @@
 ; 3b) else, backtrack one row and place in the next col
 ; 4) Repeat steps 1 through 3b
 
-; (defun DFS(N)
-; 	(cond ((NULL N) NIL); If N is NULL, return NIL since there are no possible solutions
-; 		((final-state N (length N) ) N);	Return N if we have reached the final state
-		
-; 		(() place-queen N 1); Place in the next possible row, next possible column
-; 		;(t (append (DFS(first N) ) (DFS(rest N) ) ) ); else, traverse downwards, then to the right, and append the list together
-; 	)
-; )
-
-(defun DFS(N rowIndex N-size)
-	(cond ((NULL N) NIL); If N is NULL, return NIL since there are no possible solutions 
+(defun DFS(N rowIndex colIndex N-size)
+	(cond ((> rowIndex N-size) NIL);	Return nil if no possible options left on the board
 		((final-state N N-size) N);	//Return N if we have reached the final state
-
-		((placed-queen-successfully (place-queen N rowIndex) ) (DFS (place-queen N rowIndex) (+ rowIndex 1) N-size) ); If the move is valid, keep searching down the tree
-;		((placed-queen-successfully) (DFS (place-queen N rowIndex) (+ rowIndex 1) N-size) ); If the move is valid, keep searching down the tree
+		((placed-queen-successfully N row-index) (DFS (place-queen N colIndex) 1 N-size) ); If the move is valid, keep searching down the tree
 		(t (DFS (place-queen N (+ rowIndex 1) ) rowIndex N-size) ); If the move is invalid, back track and move to the next sibling node
 	)
 )
 
 
 ("DFS")
-(DFS '(2 4 1 3) 1 4);	 (2 4 1 3)
-(DFS '() 1 4);	(2 4 1 3)
+(DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
+(DFS '() 1 1 4);	(2 4 1 3)
+(DFS '() 1 1 1);	(2 4 1 3)
 ("END DFS")
 
 (defun try-move(N rowIndex N-size)
