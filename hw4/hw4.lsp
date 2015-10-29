@@ -224,7 +224,7 @@
 	(cond ((> count N-size) next-states);	If count > N-size - (length N), you have tried every possible move from your state N, so return next-states
 		;	If you can place a queen 			; Recursively call (N is original state) (return condition) (N-size ) (count + 1)
 		;((placed-queen-successfully N count) (possible-moves N (append next-states (place-queen N count) ) N-size (+ count 1) ) );	
-		((placed-queen-successfully N count) (possible-moves N (append next-states (place-queen N count) ) (+ count 1) N-size) )
+		((placed-queen-successfully N count) (possible-moves N (append next-states (list (place-queen N count) ) ) (+ count 1) N-size) )
 		(t (possible-moves N next-states (+ count 1) N-size) );	If state is invalid, then just move on to the next column
 	)
 )
@@ -232,7 +232,7 @@
 ("POSSIBLE MOVES")
 ;(possible-moves '() '() 1 0); ( (1) )
 (possible-moves '() '() 1 1); ( (1) )
-(possible-moves '(2) '() 1 4); ( (1) (2) (3) (4) )
+(possible-moves '() '() 1 4); ( (1) (2) (3) (4) )
 ("END OF POSSIBLE MOVES")
 
 
