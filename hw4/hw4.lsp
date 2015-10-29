@@ -232,7 +232,7 @@
 ("POSSIBLE MOVES")
 ;(possible-moves '() '() 1 0); ( (1) )
 (possible-moves '() '() 1 1); ( (1) )
-(possible-moves '() '() 1 4); ( (1) (2) (3) (4) )
+(possible-moves '(2) '() 1 4); ( (1) (2) (3) (4) )
 ("END OF POSSIBLE MOVES")
 
 
