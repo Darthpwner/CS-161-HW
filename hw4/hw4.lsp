@@ -197,38 +197,48 @@
 
 ; Performs a DFS to try to solve the N queens problem
 ; N is the states of the gameboard with previous moves, col is the current column you are on and used to find a NIL solution, and N-size is the # of rows and cols
-(defun DFS (N col N-size)
-	(cond ((> col N-size) NIL);	If col > N-size, you checked every possible move at the top level, so there is no solution. Return NIL
-		((DFS-helper N col N-size) ); Call DFS-helper to perform all the checks down the tree
-		; NOTE: The else statement has to return the first of rest, NOT rest!
-		(t (DFS(first(rest(possible-moves N '() 1 N-size) ) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
+(defun DFS (N N-size)
+	(cond ((final-state N N-size) N);	Return N if it is the final state 
+		(t (DFS-helper (possible-moves N '() 1 N-size) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
 
 ; DFS-helper function that does the actual check and modifying the state of N
 ; N is the states of the gameboard with previous moves, col is the current column you are on and used to find a NIL solution, and N-size is the # of rows and cols
-(defun DFS-helper(N col N-size)
-	(cond ((final-state N N-size) N);	Return N if it is the final state 
-		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-		(t nil); Return nil if no possible move, so backtrack in the main DFS function
+(defun DFS-helper(N N-size)
+	(cond ((equal NIL N) NIL);	If col > N-size, you checked every possible move at the top level, so there is no solution. Return NIL
+		((DFS (first N) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		(t (DFS-helper (rest N) N-size) )
 	)
 )
+
+;
+; Main DFS:
+;     final state check
+;     Find all next states and pass them into helper
+
+; Helper DFS:
+;     if next-state null, return nil
+;     call DFS on first Next state
+;           if it returns a value then return this goal state
+;           else check next helper DFS
+;
 
 ("DFS")
 ; (DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
 ; (DFS '() 1 1 4);	(2 4 1 3)
 ; (DFS '() 1 1 1);	(2 4 1 3)
-(DFS '() 1 1); 	(2 4 1 3)
-(DFS '() 1 2); 	(2 4 1 3)
-(DFS '() 1 3); 	(2 4 1 3)
-(DFS '(2 4) 1 4)
-(DFS '() 1 6); 	(2 4 1 3)
+(DFS '() 1); 	(2 4 1 3)
+(DFS '() 2); 	(2 4 1 3)
+(DFS '() 3); 	(2 4 1 3)
+(DFS '(2 4) 4)
+(DFS '() 6); 	(2 4 1 3)
 ("END DFS")
 
 ; Calls helper functions to solve the N-Queens problem on a board (N * N size)
 ; N is the size of the board in terms of number of squares
 (defun QUEENS(N)
-	(DFS '() 1 N)
+	(DFS '() N)
 )
 
 ;Printing purposes
