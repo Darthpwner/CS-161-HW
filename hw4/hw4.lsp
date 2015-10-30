@@ -128,4 +128,3 @@
   (map 'list
        #'(lambda (l) (format T "~{~a ~}~C" l #\newline))
        (gen-field l (length l))))
-;
