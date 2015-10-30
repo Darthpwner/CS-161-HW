@@ -272,7 +272,7 @@
 ; (print-queens (QUEENS 5))
 ; (print-queens (QUEENS 6))
 ; (print-queens (QUEENS 7))
-; (print-queens (QUEENS 8))
+; (print-queens (QUEENS 9))
 
 ; (QUEENS 8)
 ; (QUEENS 9)
