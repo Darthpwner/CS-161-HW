@@ -206,7 +206,7 @@
 ; DFS-helper function that does the actual check and modifying the state of N
 ; N is the states of the gameboard with previous moves, N-size is the # of rows and cols
 (defun DFS-helper(N N-size)
-	(cond ((equal NIL N) NIL);	If col > N-size, you checked every possible move at the top level, so there is no solution. Return NIL
+	(cond ((equal NIL N) NIL);	If N equals NIL, you have no possible moves left, so return NIL
 		((DFS (first N) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
 		(t (DFS-helper (rest N) N-size) ); Otherwise, call DFS-helper on the rest of the current level of the gameboard
 	)
@@ -241,7 +241,7 @@
 	(DFS '() N)
 )
 
-;Printing purposes
+;Printing purposes that I found online
 (defun gen-row (row-tail q-loc row)
   (cond ((= row q-loc) (gen-row (cons "Q" row-tail) q-loc (- row 1)))
         ((= row 0) row-tail)
@@ -256,7 +256,7 @@
   (map 'list
        #'(lambda (l) (format T "~{~a ~}~C" l #\newline))
        (gen-field l (length l))))
-
+;
 
 ; ("QUEENS")
 (QUEENS 1)
@@ -274,6 +274,13 @@
 (QUEENS 12)
 (QUEENS 13)
 (QUEENS 14)
+(QUEENS 15)
+(QUEENS 16)
+(QUEENS 17)
+(QUEENS 18)
+(QUEENS 19)
+(QUEENS 20)
+
 
 ; (print-queens (QUEENS 1))
 ; (print-queens (QUEENS 2))
