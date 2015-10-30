@@ -1,23 +1,6 @@
 ; CS 161 HW 4
 ; N Queens Solver
 
-; QUEENS helper functions
-; Constructs a board diagram with N number of rows and cols
-; _ _ _ _ _ _ _
-; 1 2 3 ...	  N
-(defun construct-board(N)
-	(cond ((= N 0) NIL) 
-		(t (append '(0) (construct-board (- N 1) ) ) );	TODO: CHANGE '(0) to the added queen later
-	)
-)
-
-("CONSTRUCT BOARD")
-(construct-board 0)
-(construct-board 1)
-(construct-board 2)
-(construct-board 8)
-("END OF CONSTRUCT BOARD")
-
 ; Constraint check helper functions
 ; These assume that previous states were valid and the added element Q is the next free column on your list
 
@@ -28,18 +11,6 @@
 (defun check-column(N)
 	(check-column-helper N (rest N) );	Compare your current column against the remaining columns
 )
-
-; N is a list representing the rows of your board, Q checks for the column matches in the queens
-; Returns t if the added column is valid, nil if a queen shares the same column
-; Algorithm, look for repeated member states in the list and see if it equals Q
-
-; This function CHECKS BEFORE ADDING!
-; (defun check-column(N Q)
-; 	(cond ((null N) t);	You went through the entire list and did not find a match, so it is safe to place a Queen
-; 		((equal Q (first N) ) nil); Found a match in the list, don't place a queen
-; 		(t (check-column-helper(rest N) Q) ); Check the next row
-; 	)
-; )
 
 ; check-column helper function
 ; Search for all possible duplicates up to the length of n1
@@ -237,8 +208,8 @@
 ; DFS-helper function that does the actual check and modifying the state of N
 ; N is the states of the gameboard with previous moves, col is the current column you are on and used to find a NIL solution, and N-size is the # of rows and cols
 (defun DFS-helper(N col N-size)
-	(cond ((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-		((final-state N N-size) N);	Return N if it is the final state
+	(cond ((final-state N N-size) N);	Return N if it is the final state 
+		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
 		(t nil); Return nil if no possible move, so backtrack in the main DFS function
 	)
 )
@@ -260,24 +231,22 @@
 	(DFS '() 1 N)
 )
 
-; Printing purposes
-; (defun gen-row (row-tail q-loc row)
-;   (cond ((= row q-loc) (gen-row (cons "Q" row-tail) q-loc (- row 1)))
-;         ((= row 0) row-tail)
-;         (t (gen-row (cons "." row-tail) q-loc (- row 1)))))
+;Printing purposes
+(defun gen-row (row-tail q-loc row)
+  (cond ((= row q-loc) (gen-row (cons "Q" row-tail) q-loc (- row 1)))
+        ((= row 0) row-tail)
+        (t (gen-row (cons "." row-tail) q-loc (- row 1)))))
  
-; (defun gen-field (f n)
-;   (if (null f) nil
-;     (cons (gen-row '() (car f) n)
-;           (gen-field (cdr f) n))))
+(defun gen-field (f n)
+  (if (null f) nil
+    (cons (gen-row '() (car f) n)
+          (gen-field (cdr f) n))))
  
-; (defun print-queens (l)
-;   (map 'list
-;        #'(lambda (l) (format T "~{~a ~}~C" l #\newline))
-;        (gen-field l (length l))))
-;
+(defun print-queens (l)
+  (map 'list
+       #'(lambda (l) (format T "~{~a ~}~C" l #\newline))
+       (gen-field l (length l))))
 
-; (print-queens '(3 1 4 2))
 
 ; ("QUEENS")
 (QUEENS 1)
@@ -289,8 +258,19 @@
 (QUEENS 6)
 (QUEENS 7)
 (QUEENS 8)
-(QUEENS 9)
-(QUEENS 10)
+
+; (print-queens (QUEENS 1))
+; (print-queens (QUEENS 2))
+; (print-queens (QUEENS 3))
+; (print-queens (QUEENS 4))
+; (print-queens (QUEENS 5))
+; (print-queens (QUEENS 6))
+; (print-queens (QUEENS 7))
+; (print-queens (QUEENS 8))
+
+; (QUEENS 8)
+; (QUEENS 9)
+; (QUEENS 10)
 ; (QUEENS 11)
 ; (QUEENS 12)
 ; (QUEENS 13)
