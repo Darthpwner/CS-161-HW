@@ -258,6 +258,12 @@
 (QUEENS 6)
 (QUEENS 7)
 (QUEENS 8)
+(QUEENS 9)
+(QUEENS 10)
+(QUEENS 11)
+(QUEENS 12)
+(QUEENS 13)
+(QUEENS 14)
 
 ; (print-queens (QUEENS 1))
 ; (print-queens (QUEENS 2))
