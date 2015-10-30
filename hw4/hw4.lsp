@@ -224,57 +224,11 @@
 	)
 )
 
-("POSSIBLE MOVES")
-(possible-moves '() '() 1 1); ( (1) )
-(possible-moves '(1 4 2 5) '() 1 5); ( (1) (2) (3) (4) )
-(possible-moves '(3 2 1) '() 1 3); ( (1) (2) (3) (4) )
-(possible-moves '(1) '() 1 3); ( (1) (2) (3) (4) )
-;(possible-moves '() '() 1 50); ( (1) (2) (3) (4) )
-
-("END OF POSSIBLE MOVES")
-
-; REFACTOR THE SHIT BELOW!!!!
-
-(defun previous-state(N)
-	(butlast N 1)
-)
-
-(previous-state '(1 2 3))
-
-; DFS Algorithm:
-; 1) Check if final state, if it is, return t
-; 2) Place in the first row, first col
-; 3) Call valid state and see if move was okay
-; 3a) If valid, go to the next row and place in next col
-; 3b) else, backtrack one row and place in the next col
-; 4) Repeat steps 1 through 3b
-; (defun DFS(N rowIndex colIndex N-size)
-; 	(cond ((> rowIndex N-size) NIL);	Return nil if no possible options left on the board
-; 		((final-state N N-size) N);	//Return N if we have reached the final state
-; 		((placed-queen-successfully N col-index) (DFS (place-queen N colIndex) 1 N-size) ); If the move is valid, keep searching down the tree
-; 		(t (DFS (place-queen N (+ rowIndex 1) ) rowIndex N-size) ); If the move is invalid, back track and move to the next sibling node
-; 	)
-; )
-
-; If invalid, DFS calls (+ col 1)
-; NOTE: Always pass 1 in for col
-; (defun DFS(N col N-size)
-; 	(cond ((final-state N N-size) N);	Return N if it is the final state
-; 		((> col N-size) NIL);
-; 		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-; 		((equal (possible-moves N '() 1 N-size) NIL)  (DFS(rest(possible-moves (previous-state N) '() 1 N-size) ) (- col 1) N-size) ); If there are no more possible moves at the current level, backtrack
-; 		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
-; 	)
-; )
-
-;So essentially I have two functions. The first is the main DFS function. This one takes in the size of the board and the current-state. 
-;The base case for this is to return the current state if its the final solution. If its not then is calls a second helper function. 
-;This function essentially gets passed in all the next states from the current state. The base case for this one is to return nil if theres no next states left. 
-;It then runs the main function on each of the next states.
-
+; Performs a DFS to try to solve the N queens problem
+; N is the states of the gameboard with previous moves, col is the current column you are on and used to find a NIL solution, and N-size is the # of rows and cols
 (defun DFS (N col N-size)
-	(cond ((> col N-size) NIL)
-		((DFS-helper N col N-size) )
+	(cond ((> col N-size) NIL);	If col > N-size, you checked every possible move at the top level, so there is no solution. Return NIL
+		((DFS-helper N col N-size) ); Call DFS-helper to perform all the checks down the tree
 		(t (DFS(first(rest(possible-moves N '() 1 N-size) ) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
@@ -286,22 +240,6 @@
 		(t nil)
 	)
 )
-
-; (defun multDFS (col n ans)
-; 	(cond ((> col n) nil) ;return nil if none of the valid columns we looked at worked
-; 		((queenDFS col n ans)) ;return a list with a valid queen added, if possible
-; 		(t (multDFS (+ col 1) n ans)) ;otherwise, try repeating with the next column
-; 	)
-; )
-		
-; (defun queenDFS (col n ans)
-; 	(cond ((= (length ans) n) ans) ;return ans if queens don't attack each other and it is of the right length
-; 		((isValid (+ 1 (length ans)) col 1 ans) (multDFS 1 n (append ans (list col)))) ;if col is valid, run multDFS with it appended
-; 		(t nil) ;otherwise, end here and backtrack (try with a different col)
-; 	)
-; )
-
-
 ;;;
 ; (defun multDFS (col n ans)
 ; 	if out of bounds return nil
@@ -324,7 +262,7 @@
 (DFS '() 1 2); 	(2 4 1 3)
 (DFS '() 1 3); 	(2 4 1 3)
 (DFS '(2 4) 1 4)
-(DFS '() 1 4); 	(2 4 1 3)
+(DFS '() 1 6); 	(2 4 1 3)
 ("END DFS")
 
 ; (defun try-move(N rowIndex N-size)
@@ -361,17 +299,17 @@
 ; (print-queens '(3 1 4 2))
 
 ; ("QUEENS")
-; (QUEENS 1)
+(QUEENS 1)
 ; ("FIX SHIT")
-; (QUEENS 2)
-; (QUEENS 3)
-; (QUEENS 4)
-; (QUEENS 5)
-; (QUEENS 6)
-; (QUEENS 7)
-; (QUEENS 8)
-; (QUEENS 9)
-; (QUEENS 10)
+(QUEENS 2)
+(QUEENS 3)
+(QUEENS 4)
+(QUEENS 5)
+(QUEENS 6)
+(QUEENS 7)
+(QUEENS 8)
+(QUEENS 9)
+(QUEENS 10)
 ; (QUEENS 11)
 ; (QUEENS 12)
 ; (QUEENS 13)
