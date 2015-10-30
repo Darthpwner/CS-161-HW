@@ -275,13 +275,14 @@
 (defun DFS (N col N-size)
 	(cond ((> col N-size) NIL)
 		((DFS-helper N col N-size) )
-		(t (DFS(rest(possible-moves N '() 1 N-size) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
+		(t (DFS(first(rest(possible-moves N '() 1 N-size) ) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
 
+; valid-state and final-state have to be lists, NOT list of lists
 (defun DFS-helper(N col N-size)
-	(cond ((final-state N N-size) N);	Return N if it is the final state
-		((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+	(cond ((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
+		((final-state N N-size) N);	Return N if it is the final state
 		(t nil)
 	)
 )
@@ -339,6 +340,25 @@
 (defun QUEENS(N)
 	(DFS '() 1 N)
 )
+
+; Printing purposes
+; (defun gen-row (row-tail q-loc row)
+;   (cond ((= row q-loc) (gen-row (cons "Q" row-tail) q-loc (- row 1)))
+;         ((= row 0) row-tail)
+;         (t (gen-row (cons "." row-tail) q-loc (- row 1)))))
+ 
+; (defun gen-field (f n)
+;   (if (null f) nil
+;     (cons (gen-row '() (car f) n)
+;           (gen-field (cdr f) n))))
+ 
+; (defun print-queens (l)
+;   (map 'list
+;        #'(lambda (l) (format T "~{~a ~}~C" l #\newline))
+;        (gen-field l (length l))))
+;
+
+; (print-queens '(3 1 4 2))
 
 ; ("QUEENS")
 ; (QUEENS 1)
