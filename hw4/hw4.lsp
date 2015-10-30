@@ -229,30 +229,19 @@
 (defun DFS (N col N-size)
 	(cond ((> col N-size) NIL);	If col > N-size, you checked every possible move at the top level, so there is no solution. Return NIL
 		((DFS-helper N col N-size) ); Call DFS-helper to perform all the checks down the tree
+		; NOTE: The else statement has to return the first of rest, NOT rest!
 		(t (DFS(first(rest(possible-moves N '() 1 N-size) ) ) (+ col 1) N-size) ); If the path is not valid, call it on the rest of DFS
 	)
 )
 
-; valid-state and final-state have to be lists, NOT list of lists
+; DFS-helper function that does the actual check and modifying the state of N
+; N is the states of the gameboard with previous moves, col is the current column you are on and used to find a NIL solution, and N-size is the # of rows and cols
 (defun DFS-helper(N col N-size)
 	(cond ((valid-state (first(possible-moves N '() 1 N-size) ) ) (DFS (first(possible-moves N '() 1 N-size) ) col N-size) ); Recursively call DFS on the first of possible-moves if it is valid
 		((final-state N N-size) N);	Return N if it is the final state
-		(t nil)
+		(t nil); Return nil if no possible move, so backtrack in the main DFS function
 	)
 )
-;;;
-; (defun multDFS (col n ans)
-; 	if out of bounds return nil
-; 		call dfs-helper with a valid queen added
-; 		otherwise try repeting with the next column	
-; )
-		
-; (defun queenDFS (col n ans)
-; 	if final state, return N
-; 		if the column is valid, take this route 
-; 		otherwise, backtrack with a different col
-; )
-;;
 
 ("DFS")
 ; (DFS '(2 4 1 3) 1 1 4);	 (2 4 1 3)
@@ -264,14 +253,6 @@
 (DFS '(2 4) 1 4)
 (DFS '() 1 6); 	(2 4 1 3)
 ("END DFS")
-
-; (defun try-move(N rowIndex N-size)
-; 	(cond ((final-state N N-size ) N);	//Return N if we have reached the final state
-; 		((placed-queen-successfully N rowIndex) (place-queen N rowIndex) ); Execute move if it is possible
-; 		((< rowIndex N-size ) (+ rowIndex 1) );	If rowIndex is less than the length of N, increment row index
-; 		(t (try-move N rowIndex-reset) ); After placing a Queen, move on to the rest N
-; 	)
-; )
 
 ; Calls helper functions to solve the N-Queens problem on a board (N * N size)
 ; N is the size of the board in terms of number of squares
