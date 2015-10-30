@@ -2,11 +2,7 @@
 
 ;Explanation: parse out basic values that are known to give errors to increase efficiency; then use DFS to solve this CSP
 (defun QUEENS (N) 
-  (cond ((<= N 0) nil) ;ignore impossible parameters
-        ;((oddp N) (append (multDFS 2 (- N 1) ()) (list N))) ;if odd, append N to the list of previous board that starts at col=2
-        ;not as efficient as I thought it would be
-        (t (multDFS 1 N ())) ;use DFS to try all valid solutions until we get the right answer or nil
-        )
+  (multDFS 1 N '() ) ;use DFS to try all valid solutions until we get the right answer or nil
 )
 
 (defun multDFS (col n ans)
