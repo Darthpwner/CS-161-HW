@@ -196,7 +196,7 @@
 )
 
 ; Performs a DFS to try to solve the N queens problem
-; N is the states of the gameboard with previous moves, col is the current column you are on and used to find a NIL solution, and N-size is the # of rows and cols
+; N is the states of the gameboard with previous moves, N-size is the # of rows and cols
 (defun DFS (N N-size)
 	(cond ((final-state N N-size) N);	Return N if it is the final state 
 		(t (DFS-helper (possible-moves N '() 1 N-size) N-size) ); If the path is not valid, call it on the rest of DFS
@@ -204,11 +204,11 @@
 )
 
 ; DFS-helper function that does the actual check and modifying the state of N
-; N is the states of the gameboard with previous moves, col is the current column you are on and used to find a NIL solution, and N-size is the # of rows and cols
+; N is the states of the gameboard with previous moves, N-size is the # of rows and cols
 (defun DFS-helper(N N-size)
 	(cond ((equal NIL N) NIL);	If col > N-size, you checked every possible move at the top level, so there is no solution. Return NIL
 		((DFS (first N) N-size) ); Recursively call DFS on the first of possible-moves if it is valid
-		(t (DFS-helper (rest N) N-size) )
+		(t (DFS-helper (rest N) N-size) ); Otherwise, call DFS-helper on the rest of the current level of the gameboard
 	)
 )
 
@@ -267,13 +267,13 @@
 (QUEENS 5)
 (QUEENS 6)
 (QUEENS 7)
-;(QUEENS 8)
+(QUEENS 8)
 (QUEENS 9)
-; (QUEENS 10)
-; (QUEENS 11)
-; (QUEENS 12)
-; (QUEENS 13)
-; (QUEENS 14)
+(QUEENS 10)
+(QUEENS 11)
+(QUEENS 12)
+(QUEENS 13)
+(QUEENS 14)
 
 ; (print-queens (QUEENS 1))
 ; (print-queens (QUEENS 2))
